@@ -96,7 +96,7 @@ namespace Timesheet.Persistence.Repositories
 
         public TimesheetEntity GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return GetAll().FirstOrDefault(t => t.Id == id);
         }
 
         public void InitializeCSV()

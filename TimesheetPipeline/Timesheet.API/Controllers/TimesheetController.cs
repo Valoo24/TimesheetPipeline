@@ -14,7 +14,7 @@ namespace Timesheet.API.Controllers
             _service = Service;
         }
 
-        [HttpGet]
+        [HttpGet("Get")]
         public IActionResult GetAll()
         {
             try
@@ -22,6 +22,19 @@ namespace Timesheet.API.Controllers
                 return Ok(_service.GetAll());
             }
             catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet("Get/{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            try
+            {
+                return Ok(_service.GetById(id));
+            }
+            catch(Exception ex) 
             {
                 return NotFound(ex.Message);
             }

@@ -36,7 +36,11 @@ namespace Timesheet.Application.Services
 
         public TimesheetEntity GetById(Guid id)
         {
-            throw new NotImplementedException();
+            TimesheetEntity Timesheet = _timesheetRepository.GetById(id);
+
+            Timesheet.User = _userRepository.GetById(Timesheet.User.Id);
+
+            return Timesheet;
         }
     }
 }
