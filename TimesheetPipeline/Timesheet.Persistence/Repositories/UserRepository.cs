@@ -91,5 +91,21 @@ namespace Timesheet.Persistence.Repositories
                 writer.WriteLine("Id,Name,Surname,Mail Adress");
             }
         }
+
+        public Guid Delete(Guid id)
+        {
+            IList<User> userList = GetAll().ToList();
+
+            userList.Remove(userList.FirstOrDefault(u => u.Id == id));
+
+            InitializeCSV();
+
+            foreach (var user in userList)
+            {
+                Add(user);
+            }
+
+            return id;
+        }
     }
 }

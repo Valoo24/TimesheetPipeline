@@ -14,7 +14,7 @@ namespace Timesheet.API.Controllers
             _service = Service;
         }
 
-        [HttpGet("{year}")]
+        [HttpGet("Get/{year}")]
         public IActionResult GetAll(int year)
         {
             try
@@ -27,7 +27,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
-        [HttpGet("ById/{year}/{id}")]
+        [HttpGet("GetById/{year}/{id}")]
         public IActionResult GetById(int year, int id)
         {
             try
@@ -40,7 +40,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
-        [HttpGet("ByMonth/{year}/{month}")]
+        [HttpGet("GetByMonth/{year}/{month}")]
         public IActionResult GetByMonth(int year, int month)
         {
             try

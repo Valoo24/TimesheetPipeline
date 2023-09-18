@@ -37,6 +37,11 @@ namespace Timesheet.Application.Services
             return _repository.Add(NewUser);
         }
 
+        public Guid Delete(Guid id)
+        {
+            return _repository.Delete(id);
+        }
+
         public IEnumerable<User> GetAll()
         {
             return _repository.GetAll();

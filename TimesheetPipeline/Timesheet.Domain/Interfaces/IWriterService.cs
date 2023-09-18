@@ -10,5 +10,6 @@ namespace Timesheet.Domain.Interfaces
     {
         public TKey Add(TEntity entity);
         public TKey Update(TEntity entity);
+        public TKey Delete(TKey id);
     }
 }
