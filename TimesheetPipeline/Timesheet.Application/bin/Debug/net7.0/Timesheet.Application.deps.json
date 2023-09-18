@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v7.0": {
       "Timesheet.Application/1.0.0": {
         "dependencies": {
-          "Timesheet.Domain": "1.0.0"
+          "Timesheet.Domain": "1.0.0",
+          "Timesheet.Persistence": "1.0.0"
         },
         "runtime": {
           "Timesheet.Application.dll": {}
@@ -17,6 +18,14 @@
       "Timesheet.Domain/1.0.0": {
         "runtime": {
           "Timesheet.Domain.dll": {}
+        }
+      },
+      "Timesheet.Persistence/1.0.0": {
+        "dependencies": {
+          "Timesheet.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Timesheet.Persistence.dll": {}
         }
       }
     }
@@ -28,6 +37,11 @@
       "sha512": ""
     },
     "Timesheet.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Timesheet.Persistence/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

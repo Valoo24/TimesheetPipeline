@@ -1,4 +1,5 @@
 using Timesheet.Application.Services;
+using Timesheet.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<HolidayService, HolidayService>();
+builder.Services.AddScoped<HolidayRepository, HolidayRepository>();
 
 var app = builder.Build();
 

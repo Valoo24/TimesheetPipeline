@@ -11,6 +11,19 @@
         "runtime": {
           "bin/placeholder/Timesheet.Domain.dll": {}
         }
+      },
+      "Timesheet.Persistence/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Timesheet.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Timesheet.Persistence.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Timesheet.Persistence.dll": {}
+        }
       }
     }
   },
@@ -19,11 +32,17 @@
       "type": "project",
       "path": "../Timesheet.Domain/Timesheet.Domain.csproj",
       "msbuildProject": "../Timesheet.Domain/Timesheet.Domain.csproj"
+    },
+    "Timesheet.Persistence/1.0.0": {
+      "type": "project",
+      "path": "../Timesheet.Persistence/Timesheet.Persistence.csproj",
+      "msbuildProject": "../Timesheet.Persistence/Timesheet.Persistence.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "Timesheet.Domain >= 1.0.0"
+      "Timesheet.Domain >= 1.0.0",
+      "Timesheet.Persistence >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -61,6 +80,9 @@
           "projectReferences": {
             "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Domain\\Timesheet.Domain.csproj": {
               "projectPath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Domain\\Timesheet.Domain.csproj"
+            },
+            "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Persistence\\Timesheet.Persistence.csproj": {
+              "projectPath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Persistence\\Timesheet.Persistence.csproj"
             }
           }
         }
