@@ -10,7 +10,7 @@ using Timesheet.Persistence.Repositories;
 
 namespace Timesheet.Application.Services
 {
-    public class UserService : IReaderService<User, Guid>
+    public class UserService : IReaderService<User, Guid>, IWriterService<User,Guid>
     {
         private UserRepository _repository;
 
@@ -18,6 +18,25 @@ namespace Timesheet.Application.Services
         {
             _repository = Repository;
         }
+
+        public Guid Add(User entity)
+        {
+            return _repository.Add(entity);
+        }
+
+        public Guid Add(UserAddForm entity) 
+        { 
+            User NewUser = new User 
+            { 
+                Id = Guid.NewGuid(),
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
+                MailAdress = entity.MailAdress,
+            };
+
+            return _repository.Add(NewUser);
+        }
+
         public IEnumerable<User> GetAll()
         {
             return _repository.GetAll();

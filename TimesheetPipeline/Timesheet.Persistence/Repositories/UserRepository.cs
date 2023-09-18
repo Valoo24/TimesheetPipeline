@@ -8,7 +8,7 @@ using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.Persistence.Repositories
 {
-    public class UserRepository : IReaderRepository<User, Guid>
+    public class UserRepository : IReaderRepository<User, Guid>, IWriterRepository<User, Guid>
     {
         public string _csvFilePath
         {
@@ -17,6 +17,16 @@ namespace Timesheet.Persistence.Repositories
                 string AppPath = AppDomain.CurrentDomain.BaseDirectory;
                 return Path.Combine(AppPath, "UserDataBase.csv");
             }
+        }
+
+        public Guid Add(User entity)
+        {
+            using (StreamWriter writer = new StreamWriter(_csvFilePath, true, Encoding.UTF8))
+            {
+                writer.WriteLine($"{entity.Id},{entity.FirstName},{entity.LastName},{entity.MailAdress}");
+            }
+
+            return entity.Id;
         }
 
         public IEnumerable<User> GetAll()
@@ -52,6 +62,14 @@ namespace Timesheet.Persistence.Repositories
         public User GetById(Guid id)
         {
             return GetAll().FirstOrDefault(u => u.Id == id);
+        }
+
+        public void InitializeCSV()
+        {
+            using (StreamWriter writer = new StreamWriter(_csvFilePath, false, Encoding.UTF8))
+            {
+                writer.WriteLine("Id,Name,Surname,Mail Adress");
+            }
         }
     }
 }

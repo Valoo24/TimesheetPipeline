@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Timesheet.Application.Services;
+using Timesheet.Domain.Entities.Users;
 
 namespace Timesheet.API.Controllers
 {
@@ -12,6 +13,19 @@ namespace Timesheet.API.Controllers
         public UserController(UserService Service)
         {
             _service = Service;
+        }
+
+        [HttpPost]
+        public IActionResult Add(UserAddForm form)
+        {
+            try
+            {
+                return Ok($"{_service.Add(form)}");
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpGet]
@@ -28,14 +42,14 @@ namespace Timesheet.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(Guid id) 
-        { 
+        public IActionResult GetById(Guid id)
+        {
             try
             {
                 return Ok(_service.GetById(id));
             }
-            catch(Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 return NotFound(ex.Message);
             }
         }
