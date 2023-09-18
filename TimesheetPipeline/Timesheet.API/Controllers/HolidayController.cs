@@ -27,12 +27,25 @@ namespace Timesheet.API.Controllers
             }
         }
 
-        [HttpGet("{year}/{id}")]
+        [HttpGet("ById/{year}/{id}")]
         public IActionResult GetById(int year, int id)
         {
             try
             {
                 return Ok(_service.GetById(year, id));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet("ByMonth/{year}/{month}")]
+        public IActionResult GetByMonth(int year, int month)
+        {
+            try
+            {
+                return Ok(_service.GetByMonth(year, month));
             }
             catch (Exception ex)
             {

@@ -18,6 +18,7 @@ namespace Timesheet.Application.Services
             _repository = Repository;
         }
 
+        #region Méthodes Read
         public IEnumerable<Holiday> GetAll()
         {
             return _repository.GetAll();
@@ -49,6 +50,20 @@ namespace Timesheet.Application.Services
             return Holiday;
         }
 
+        public IEnumerable<Holiday> GetByMonth(int year, int month)
+        {
+            IList<Holiday> holidayList = this.GetAll().ToList();
+
+            foreach (Holiday holiday in holidayList)
+            {
+                this.ChangeDate(holiday, year);
+            }
+
+            return holidayList.Where(h => h.Date.Month == month);
+        }
+        #endregion
+
+        #region Méthodes Custom
         public DateTime GetEasterDate(int year, bool getMondayDate = true)
         {
             int a = year % 19;
@@ -89,5 +104,6 @@ namespace Timesheet.Application.Services
                     break;
             }
         }
+        #endregion
     }
 }
