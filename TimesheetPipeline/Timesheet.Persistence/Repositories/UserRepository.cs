@@ -29,6 +29,26 @@ namespace Timesheet.Persistence.Repositories
             return entity.Id;
         }
 
+        public Guid Update(User entity)
+        {
+            IList<User> userList = GetAll().ToList();
+
+            int index = userList.IndexOf(userList.FirstOrDefault(u => u.Id == entity.Id));
+
+            userList.Insert(index, entity);
+
+            userList.RemoveAt(index + 1);
+
+            InitializeCSV();
+
+            foreach (var user in userList)
+            {
+                Add(user);
+            }
+
+            return entity.Id;
+        }
+
         public IEnumerable<User> GetAll()
         {
             IList<User> UserList = new List<User>();

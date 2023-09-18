@@ -24,14 +24,14 @@ namespace Timesheet.Application.Services
             return _repository.Add(entity);
         }
 
-        public Guid Add(UserAddForm entity) 
+        public Guid Add(UserAddForm form) 
         { 
             User NewUser = new User 
             { 
                 Id = Guid.NewGuid(),
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
-                MailAdress = entity.MailAdress,
+                FirstName = form.FirstName,
+                LastName = form.LastName,
+                MailAdress = form.MailAdress,
             };
 
             return _repository.Add(NewUser);
@@ -45,6 +45,24 @@ namespace Timesheet.Application.Services
         public User GetById(Guid id)
         {
             return _repository.GetById(id);
+        }
+
+        public Guid Update(User entity)
+        {
+            return _repository.Update(entity);
+        }
+
+        public Guid Update(Guid userIdToUpdate, UserAddForm form)
+        {
+            User NewUser = new User
+            {
+                Id = userIdToUpdate,
+                FirstName = form.FirstName,
+                LastName = form.LastName,
+                MailAdress = form.MailAdress,
+            };
+
+            return _repository.Update(NewUser);
         }
     }
 }

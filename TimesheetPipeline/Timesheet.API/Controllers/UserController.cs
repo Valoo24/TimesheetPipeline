@@ -28,6 +28,19 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [HttpPut("{userIdToUpdate}")]
+        public IActionResult Update(Guid userIdToUpdate, UserAddForm form)
+        {
+            try
+            {
+                return Ok($"{_service.Update(userIdToUpdate, form)}");
+            }
+            catch(Exception ex) 
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
         [HttpGet]
         public IActionResult GetAll()
         {
