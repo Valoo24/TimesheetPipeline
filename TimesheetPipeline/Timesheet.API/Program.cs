@@ -13,6 +13,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<HolidayService, HolidayService>();
 builder.Services.AddScoped<HolidayRepository, HolidayRepository>();
 
+builder.Services.AddScoped<UserRepository, UserRepository>();
+builder.Services.AddScoped<UserService, UserService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

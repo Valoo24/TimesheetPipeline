@@ -9,7 +9,7 @@ using Timesheet.Persistence.Repositories;
 
 namespace Timesheet.Application.Services
 {
-    public class HolidayService : IService<Holiday, int>
+    public class HolidayService : IReaderService<Holiday, int>
     {
         public HolidayRepository _repository { get; set; }
 

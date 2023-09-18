@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Timesheet.Domain.Interfaces
 {
-    public interface IRepository<TEntity, TKey> where TEntity : IEntity<TKey>
+    public interface IReaderService<TEntity, Tkey> where TEntity : IEntity<Tkey>
     {
         public IEnumerable<TEntity> GetAll();
-        public TEntity GetById(TKey id);
+        public TEntity GetById (Tkey id);
     }
 }
