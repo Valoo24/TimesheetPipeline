@@ -138,7 +138,22 @@ namespace Timesheet.Persistence.Repositories
 
         public Guid Update(TimesheetEntity entity)
         {
-            throw new NotImplementedException();
+            IList<TimesheetEntity> TimesheetList = GetAll().ToList();
+
+            int index = TimesheetList.IndexOf(TimesheetList.FirstOrDefault(t => t.Id == entity.Id));
+
+            TimesheetList.Insert(index, entity);
+
+            TimesheetList.RemoveAt(index + 1);
+
+            InitializeCSV();
+
+            foreach (var timesheet in TimesheetList)
+            {
+                Add(timesheet);
+            }
+
+            return entity.Id;
         }
     }
 }

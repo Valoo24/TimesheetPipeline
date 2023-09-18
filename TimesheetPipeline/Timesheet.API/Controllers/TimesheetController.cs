@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Timesheet.Application.Mappers;
 using Timesheet.Application.Services;
+using Timesheet.Domain.Entities;
 using Timesheet.Domain.Entities.Timesheets;
 
 namespace Timesheet.API.Controllers
@@ -26,6 +27,26 @@ namespace Timesheet.API.Controllers
             catch (Exception ex)
             {
                 return NotFound(ex.Message);
+            }
+        }
+
+        [HttpPut("AddOccupation/{idToUpdate}")]
+        public IActionResult AddOccupation(Guid idToUpdate, Occupation form)
+        {
+            try
+            {
+                return Ok(_service.Update(new TimesheetEntity
+                {
+                    Id = idToUpdate,
+                    OccupationList = new List<Occupation>
+                    {
+                        form
+                    }
+                }));
+            }
+            catch (Exception ex) 
+            { 
+                return NotFound();
             }
         }
 

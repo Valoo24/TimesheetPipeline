@@ -76,7 +76,14 @@ namespace Timesheet.Application.Services
 
         public Guid Update(TimesheetEntity entity)
         {
-            throw new NotImplementedException();
+            TimesheetEntity TimesheetToUpdate = GetById(entity.Id);
+
+            foreach(var occupation in entity.OccupationList)
+            {
+                TimesheetToUpdate.OccupationList.Add(occupation);
+            }
+
+            return _timesheetRepository.Update(TimesheetToUpdate);
         }
     }
 }
