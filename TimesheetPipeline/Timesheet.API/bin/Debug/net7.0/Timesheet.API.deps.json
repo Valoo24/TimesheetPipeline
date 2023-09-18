@@ -9,7 +9,8 @@
       "Timesheet.API/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.OpenApi": "7.0.9",
-          "Swashbuckle.AspNetCore": "6.5.0"
+          "Swashbuckle.AspNetCore": "6.5.0",
+          "Timesheet.Application": "1.0.0"
         },
         "runtime": {
           "Timesheet.API.dll": {}
@@ -72,6 +73,19 @@
             "fileVersion": "6.5.0.0"
           }
         }
+      },
+      "Timesheet.Application/1.0.0": {
+        "dependencies": {
+          "Timesheet.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Timesheet.Application.dll": {}
+        }
+      },
+      "Timesheet.Domain/1.0.0": {
+        "runtime": {
+          "Timesheet.Domain.dll": {}
+        }
       }
     }
   },
@@ -129,6 +143,16 @@
       "sha512": "sha512-OvbvxX+wL8skxTBttcBsVxdh73Fag4xwqEU2edh4JMn7Ws/xJHnY/JB1e9RoCb6XpDxUF3hD9A0Z1lEUx40Pfw==",
       "path": "swashbuckle.aspnetcore.swaggerui/6.5.0",
       "hashPath": "swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+    },
+    "Timesheet.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Timesheet.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

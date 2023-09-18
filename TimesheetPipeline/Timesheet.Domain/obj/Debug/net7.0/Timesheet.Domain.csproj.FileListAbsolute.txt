@@ -1,0 +1,12 @@
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Domain\bin\Debug\net7.0\Timesheet.Domain.deps.json
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Domain\bin\Debug\net7.0\Timesheet.Domain.dll
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Domain\bin\Debug\net7.0\Timesheet.Domain.pdb
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Domain\obj\Debug\net7.0\Timesheet.Domain.csproj.AssemblyReference.cache
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Domain\obj\Debug\net7.0\Timesheet.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Domain\obj\Debug\net7.0\Timesheet.Domain.AssemblyInfoInputs.cache
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Domain\obj\Debug\net7.0\Timesheet.Domain.AssemblyInfo.cs
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Domain\obj\Debug\net7.0\Timesheet.Domain.csproj.CoreCompileInputs.cache
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Domain\obj\Debug\net7.0\Timesheet.Domain.dll
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Domain\obj\Debug\net7.0\refint\Timesheet.Domain.dll
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Domain\obj\Debug\net7.0\Timesheet.Domain.pdb
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Domain\obj\Debug\net7.0\ref\Timesheet.Domain.dll

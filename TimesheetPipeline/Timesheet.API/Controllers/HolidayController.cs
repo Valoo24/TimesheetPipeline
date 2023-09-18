@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Timesheet.Application.Services;
 
 namespace Timesheet.API.Controllers
 {
@@ -6,10 +7,17 @@ namespace Timesheet.API.Controllers
     [Route("[Controller]")]
     public class HolidayController : Controller
     {
+        private HolidayService _service { get; set; }
+
+        public HolidayController(HolidayService Service)
+        {
+            _service = Service;
+        }
+
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok("Accès à la méthode pour avoir toutes les Vacances.");
+            return Ok(_service.GetAll());
         }
     }
 }

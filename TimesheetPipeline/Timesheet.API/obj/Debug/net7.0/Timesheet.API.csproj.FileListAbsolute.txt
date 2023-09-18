@@ -31,3 +31,7 @@ C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Time
 C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.API\obj\Debug\net7.0\Timesheet.API.pdb
 C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.API\obj\Debug\net7.0\Timesheet.API.genruntimeconfig.cache
 C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.API\obj\Debug\net7.0\ref\Timesheet.API.dll
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.API\bin\Debug\net7.0\Timesheet.Application.dll
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.API\bin\Debug\net7.0\Timesheet.Domain.dll
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.API\bin\Debug\net7.0\Timesheet.Application.pdb
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.API\bin\Debug\net7.0\Timesheet.Domain.pdb

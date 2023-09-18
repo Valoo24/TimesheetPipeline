@@ -107,6 +107,29 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "Timesheet.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Timesheet.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Timesheet.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Timesheet.Application.dll": {}
+        }
+      },
+      "Timesheet.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/Timesheet.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Timesheet.Domain.dll": {}
+        }
       }
     }
   },
@@ -460,12 +483,23 @@
         "swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "Timesheet.Application/1.0.0": {
+      "type": "project",
+      "path": "../Timesheet.Application/Timesheet.Application.csproj",
+      "msbuildProject": "../Timesheet.Application/Timesheet.Application.csproj"
+    },
+    "Timesheet.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Timesheet.Domain/Timesheet.Domain.csproj",
+      "msbuildProject": "../Timesheet.Domain/Timesheet.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
       "Microsoft.AspNetCore.OpenApi >= 7.0.9",
-      "Swashbuckle.AspNetCore >= 6.5.0"
+      "Swashbuckle.AspNetCore >= 6.5.0",
+      "Timesheet.Application >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -501,7 +535,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Application\\Timesheet.Application.csproj": {
+              "projectPath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Application\\Timesheet.Application.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
