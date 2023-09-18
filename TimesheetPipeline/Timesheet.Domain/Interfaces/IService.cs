@@ -9,5 +9,6 @@ namespace Timesheet.Domain.Interfaces
     public interface IService<TEntity, Tkey> where TEntity : IEntity<Tkey>
     {
         public IEnumerable<TEntity> GetAll();
+        public TEntity GetById (Tkey id);
     }
 }

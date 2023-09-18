@@ -56,5 +56,10 @@ namespace Timesheet.Persistence.Repositories
             }
             return holidayList;
         }
+
+        public Holiday GetById(int id)
+        {
+            return GetAll().FirstOrDefault(h => h.Id == id);
+        }
     }
 }

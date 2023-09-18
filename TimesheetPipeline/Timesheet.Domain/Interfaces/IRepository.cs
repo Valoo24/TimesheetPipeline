@@ -9,5 +9,6 @@ namespace Timesheet.Domain.Interfaces
     public interface IRepository<TEntity, TKey> where TEntity : IEntity<TKey>
     {
         public IEnumerable<TEntity> GetAll();
+        public TEntity GetById(TKey id);
     }
 }

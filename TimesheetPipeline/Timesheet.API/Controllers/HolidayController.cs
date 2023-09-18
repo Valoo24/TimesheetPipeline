@@ -19,5 +19,18 @@ namespace Timesheet.API.Controllers
         {
             return Ok(_service.GetAll());
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id) 
+        {
+            try
+            {
+                return Ok(_service.GetById(id));
+            }
+            catch (Exception ex) 
+            { 
+                return NotFound(ex.Message);
+            }
+        }
     }
 }

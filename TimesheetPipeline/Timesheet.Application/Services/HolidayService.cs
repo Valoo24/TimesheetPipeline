@@ -22,5 +22,10 @@ namespace Timesheet.Application.Services
         {
             return _repository.GetAll();
         }
+
+        public Holiday GetById(int id)
+        {
+            return _repository.GetById(id);
+        }
     }
 }
