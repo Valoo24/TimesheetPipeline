@@ -29,6 +29,19 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [HttpDelete("Delete/{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                return Ok(_service.Delete(id));
+            }
+            catch (Exception ex)
+            { 
+                return NotFound(ex.Message);
+            }
+        }
+
         [HttpGet("Get")]
         public IActionResult GetAll()
         {

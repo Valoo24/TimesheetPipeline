@@ -36,7 +36,18 @@ namespace Timesheet.Persistence.Repositories
 
         public Guid Delete(Guid id)
         {
-            throw new NotImplementedException();
+            IList<TimesheetEntity> timesheetList = GetAll().ToList();
+
+            timesheetList.Remove(timesheetList.FirstOrDefault(t => t.Id == id));
+
+            InitializeCSV();
+
+            foreach(var timesheet in timesheetList) 
+            { 
+                Add(timesheet);
+            }
+
+            return id;
         }
 
         public IEnumerable<TimesheetEntity> GetAll()

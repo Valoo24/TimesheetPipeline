@@ -50,7 +50,7 @@ namespace Timesheet.Application.Services
 
         public Guid Delete(Guid id)
         {
-            throw new NotImplementedException();
+            return _timesheetRepository.Delete(id);
         }
 
         public IEnumerable<TimesheetEntity> GetAll()
