@@ -14,21 +14,28 @@ namespace Timesheet.API.Controllers
             _service = Service;
         }
 
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            return Ok(_service.GetAll());
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id) 
+        [HttpGet("{year}")]
+        public IActionResult GetAll(int year)
         {
             try
             {
-                return Ok(_service.GetById(id));
+                return Ok(_service.GetAll(year));
             }
-            catch (Exception ex) 
-            { 
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet("{year}/{id}")]
+        public IActionResult GetById(int year, int id)
+        {
+            try
+            {
+                return Ok(_service.GetById(year, id));
+            }
+            catch (Exception ex)
+            {
                 return NotFound(ex.Message);
             }
         }
