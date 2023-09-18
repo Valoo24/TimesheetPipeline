@@ -60,6 +60,7 @@ namespace Timesheet.Application.Services
             foreach(var Timesheet in TimesheetList)
             {
                 Timesheet.User = _userRepository.GetById(Timesheet.User.Id);
+                OrderOccupationList(Timesheet);
             }
 
             return TimesheetList;
@@ -70,6 +71,8 @@ namespace Timesheet.Application.Services
             TimesheetEntity Timesheet = _timesheetRepository.GetById(id);
 
             Timesheet.User = _userRepository.GetById(Timesheet.User.Id);
+
+            OrderOccupationList(Timesheet);
 
             return Timesheet;
         }
@@ -84,6 +87,17 @@ namespace Timesheet.Application.Services
             }
 
             return _timesheetRepository.Update(TimesheetToUpdate);
+        }
+
+        private void OrderOccupationList(TimesheetEntity timesheet)
+        {
+            IEnumerable<Occupation> OrderedOccupations = timesheet.OccupationList.OrderBy(o => o.Date);
+            timesheet.OccupationList = new List<Occupation>();
+
+            foreach (var occupation in OrderedOccupations)
+            {
+                timesheet.OccupationList.Add(occupation);
+            }
         }
     }
 }
