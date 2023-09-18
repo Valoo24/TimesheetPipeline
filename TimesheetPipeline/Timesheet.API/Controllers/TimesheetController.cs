@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Timesheet.Application.Mappers;
 using Timesheet.Application.Services;
+using Timesheet.Domain.Entities.Timesheets;
 
 namespace Timesheet.API.Controllers
 {
@@ -12,6 +14,19 @@ namespace Timesheet.API.Controllers
         public TimesheetController(TimesheetService Service)
         {
             _service = Service;
+        }
+
+        [HttpPost("CreateNewTimesheet")]
+        public IActionResult CreateNewTimesheet(TimesheetCreateForm form)
+        {
+            try
+            {
+                return Ok(_service.Add(form.ToEntity()));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpGet("Get")]
@@ -34,7 +49,7 @@ namespace Timesheet.API.Controllers
             {
                 return Ok(_service.GetById(id));
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }

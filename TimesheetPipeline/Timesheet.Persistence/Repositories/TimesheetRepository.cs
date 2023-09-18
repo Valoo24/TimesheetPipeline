@@ -10,7 +10,7 @@ using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.Persistence.Repositories
 {
-    public class TimesheetRepository : IReaderRepository<TimesheetEntity, Guid>
+    public class TimesheetRepository : IReaderRepository<TimesheetEntity, Guid>, IWriterRepository<TimesheetEntity, Guid>
     {
         public string _csvFilePath
         {
@@ -19,6 +19,24 @@ namespace Timesheet.Persistence.Repositories
                 string AppPath = AppDomain.CurrentDomain.BaseDirectory;
                 return Path.Combine(AppPath, "Timesheet.csv");
             }
+        }
+
+        public Guid Add(TimesheetEntity entity)
+        {
+            using (StreamWriter writer = new StreamWriter(_csvFilePath, true, Encoding.UTF8))
+            {
+                foreach (Occupation occupation in entity.OccupationList)
+                {
+                    writer.WriteLine($"{entity.Id},{entity.User.Id},{entity.Year},{entity.Month},{occupation.Date},{occupation.Title}");
+                }
+            }
+
+            return entity.Id;
+        }
+
+        public Guid Delete(Guid id)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<TimesheetEntity> GetAll()
@@ -105,6 +123,11 @@ namespace Timesheet.Persistence.Repositories
             {
                 writer.WriteLine("Id,User Id,Year,Month,Date of the occupation,Occupation Title");
             }
+        }
+
+        public Guid Update(TimesheetEntity entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

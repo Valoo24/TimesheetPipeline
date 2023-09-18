@@ -52,11 +52,11 @@ namespace Timesheet.Application.Services
 
         public IEnumerable<Holiday> GetByMonth(int year, int month)
         {
-            IList<Holiday> holidayList = this.GetAll().ToList();
+            IList<Holiday> holidayList = GetAll().ToList();
 
-            foreach (Holiday holiday in holidayList)
+            foreach (var holiday in holidayList)
             {
-                this.ChangeDate(holiday, year);
+                ChangeDate(holiday, year);
             }
 
             return holidayList.Where(h => h.Date.Month == month);

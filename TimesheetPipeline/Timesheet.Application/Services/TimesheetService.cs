@@ -3,23 +3,54 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Timesheet.Application.Mappers;
+using Timesheet.Domain.Entities;
 using Timesheet.Domain.Entities.Timesheets;
+using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Persistence.Repositories;
 
 namespace Timesheet.Application.Services
 {
-    public class TimesheetService : IReaderService<TimesheetEntity, Guid>
+    public class TimesheetService : IReaderService<TimesheetEntity, Guid>, IWriterService<TimesheetEntity, Guid>
     {
         private TimesheetRepository _timesheetRepository;
 
         private UserRepository _userRepository;
 
-        public TimesheetService(TimesheetRepository TimesheetRepository, UserRepository userRepository)
+        private HolidayRepository _holidayRepository;
+
+        private HolidayService _holidayService;
+
+        public TimesheetService(TimesheetRepository TimesheetRepository, UserRepository UserRepository, HolidayRepository HolidayRepository, HolidayService HolidayService)
         {
             _timesheetRepository = TimesheetRepository;
-            _userRepository = userRepository;
+            _userRepository = UserRepository;
+            _holidayRepository = HolidayRepository;
+            _holidayService = HolidayService;
 
+        }
+
+        public Guid Add(TimesheetEntity entity)
+        {
+            IList<Holiday> holidayList = _holidayService.GetByMonth(entity.Year, entity.Month).ToList();
+
+            foreach (var holiday in holidayList)
+            {
+                entity.OccupationList.Add(
+                    new Occupation
+                    {
+                        Date = holiday.Date,
+                        Title = holiday.Name
+                    });
+            }
+
+            return _timesheetRepository.Add(entity);
+        }
+
+        public Guid Delete(Guid id)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<TimesheetEntity> GetAll()
@@ -41,6 +72,11 @@ namespace Timesheet.Application.Services
             Timesheet.User = _userRepository.GetById(Timesheet.User.Id);
 
             return Timesheet;
+        }
+
+        public Guid Update(TimesheetEntity entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
