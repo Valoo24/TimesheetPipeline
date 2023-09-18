@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Timesheet.Application.Mappers;
 using Timesheet.Domain.Entities;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
@@ -26,15 +27,7 @@ namespace Timesheet.Application.Services
 
         public Guid Add(UserAddForm form) 
         { 
-            User NewUser = new User 
-            { 
-                Id = Guid.NewGuid(),
-                FirstName = form.FirstName,
-                LastName = form.LastName,
-                MailAdress = form.MailAdress,
-            };
-
-            return _repository.Add(NewUser);
+            return _repository.Add(form.ToEntity());
         }
 
         public Guid Delete(Guid id)
@@ -59,15 +52,7 @@ namespace Timesheet.Application.Services
 
         public Guid Update(Guid userIdToUpdate, UserAddForm form)
         {
-            User NewUser = new User
-            {
-                Id = userIdToUpdate,
-                FirstName = form.FirstName,
-                LastName = form.LastName,
-                MailAdress = form.MailAdress,
-            };
-
-            return _repository.Update(NewUser);
+            return _repository.Update(form.ToEntity(userIdToUpdate));
         }
     }
 }
