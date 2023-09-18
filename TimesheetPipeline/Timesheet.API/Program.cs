@@ -16,6 +16,9 @@ builder.Services.AddScoped<HolidayRepository, HolidayRepository>();
 builder.Services.AddScoped<UserRepository, UserRepository>();
 builder.Services.AddScoped<UserService, UserService>();
 
+builder.Services.AddScoped<TimesheetRepository, TimesheetRepository>();
+builder.Services.AddScoped<TimesheetService, TimesheetService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

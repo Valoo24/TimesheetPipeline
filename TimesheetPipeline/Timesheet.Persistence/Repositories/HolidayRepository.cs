@@ -62,7 +62,7 @@ namespace Timesheet.Persistence.Repositories
             return GetAll().FirstOrDefault(h => h.Id == id);
         }
 
-        public void InitializeHolidayCSV()
+        public void InitializeCSV()
         {
             IEnumerable<Holiday> HolidayList = new List<Holiday>
             {
