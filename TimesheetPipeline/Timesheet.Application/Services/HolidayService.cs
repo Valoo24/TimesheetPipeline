@@ -11,9 +11,9 @@ namespace Timesheet.Application.Services
 {
     public class HolidayService : IHolidayService
     {
-        public HolidayRepository _repository { get; set; }
+        public IHolidayRepository _repository { get; set; }
 
-        public HolidayService(HolidayRepository Repository)
+        public HolidayService(IHolidayRepository Repository)
         {
             _repository = Repository;
         }

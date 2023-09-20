@@ -14,7 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IHolidayService, HolidayService>();
-builder.Services.AddScoped<HolidayRepository, HolidayRepository>();
+builder.Services.AddScoped<IHolidayRepository, HolidayRepository>();
 
 builder.Services.AddScoped<UserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
