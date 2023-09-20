@@ -36,6 +36,9 @@
             "projectReferences": {
               "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Application\\Timesheet.Application.csproj": {
                 "projectPath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Application\\Timesheet.Application.csproj"
+              },
+              "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Persistence\\Timesheet.Persistence.csproj": {
+                "projectPath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Persistence\\Timesheet.Persistence.csproj"
               }
             }
           }
@@ -113,9 +116,6 @@
             "projectReferences": {
               "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Domain\\Timesheet.Domain.csproj": {
                 "projectPath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Domain\\Timesheet.Domain.csproj"
-              },
-              "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Persistence\\Timesheet.Persistence.csproj": {
-                "projectPath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Persistence\\Timesheet.Persistence.csproj"
               }
             }
           }

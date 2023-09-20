@@ -112,8 +112,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "Timesheet.Domain": "1.0.0",
-          "Timesheet.Persistence": "1.0.0"
+          "Timesheet.Domain": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Timesheet.Application.dll": {}
@@ -518,7 +517,8 @@
     "net7.0": [
       "Microsoft.AspNetCore.OpenApi >= 7.0.9",
       "Swashbuckle.AspNetCore >= 6.5.0",
-      "Timesheet.Application >= 1.0.0"
+      "Timesheet.Application >= 1.0.0",
+      "Timesheet.Persistence >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -557,6 +557,9 @@
           "projectReferences": {
             "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Application\\Timesheet.Application.csproj": {
               "projectPath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Application\\Timesheet.Application.csproj"
+            },
+            "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Persistence\\Timesheet.Persistence.csproj": {
+              "projectPath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Persistence\\Timesheet.Persistence.csproj"
             }
           }
         }

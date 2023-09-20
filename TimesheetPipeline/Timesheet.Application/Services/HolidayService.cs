@@ -5,15 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Timesheet.Domain.Entities;
 using Timesheet.Domain.Interfaces;
-using Timesheet.Persistence.Repositories;
 
 namespace Timesheet.Application.Services
 {
-    public class HolidayService : IReaderService<Holiday, int>
+    public class HolidayService : IHolidayService
     {
-        public HolidayRepository _repository { get; set; }
+        public IHolidayRepository _repository { get; set; }
 
-        public HolidayService(HolidayRepository Repository)
+        public HolidayService(IHolidayRepository Repository)
         {
             _repository = Repository;
         }
@@ -64,7 +63,7 @@ namespace Timesheet.Application.Services
         #endregion
 
         #region Méthodes Custom
-        public DateTime GetEasterDate(int year, bool getMondayDate = true)
+        private DateTime GetEasterDate(int year, bool getMondayDate = true)
         {
             int a = year % 19;
             int b = year / 100;
@@ -86,7 +85,7 @@ namespace Timesheet.Application.Services
             else return EasterDate.AddDays(1);
         }
 
-        public void ChangeDate(Holiday holiday, int year)
+        private void ChangeDate(Holiday holiday, int year)
         {
             switch (holiday.Id)
             {

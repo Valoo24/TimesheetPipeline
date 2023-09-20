@@ -10,7 +10,8 @@
         "dependencies": {
           "Microsoft.AspNetCore.OpenApi": "7.0.9",
           "Swashbuckle.AspNetCore": "6.5.0",
-          "Timesheet.Application": "1.0.0"
+          "Timesheet.Application": "1.0.0",
+          "Timesheet.Persistence": "1.0.0"
         },
         "runtime": {
           "Timesheet.API.dll": {}
@@ -76,8 +77,7 @@
       },
       "Timesheet.Application/1.0.0": {
         "dependencies": {
-          "Timesheet.Domain": "1.0.0",
-          "Timesheet.Persistence": "1.0.0"
+          "Timesheet.Domain": "1.0.0"
         },
         "runtime": {
           "Timesheet.Application.dll": {}

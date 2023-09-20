@@ -8,21 +8,20 @@ using Timesheet.Domain.Entities;
 using Timesheet.Domain.Entities.Timesheets;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
-using Timesheet.Persistence.Repositories;
 
 namespace Timesheet.Application.Services
 {
-    public class TimesheetService : IReaderService<TimesheetEntity, Guid>, IWriterService<TimesheetEntity, Guid>
+    public class TimesheetService : ITimesheetService
     {
-        private TimesheetRepository _timesheetRepository;
+        private ITimesheetRepository _timesheetRepository;
 
-        private UserRepository _userRepository;
+        private IUserRepository _userRepository;
 
-        private HolidayRepository _holidayRepository;
+        private IHolidayRepository _holidayRepository;
 
-        private HolidayService _holidayService;
+        private IHolidayService _holidayService;
 
-        public TimesheetService(TimesheetRepository TimesheetRepository, UserRepository UserRepository, HolidayRepository HolidayRepository, HolidayService HolidayService)
+        public TimesheetService(ITimesheetRepository TimesheetRepository, IUserRepository UserRepository, IHolidayRepository HolidayRepository, IHolidayService HolidayService)
         {
             _timesheetRepository = TimesheetRepository;
             _userRepository = UserRepository;

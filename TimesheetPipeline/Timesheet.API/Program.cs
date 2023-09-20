@@ -1,5 +1,8 @@
 using Timesheet.Application.Services;
+using Timesheet.Domain.Interfaces;
 using Timesheet.Persistence.Repositories;
+
+//Maxime, soit gentil stp.
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,14 +13,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<HolidayService, HolidayService>();
-builder.Services.AddScoped<HolidayRepository, HolidayRepository>();
+builder.Services.AddScoped<IHolidayService, HolidayService>();
+builder.Services.AddScoped<IHolidayRepository, HolidayRepository>();
 
-builder.Services.AddScoped<UserRepository, UserRepository>();
-builder.Services.AddScoped<UserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
-builder.Services.AddScoped<TimesheetRepository, TimesheetRepository>();
-builder.Services.AddScoped<TimesheetService, TimesheetService>();
+builder.Services.AddScoped<ITimesheetRepository, TimesheetRepository>();
+builder.Services.AddScoped<ITimesheetService, TimesheetService>();
 
 var app = builder.Build();
 

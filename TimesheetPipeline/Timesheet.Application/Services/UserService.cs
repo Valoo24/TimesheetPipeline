@@ -7,15 +7,14 @@ using Timesheet.Application.Mappers;
 using Timesheet.Domain.Entities;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
-using Timesheet.Persistence.Repositories;
 
 namespace Timesheet.Application.Services
 {
-    public class UserService : IReaderService<User, Guid>, IWriterService<User,Guid>
+    public class UserService : IUserService
     {
-        private UserRepository _repository;
+        private IUserRepository _repository;
 
-        public UserService(UserRepository Repository)
+        public UserService(IUserRepository Repository)
         {
             _repository = Repository;
         }

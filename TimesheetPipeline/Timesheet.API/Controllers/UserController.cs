@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Timesheet.Application.Services;
 using Timesheet.Domain.Entities.Users;
+using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.API.Controllers
 {
@@ -8,9 +9,9 @@ namespace Timesheet.API.Controllers
     [Route("[Controller]")]
     public class UserController : Controller
     {
-        private UserService _service;
+        private IUserService _service;
 
-        public UserController(UserService Service)
+        public UserController(IUserService Service)
         {
             _service = Service;
         }
