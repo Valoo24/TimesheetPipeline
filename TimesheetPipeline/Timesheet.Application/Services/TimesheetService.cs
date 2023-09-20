@@ -20,9 +20,9 @@ namespace Timesheet.Application.Services
 
         private HolidayRepository _holidayRepository;
 
-        private HolidayService _holidayService;
+        private IHolidayService _holidayService;
 
-        public TimesheetService(TimesheetRepository TimesheetRepository, UserRepository UserRepository, HolidayRepository HolidayRepository, HolidayService HolidayService)
+        public TimesheetService(TimesheetRepository TimesheetRepository, UserRepository UserRepository, HolidayRepository HolidayRepository, IHolidayService HolidayService)
         {
             _timesheetRepository = TimesheetRepository;
             _userRepository = UserRepository;

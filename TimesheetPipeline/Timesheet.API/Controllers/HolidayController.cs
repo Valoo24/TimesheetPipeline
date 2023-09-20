@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Timesheet.Application.Services;
+using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.API.Controllers
 {
@@ -7,9 +8,9 @@ namespace Timesheet.API.Controllers
     [Route("[Controller]")]
     public class HolidayController : Controller
     {
-        private HolidayService _service { get; set; }
+        private IHolidayService _service { get; set; }
 
-        public HolidayController(HolidayService Service)
+        public HolidayController(IHolidayService Service)
         {
             _service = Service;
         }

@@ -1,4 +1,5 @@
 using Timesheet.Application.Services;
+using Timesheet.Domain.Interfaces;
 using Timesheet.Persistence.Repositories;
 
 //Maxime, soit gentil stp.
@@ -12,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<HolidayService, HolidayService>();
+builder.Services.AddScoped<IHolidayService, HolidayService>();
 builder.Services.AddScoped<HolidayRepository, HolidayRepository>();
 
 builder.Services.AddScoped<UserRepository, UserRepository>();
