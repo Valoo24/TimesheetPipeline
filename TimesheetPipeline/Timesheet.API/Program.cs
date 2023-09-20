@@ -2,8 +2,6 @@ using Timesheet.Application.Services;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Persistence.Repositories;
 
-//Maxime, soit gentil stp.
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
