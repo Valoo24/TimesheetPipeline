@@ -17,7 +17,7 @@ builder.Services.AddScoped<IHolidayService, HolidayService>();
 builder.Services.AddScoped<HolidayRepository, HolidayRepository>();
 
 builder.Services.AddScoped<UserRepository, UserRepository>();
-builder.Services.AddScoped<UserService, UserService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<TimesheetRepository, TimesheetRepository>();
 builder.Services.AddScoped<TimesheetService, TimesheetService>();

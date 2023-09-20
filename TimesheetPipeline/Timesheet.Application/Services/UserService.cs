@@ -11,7 +11,7 @@ using Timesheet.Persistence.Repositories;
 
 namespace Timesheet.Application.Services
 {
-    public class UserService : IReaderService<User, Guid>, IWriterService<User,Guid>
+    public class UserService : IUserService
     {
         private UserRepository _repository;
 
