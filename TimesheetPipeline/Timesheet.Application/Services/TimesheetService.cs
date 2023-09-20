@@ -16,13 +16,13 @@ namespace Timesheet.Application.Services
     {
         private TimesheetRepository _timesheetRepository;
 
-        private UserRepository _userRepository;
+        private IUserRepository _userRepository;
 
         private IHolidayRepository _holidayRepository;
 
         private IHolidayService _holidayService;
 
-        public TimesheetService(TimesheetRepository TimesheetRepository, UserRepository UserRepository, IHolidayRepository HolidayRepository, IHolidayService HolidayService)
+        public TimesheetService(TimesheetRepository TimesheetRepository, IUserRepository UserRepository, IHolidayRepository HolidayRepository, IHolidayService HolidayService)
         {
             _timesheetRepository = TimesheetRepository;
             _userRepository = UserRepository;

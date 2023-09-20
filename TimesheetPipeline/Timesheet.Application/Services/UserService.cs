@@ -13,9 +13,9 @@ namespace Timesheet.Application.Services
 {
     public class UserService : IUserService
     {
-        private UserRepository _repository;
+        private IUserRepository _repository;
 
-        public UserService(UserRepository Repository)
+        public UserService(IUserRepository Repository)
         {
             _repository = Repository;
         }

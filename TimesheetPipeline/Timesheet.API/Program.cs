@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IHolidayService, HolidayService>();
 builder.Services.AddScoped<IHolidayRepository, HolidayRepository>();
 
-builder.Services.AddScoped<UserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<TimesheetRepository, TimesheetRepository>();
