@@ -10,7 +10,7 @@ using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.Persistence.Repositories
 {
-    public class TimesheetRepository : IReaderRepository<TimesheetEntity, Guid>, IWriterRepository<TimesheetEntity, Guid>
+    public class TimesheetRepository : ITimesheetRepository
     {
         public string _csvFilePath
         {

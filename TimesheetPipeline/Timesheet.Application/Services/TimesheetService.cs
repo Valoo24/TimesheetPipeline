@@ -14,7 +14,7 @@ namespace Timesheet.Application.Services
 {
     public class TimesheetService : ITimesheetService
     {
-        private TimesheetRepository _timesheetRepository;
+        private ITimesheetRepository _timesheetRepository;
 
         private IUserRepository _userRepository;
 
@@ -22,7 +22,7 @@ namespace Timesheet.Application.Services
 
         private IHolidayService _holidayService;
 
-        public TimesheetService(TimesheetRepository TimesheetRepository, IUserRepository UserRepository, IHolidayRepository HolidayRepository, IHolidayService HolidayService)
+        public TimesheetService(ITimesheetRepository TimesheetRepository, IUserRepository UserRepository, IHolidayRepository HolidayRepository, IHolidayService HolidayService)
         {
             _timesheetRepository = TimesheetRepository;
             _userRepository = UserRepository;
