@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Timesheet.Domain.Entities;
 using Timesheet.Domain.Interfaces;
-using Timesheet.Persistence.Repositories;
 
 namespace Timesheet.Application.Services
 {
