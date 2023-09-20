@@ -3,6 +3,7 @@ using Timesheet.Application.Mappers;
 using Timesheet.Application.Services;
 using Timesheet.Domain.Entities;
 using Timesheet.Domain.Entities.Timesheets;
+using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.API.Controllers
 {
@@ -10,9 +11,9 @@ namespace Timesheet.API.Controllers
     [Route("[Controller]")]
     public class TimesheetController : Controller
     {
-        private TimesheetService _service;
+        private ITimesheetService _service;
 
-        public TimesheetController(TimesheetService Service)
+        public TimesheetController(ITimesheetService Service)
         {
             _service = Service;
         }

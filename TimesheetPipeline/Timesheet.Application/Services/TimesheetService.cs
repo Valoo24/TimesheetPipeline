@@ -12,7 +12,7 @@ using Timesheet.Persistence.Repositories;
 
 namespace Timesheet.Application.Services
 {
-    public class TimesheetService : IReaderService<TimesheetEntity, Guid>, IWriterService<TimesheetEntity, Guid>
+    public class TimesheetService : ITimesheetService
     {
         private TimesheetRepository _timesheetRepository;
 

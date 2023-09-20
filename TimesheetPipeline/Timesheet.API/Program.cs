@@ -20,7 +20,7 @@ builder.Services.AddScoped<UserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<TimesheetRepository, TimesheetRepository>();
-builder.Services.AddScoped<TimesheetService, TimesheetService>();
+builder.Services.AddScoped<ITimesheetService, TimesheetService>();
 
 var app = builder.Build();
 
