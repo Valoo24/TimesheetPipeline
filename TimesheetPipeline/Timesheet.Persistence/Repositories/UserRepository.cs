@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
+using Timesheet.Infrastrucutre.DataAccess;
 
 namespace Timesheet.Persistence.Repositories
 {
@@ -18,13 +19,21 @@ namespace Timesheet.Persistence.Repositories
                 return Path.Combine(AppPath, "UserDataBase.csv");
             }
         }
+        private TimesheetContext _context;
+
+        public UserRepository(TimesheetContext Context)
+        {
+            _context = Context;
+        }
 
         public Guid Add(User entity)
         {
-            using (StreamWriter writer = new StreamWriter(_csvFilePath, true, Encoding.UTF8))
-            {
-                writer.WriteLine($"{entity.Id},{entity.FirstName},{entity.LastName},{entity.MailAdress}");
-            }
+            //using (StreamWriter writer = new StreamWriter(_csvFilePath, true, Encoding.UTF8))
+            //{
+            //    writer.WriteLine($"{entity.Id},{entity.FirstName},{entity.LastName},{entity.MailAdress}");
+            //}
+            _context.Users.Add(entity);
+            _context.SaveChanges();
 
             return entity.Id;
         }
@@ -39,7 +48,7 @@ namespace Timesheet.Persistence.Repositories
 
             userList.RemoveAt(index + 1);
 
-            InitializeCSV();
+            //InitializeCSV();
 
             foreach (var user in userList)
             {
@@ -51,46 +60,40 @@ namespace Timesheet.Persistence.Repositories
 
         public IEnumerable<User> GetAll()
         {
-            IList<User> UserList = new List<User>();
+            //IList<User> UserList = new List<User>();
 
-            using (StreamReader reader = new StreamReader(_csvFilePath))
-            {
-                reader.ReadLine();
+            //using (StreamReader reader = new StreamReader(_csvFilePath))
+            //{
+            //    reader.ReadLine();
 
-                while (!reader.EndOfStream)
-                {
-                    string userLine = reader.ReadLine();
-                    string[] userValues = userLine.Split(',');
+            //    while (!reader.EndOfStream)
+            //    {
+            //        string userLine = reader.ReadLine();
+            //        string[] userValues = userLine.Split(',');
 
-                    Guid UserId;
-                    Guid.TryParse(userValues[0], out UserId);
+            //        Guid UserId;
+            //        Guid.TryParse(userValues[0], out UserId);
 
-                    User user = new User
-                    { 
-                        Id = UserId,
-                        FirstName = userValues[1],
-                        LastName = userValues[2],
-                        MailAdress = userValues[3]
-                    };
+            //        User user = new User
+            //        { 
+            //            Id = UserId,
+            //            FirstName = userValues[1],
+            //            LastName = userValues[2],
+            //            MailAdress = userValues[3]
+            //        };
 
-                    UserList.Add(user);
-                }
-            }
-            return UserList;
+            //        UserList.Add(user);
+            //    }
+            //}
+            return _context.Users.ToList();
         }
 
         public User GetById(Guid id)
         {
-            return GetAll().FirstOrDefault(u => u.Id == id);
+            return _context.Users.FirstOrDefault(u => u.Id == id);
         }
 
-        public void InitializeCSV()
-        {
-            using (StreamWriter writer = new StreamWriter(_csvFilePath, false, Encoding.UTF8))
-            {
-                writer.WriteLine("Id,Name,Surname,Mail Adress");
-            }
-        }
+
 
         public Guid Delete(Guid id)
         {
@@ -98,7 +101,7 @@ namespace Timesheet.Persistence.Repositories
 
             userList.Remove(userList.FirstOrDefault(u => u.Id == id));
 
-            InitializeCSV();
+            //InitializeCSV();
 
             foreach (var user in userList)
             {
