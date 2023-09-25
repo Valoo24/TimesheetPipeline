@@ -37,16 +37,7 @@ namespace Timesheet.Persistence.Repositories
 
         public Guid Delete(Guid id)
         {
-            IList<TimesheetEntity> timesheetList = GetAll().ToList();
-
-            timesheetList.Remove(timesheetList.FirstOrDefault(t => t.Id == id));
-
-            foreach(var timesheet in timesheetList) 
-            { 
-                Add(timesheet);
-            }
-
-            return id;
+            throw new NotImplementedException();
         }
 
         public IEnumerable<TimesheetEntity> GetAll()
@@ -66,20 +57,7 @@ namespace Timesheet.Persistence.Repositories
 
         public Guid Update(TimesheetEntity entity)
         {
-            IList<TimesheetEntity> TimesheetList = GetAll().ToList();
-
-            int index = TimesheetList.IndexOf(TimesheetList.FirstOrDefault(t => t.Id == entity.Id));
-
-            TimesheetList.Insert(index, entity);
-
-            TimesheetList.RemoveAt(index + 1);
-
-            foreach (var timesheet in TimesheetList)
-            {
-                Add(timesheet);
-            }
-
-            return entity.Id;
+            throw new NotImplementedException();
         }
     }
 }

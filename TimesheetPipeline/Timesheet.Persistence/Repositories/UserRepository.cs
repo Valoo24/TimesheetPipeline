@@ -29,20 +29,7 @@ namespace Timesheet.Persistence.Repositories
 
         public Guid Update(User entity)
         {
-            IList<User> userList = GetAll().ToList();
-
-            int index = userList.IndexOf(userList.FirstOrDefault(u => u.Id == entity.Id));
-
-            userList.Insert(index, entity);
-
-            userList.RemoveAt(index + 1);
-
-            foreach (var user in userList)
-            {
-                Add(user);
-            }
-
-            return entity.Id;
+            throw new NotImplementedException();
         }
 
         public IEnumerable<User> GetAll()
@@ -56,19 +43,9 @@ namespace Timesheet.Persistence.Repositories
         }
 
 
-
         public Guid Delete(Guid id)
         {
-            IList<User> userList = GetAll().ToList();
-
-            userList.Remove(userList.FirstOrDefault(u => u.Id == id));
-
-            foreach (var user in userList)
-            {
-                Add(user);
-            }
-
-            return id;
+            throw new NotImplementedException();
         }
     }
 }
