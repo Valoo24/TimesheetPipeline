@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Timesheet.Domain.Entities.Timesheets;
 using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.Domain.Entities
@@ -22,5 +23,8 @@ namespace Timesheet.Domain.Entities
         /// Nom de l'occupation.
         /// </summary>
         public string Title { get; set; }
+
+        public Guid TimesheetId { get; set; }
+        public TimesheetEntity Timesheet { get; set; }
     }
 }

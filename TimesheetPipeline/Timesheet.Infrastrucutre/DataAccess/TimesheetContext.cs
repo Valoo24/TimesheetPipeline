@@ -21,6 +21,19 @@ namespace Timesheet.Infrastrucutre.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Holiday>().HasKey(h => h.Id);
+
+            modelBuilder.Entity<User>().HasKey(u => u.Id);
+
+            modelBuilder.Entity<TimesheetEntity>().HasKey(t => t.Id);
+
+            modelBuilder.Entity<Occupation>().HasKey(o => o.Id);
+
+            //modelBuilder.Entity<TimesheetEntity>().HasOne(t => t.User).WithMany().HasForeignKey(t => t.UserId);
+
+            //modelBuilder.Entity<User>().HasMany(u => u.Timesheets).WithOne(t => t.User).HasForeignKey(t => t.UserId);
+
+            modelBuilder.Entity<TimesheetEntity>().HasMany(t => t.OccupationList).WithOne(o => o.Timesheet).HasForeignKey(o => o.TimesheetId);
 
             base.OnModelCreating(modelBuilder);
         }

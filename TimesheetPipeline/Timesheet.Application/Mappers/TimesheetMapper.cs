@@ -15,14 +15,9 @@ namespace Timesheet.Application.Mappers
         {
             return new TimesheetEntity
             {
-                Id = Guid.NewGuid(),
-                User = new User
-                {
-                    Id = form.UserId
-                },
+                UserId = form.UserId,
                 Year = form.Year,
                 Month = form.Month,
-                OccupationList = new List<Occupation>()
             };
         }
     }

@@ -34,6 +34,8 @@ namespace Timesheet.Application.Services
         {
             IList<Holiday> holidayList = _holidayService.GetByMonth(entity.Year, entity.Month).ToList();
 
+            //entity.User = _userRepository.GetById(entity.User.Id);
+
             foreach (var holiday in holidayList)
             {
                 entity.OccupationList.Add(
@@ -56,9 +58,9 @@ namespace Timesheet.Application.Services
         {
             IList<TimesheetEntity> TimesheetList = _timesheetRepository.GetAll().ToList();
 
-            foreach(var Timesheet in TimesheetList)
+            foreach (var Timesheet in TimesheetList)
             {
-                Timesheet.User = _userRepository.GetById(Timesheet.User.Id);
+                //Timesheet.User = _userRepository.GetById(Timesheet.User.Id);
                 OrderOccupationList(Timesheet);
             }
 
@@ -69,7 +71,7 @@ namespace Timesheet.Application.Services
         {
             TimesheetEntity Timesheet = _timesheetRepository.GetById(id);
 
-            Timesheet.User = _userRepository.GetById(Timesheet.User.Id);
+            //Timesheet.User = _userRepository.GetById(Timesheet.User.Id);
 
             OrderOccupationList(Timesheet);
 

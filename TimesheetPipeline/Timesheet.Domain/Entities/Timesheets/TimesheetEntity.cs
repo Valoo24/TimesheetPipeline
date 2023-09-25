@@ -18,10 +18,12 @@ namespace Timesheet.Domain.Entities.Timesheets
         /// </summary>
         public Guid Id { get; set; }
 
+        public Guid UserId { get; set; }
+
         /// <summary>
         /// User de la timesheet.
         /// </summary>
-        public User User { get; set; }
+        //public User User { get; set; }
 
         /// <summary>
         /// Année de la timesheet.
@@ -37,5 +39,11 @@ namespace Timesheet.Domain.Entities.Timesheets
         /// Liste d'occupations qui composent la timesheet.
         /// </summary>
         public List<Occupation> OccupationList { get; set; }
+
+        public TimesheetEntity()
+        {
+            Id = Guid.NewGuid();
+            OccupationList = new List<Occupation>();
+        }
     }
 }
