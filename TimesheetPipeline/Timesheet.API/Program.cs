@@ -1,5 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using Timesheet.Application.Services;
 using Timesheet.Domain.Interfaces;
+using Timesheet.Infrastrucutre.DataAccess;
 using Timesheet.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<TimesheetContext>(
+    option => option.UseSqlServer(builder.Configuration.GetConnectionString("TimesheetConnection"))
+    .EnableSensitiveDataLogging()
+    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
 builder.Services.AddScoped<IHolidayService, HolidayService>();
 builder.Services.AddScoped<IHolidayRepository, HolidayRepository>();
