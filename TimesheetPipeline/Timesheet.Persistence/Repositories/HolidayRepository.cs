@@ -11,14 +11,7 @@ namespace Timesheet.Persistence.Repositories
 {
     public class HolidayRepository : IHolidayRepository
     {
-        private string _csvFilePath
-        {
-            get
-            {
-                string AppPath = AppDomain.CurrentDomain.BaseDirectory;
-                return Path.Combine(AppPath, "HolidayDataBase.csv");
-            }
-        }
+
         private TimesheetContext _context;
 
         public HolidayRepository(TimesheetContext Context)
@@ -28,45 +21,12 @@ namespace Timesheet.Persistence.Repositories
 
         public IEnumerable<Holiday> GetAll()
         {
-            IList<Holiday> holidayList = new List<Holiday>();
-
-            using (StreamReader reader = new StreamReader(_csvFilePath))
-            {
-                reader.ReadLine();
-
-                while (!reader.EndOfStream)
-                {
-                    string line = reader.ReadLine();
-                    string[] values = line.Split(';');
-
-                    string idString = values[0].Trim();
-                    string name = values[1].Trim();
-                    string dateTimeString = values[2].Trim();
-
-                    int HolidayId;
-                    int.TryParse(idString, out HolidayId);
-
-                    string HolidayName = name;
-
-                    DateTime HolidayDate;
-                    DateTime.TryParse(dateTimeString, out HolidayDate);
-
-                    Holiday holiday = new Holiday
-                    {
-                        Id = HolidayId,
-                        Name = HolidayName,
-                        Date = HolidayDate
-                    };
-
-                    holidayList.Add(holiday);
-                }
-            }
-            return holidayList;
+            return _context.Holidays.ToList();
         }
 
         public Holiday GetById(int id)
         {
-            return GetAll().FirstOrDefault(h => h.Id == id);
+            return _context.Holidays.FirstOrDefault(h => h.Id == id);
         }
 
         public void InitializeDatabase()
@@ -142,14 +102,7 @@ namespace Timesheet.Persistence.Repositories
 
             _context.SaveChanges();
 
-            //using (StreamWriter writer = new StreamWriter(_csvFilePath, false, Encoding.UTF8))
-            //{
-            //    writer.WriteLine("Id,Name,Date");
-            //    foreach (Holiday holiday in HolidayList)
-            //    {
-            //        writer.WriteLine($"{holiday.Id},{holiday.Name},{holiday.Date}");
-            //    }
-            //}
+
         }
     }
 }
