@@ -34,8 +34,6 @@ namespace Timesheet.Application.Services
         {
             IList<Holiday> holidayList = _holidayService.GetByMonth(entity.Year, entity.Month).ToList();
 
-            //entity.User = _userRepository.GetById(entity.User.Id);
-
             foreach (var holiday in holidayList)
             {
                 entity.OccupationList.Add(
@@ -60,8 +58,21 @@ namespace Timesheet.Application.Services
 
             foreach (var Timesheet in TimesheetList)
             {
-                //Timesheet.User = _userRepository.GetById(Timesheet.User.Id);
                 OrderOccupationList(Timesheet);
+            }
+
+            return TimesheetList;
+        }
+
+        public IEnumerable<TimesheetDTO> GetAllDTO()
+        {
+            IList<TimesheetDTO> TimesheetList = new List<TimesheetDTO>();
+
+            foreach(var timesheet in GetAll())
+            {
+                TimesheetDTO TimesheetDTO = timesheet.ToDTO();
+                TimesheetDTO.User = _userRepository.GetById(TimesheetDTO.User.Id);
+                TimesheetList.Add(TimesheetDTO);
             }
 
             return TimesheetList;
@@ -71,11 +82,14 @@ namespace Timesheet.Application.Services
         {
             TimesheetEntity Timesheet = _timesheetRepository.GetById(id);
 
-            //Timesheet.User = _userRepository.GetById(Timesheet.User.Id);
-
             OrderOccupationList(Timesheet);
 
             return Timesheet;
+        }
+
+        public TimesheetDTO GetDTOById(Guid id)
+        {
+            return GetAllDTO().FirstOrDefault(t => t.Id == id);
         }
 
         public Guid Update(TimesheetEntity entity)

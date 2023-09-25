@@ -69,7 +69,7 @@ namespace Timesheet.API.Controllers
         {
             try
             {
-                return Ok(_service.GetAll());
+                return Ok(_service.GetAllDTO());
             }
             catch (Exception ex)
             {
@@ -82,7 +82,7 @@ namespace Timesheet.API.Controllers
         {
             try
             {
-                return Ok(_service.GetById(id));
+                return Ok(_service.GetDTOById(id));
             }
             catch (Exception ex)
             {

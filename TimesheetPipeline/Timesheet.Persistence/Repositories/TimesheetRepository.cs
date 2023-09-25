@@ -51,12 +51,17 @@ namespace Timesheet.Persistence.Repositories
 
         public IEnumerable<TimesheetEntity> GetAll()
         {
-            return _context.Timesheets.Include(t => t.OccupationList).ToList();
+            List<TimesheetEntity> TimesheetList = _context.Timesheets.ToList();
+            foreach(var timesheet in TimesheetList)
+            {
+                timesheet.OccupationList = _context.Occupations.Where(o => o.TimesheetId == timesheet.Id).ToList();
+            }
+            return TimesheetList;
         }
 
         public TimesheetEntity GetById(Guid id)
         {
-            return _context.Timesheets.FirstOrDefault(t => t.Id == id);
+            return GetAll().FirstOrDefault(t => t.Id == id);
         }
 
         public Guid Update(TimesheetEntity entity)
