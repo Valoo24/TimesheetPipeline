@@ -12,5 +12,6 @@ namespace Timesheet.Domain.Interfaces
         public IEnumerable<Holiday> GetAll(int year);
         public Holiday GetById(int year, int id);
         public IEnumerable<Holiday> GetByMonth(int year, int month);
+        public void InitializeDatabase();
     }
 }

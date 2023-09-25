@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Timesheet.Domain.Entities;
 using Timesheet.Domain.Interfaces;
+using Timesheet.Infrastrucutre.DataAccess;
 
 namespace Timesheet.Persistence.Repositories
 {
@@ -17,6 +18,12 @@ namespace Timesheet.Persistence.Repositories
                 string AppPath = AppDomain.CurrentDomain.BaseDirectory;
                 return Path.Combine(AppPath, "HolidayDataBase.csv");
             }
+        }
+        private TimesheetContext _context;
+
+        public HolidayRepository(TimesheetContext Context)
+        {
+            _context = Context;
         }
 
         public IEnumerable<Holiday> GetAll()
@@ -62,77 +69,87 @@ namespace Timesheet.Persistence.Repositories
             return GetAll().FirstOrDefault(h => h.Id == id);
         }
 
-        public void InitializeCSV()
+        public void InitializeDatabase()
         {
+            _context.Database.EnsureDeleted();
+            _context.Database.EnsureCreated();
+
             IEnumerable<Holiday> HolidayList = new List<Holiday>
             {
                 new Holiday
                 {
-                    Id = 1,
+                    //Id = 1,
                     Name = "Nouvel an",
                     Date = new DateTime(2024, 1, 1)
                 },
                 new Holiday
                 {
-                    Id = 2,
+                    //Id = 2,
                     Name = "Lundi de Pâques",
                 },
                 new Holiday
                 {
-                    Id = 3,
+                    //Id = 3,
                     Name = "Fête du travail",
                     Date = new DateTime(2023, 5, 1)
                 },
                 new Holiday
                 {
-                    Id = 4,
+                    //Id = 4,
                     Name = "Ascension"
                 },
                 new Holiday
                 {
-                    Id = 5,
+                    //Id = 5,
                     Name = "Lundi de Pentecôte"
                 },
                 new Holiday
                 {
-                    Id = 6,
+                    //Id = 6,
                     Name = "Fête nationale de Belgique",
                     Date = new DateTime(2023, 7, 21)
                 },
                 new Holiday
                 {
-                    Id = 7,
+                    //Id = 7,
                     Name = "Assomption",
                     Date = new DateTime(2023, 8, 15)
                 },
                 new Holiday
                 {
-                    Id = 8,
+                    //Id = 8,
                     Name = "Toussaint",
                     Date = new DateTime(2023, 11, 1)
                 },
                 new Holiday
                 {
-                    Id = 9,
+                    //Id = 9,
                     Name = "Armistice",
                     Date = new DateTime(2023, 11, 11)
                 },
                 new Holiday
                 {
-                    Id = 10,
+                    //Id = 10,
                     Name = "Noël",
                     Date = new DateTime(2023, 12, 25)
                 }
             };
 
-            using (StreamWriter writer = new StreamWriter(_csvFilePath, false, Encoding.UTF8))
+            foreach(var holiay in HolidayList)
             {
-                writer.WriteLine("Id,Name,Date");
-                foreach (Holiday holiday in HolidayList)
-                {
-                    writer.WriteLine($"{holiday.Id},{holiday.Name},{holiday.Date}");
-                }
+                _context.Add(holiay);
             }
+
+            _context.SaveChanges();
+
+            //using (StreamWriter writer = new StreamWriter(_csvFilePath, false, Encoding.UTF8))
+            //{
+            //    writer.WriteLine("Id,Name,Date");
+            //    foreach (Holiday holiday in HolidayList)
+            //    {
+            //        writer.WriteLine($"{holiday.Id},{holiday.Name},{holiday.Date}");
+            //    }
+            //}
         }
     }
 }

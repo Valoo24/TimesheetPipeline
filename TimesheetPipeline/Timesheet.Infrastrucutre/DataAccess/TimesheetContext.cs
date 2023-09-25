@@ -14,8 +14,15 @@ namespace Timesheet.Infrastrucutre.DataAccess
     {
         public DbSet<Holiday> Holidays { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<TimesheetEntity> Timesheets { get; set; }
+        //public DbSet<TimesheetEntity> Timesheets { get; set; }
 
         public TimesheetContext(DbContextOptions<TimesheetContext> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Occupation>().HasNoKey();
+            //modelBuilder.Entity<TimesheetEntity>().HasMany("Occupation");
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Timesheet.Domain\Timesheet.Domain.csproj" />
+    <ProjectReference Include="..\Timesheet.Infrastrucutre\Timesheet.Infrastrucutre.csproj" />
   </ItemGroup>
 
 </Project>

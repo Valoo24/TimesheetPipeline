@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.Domain.Entities
 {
     /// <summary>
     /// Objet représentant une occupation dans la timesheet.
     /// </summary>
-    public class Occupation
+    public class Occupation : IEntity<int>
     {
+        public int Id { get; set; }
         /// <summary>
         /// Date de l'occupation.
         /// </summary>

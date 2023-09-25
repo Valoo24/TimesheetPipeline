@@ -53,5 +53,19 @@ namespace Timesheet.API.Controllers
                 return NotFound(ex.Message);
             }
         }
+
+        [HttpPost("CreateDb")]
+        public IActionResult CreateDb()
+        {
+            try
+            {
+                _service.InitializeDatabase();
+                return Ok("La base de donnée a bien été crée et initialisée.");
+            }
+            catch(Exception ex) 
+            { 
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

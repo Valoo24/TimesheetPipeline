@@ -62,6 +62,13 @@ namespace Timesheet.Application.Services
         }
         #endregion
 
+        #region Méthodes HolidayRepo
+        public void InitializeDatabase()
+        { 
+            _repository.InitializeDatabase(); 
+        }
+        #endregion
+
         #region Méthodes Custom
         private DateTime GetEasterDate(int year, bool getMondayDate = true)
         {

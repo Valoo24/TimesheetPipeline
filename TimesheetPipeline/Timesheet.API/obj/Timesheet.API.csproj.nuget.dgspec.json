@@ -313,6 +313,9 @@
             "projectReferences": {
               "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Domain\\Timesheet.Domain.csproj": {
                 "projectPath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Domain\\Timesheet.Domain.csproj"
+              },
+              "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Infrastrucutre\\Timesheet.Infrastrucutre.csproj": {
+                "projectPath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Infrastrucutre\\Timesheet.Infrastrucutre.csproj"
               }
             }
           }

@@ -1108,7 +1108,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "Timesheet.Domain": "1.0.0"
+          "Timesheet.Domain": "1.0.0",
+          "Timesheet.Infrastrucutre": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Timesheet.Persistence.dll": {}
