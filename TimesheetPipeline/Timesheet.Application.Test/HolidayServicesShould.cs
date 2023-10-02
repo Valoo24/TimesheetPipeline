@@ -180,12 +180,14 @@ namespace Timesheet.Application.Services
         public void ShouldThrowANotExisitingMonthExceptionFor0OrLower()
         {
             //Arrange
-            int Month = 0;
+            Random rnd = new Random();
+            int Month = rnd.Next(int.MinValue, 1);
+            int Year = rnd.Next(1,int.MaxValue);
 
             //Act
             Exception Exception = Record.Exception(() => 
             { 
-                _service.GetByMonth(2024, Month);
+                _service.GetByMonth(Year, Month);
             });
 
             //Act & Assert
