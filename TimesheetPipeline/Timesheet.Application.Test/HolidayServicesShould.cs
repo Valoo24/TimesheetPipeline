@@ -1,11 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using Timesheet.Application.Services;
 using Timesheet.Domain.Entities;
 using Timesheet.Infrastrucutre.DataAccess;
 using Timesheet.Persistence.Repositories;
 
-namespace Timesheet.Application.Test
+namespace Timesheet.Application.Services
 {
     public class HolidayServiceShould
     {
@@ -112,7 +111,7 @@ namespace Timesheet.Application.Test
         }
 
         [Fact]
-        public void GetPâquesEntity()
+        public void GetEasterHoliday()
         {
             //Arrange
             int TestId = 2;
@@ -122,10 +121,11 @@ namespace Timesheet.Application.Test
 
             //Assert
             Assert.Equal("Lundi de Pâques", Result.Name);
+            Assert.Equal(DayOfWeek.Monday, Result.Date.DayOfWeek);
         }
 
         [Fact]
-        public void GetPâquesEntityFrom2024()
+        public void GetEasterHolidayFrom2024()
         {
             //Arrange
             int TestId = 2;

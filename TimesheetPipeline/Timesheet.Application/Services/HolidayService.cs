@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Timesheet.Domain.Entities;
+﻿using Timesheet.Domain.Entities;
+using Timesheet.Domain.Exceptions;
 using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.Application.Services
@@ -51,6 +47,10 @@ namespace Timesheet.Application.Services
 
         public IEnumerable<Holiday> GetByMonth(int year, int month)
         {
+            if (month <= 0) throw new NonExistingMonthException("A month can't be 0 or lower.");
+
+            if (month > 12) throw new NonExistingMonthException("A month can't be more than 12.");
+
             IList<Holiday> holidayList = GetAll().ToList();
 
             foreach (var holiday in holidayList)
@@ -65,7 +65,7 @@ namespace Timesheet.Application.Services
         #region Méthodes HolidayRepo
         public void InitializeDatabase()
         {
-            _repository.InitializeDatabase(); 
+            _repository.InitializeDatabase();
         }
         #endregion
 
