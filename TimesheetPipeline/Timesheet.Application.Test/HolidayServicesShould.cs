@@ -114,11 +114,8 @@ namespace Timesheet.Application.Services
         [Fact]
         public void GetEasterHoliday()
         {
-            //Arrange
-            int TestId = 2;
-
-            //Act
-            var Result = _service.GetById(TestId);
+            //Arrange & Act
+            var Result = _service.GetById(2);
 
             //Assert
             Assert.Equal("Lundi de Pâques", Result.Name);
@@ -128,12 +125,8 @@ namespace Timesheet.Application.Services
         [Fact]
         public void GetEasterHolidayFrom2024()
         {
-            //Arrange
-            int TestId = 2;
-            int Year = 2024;
-
-            //Act
-            var Result = _service.GetById(Year, TestId);
+            //Arrange & Act
+            var Result = _service.GetById(2024, 2);
 
             //Assert
             Assert.Equal("Lundi de Pâques", Result.Name);
@@ -142,18 +135,29 @@ namespace Timesheet.Application.Services
         }
 
         [Fact]
-        public void GetThreeHolidaysFromMayIn2024()
+        public void GetEasterHolidayFromAnyYear()
         {
             //Arrange
-            int Month = 5;
-            int Year = 2024;
+            Random rnd = new Random();
+            int Year = rnd.Next(1, 10_000);
 
             //Act
-            var Result = _service.GetByMonth(Year, Month);
+            var Result = _service.GetById(Year, 2);
+
+            //Assert
+            Assert.Equal("Lundi de Pâques", Result.Name);
+            Assert.Equal(Year, Result.Date.Year);
+        }
+
+        [Fact]
+        public void GetThreeHolidaysFromMayIn2024()
+        {
+            //Arrange & Act
+            var Result = _service.GetByMonth(2024, 5);
 
             //Assert
             Assert.Equal(3, Result.Count());
-            foreach(var holiday in Result)
+            foreach (var holiday in Result)
             {
                 Assert.Equal(5, holiday.Date.Month);
             }
@@ -162,17 +166,14 @@ namespace Timesheet.Application.Services
         [Fact]
         public void ShouldGetAllHolidaysFrom2027()
         {
-            //Arrange
-            int Year = 2027;
-
-            //Act
+            //Arrange & Act
             var Result = _service.GetAll(2027);
 
             //Assert
             Assert.Equal(10, Result.Count());
-            foreach(var holiday in Result)
+            foreach (var holiday in Result)
             {
-                Assert.Equal(Year, holiday.Date.Year);
+                Assert.Equal(2027, holiday.Date.Year);
             }
         }
 
@@ -182,11 +183,11 @@ namespace Timesheet.Application.Services
             //Arrange
             Random rnd = new Random();
             int Month = rnd.Next(int.MinValue, 1);
-            int Year = rnd.Next(1,int.MaxValue);
+            int Year = rnd.Next(1, 10_000);
 
             //Act
-            Exception Exception = Record.Exception(() => 
-            { 
+            Exception Exception = Record.Exception(() =>
+            {
                 _service.GetByMonth(Year, Month);
             });
 
