@@ -100,7 +100,7 @@ namespace Timesheet.Application.Test
             var Result = Service.GetAll();
 
             //Assert
-            Assert.Equal(_holidays.Count(), Result.Count());
+            Assert.Equal(_holidays, Result);
         }
     }
 }
