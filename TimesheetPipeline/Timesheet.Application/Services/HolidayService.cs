@@ -19,12 +19,12 @@ namespace Timesheet.Application.Services
             return _repository.GetAll();
         }
 
-        public IEnumerable <Holiday> GetAll(int year) 
-        { 
+        public IEnumerable<Holiday> GetAll(int year)
+        {
             IList<Holiday> HolidayList = _repository.GetAll().ToList();
 
-            foreach(var holiday in HolidayList) 
-            { 
+            foreach (var holiday in HolidayList)
+            {
                 ChangeDate(holiday, year);
             }
 
@@ -36,7 +36,7 @@ namespace Timesheet.Application.Services
             return _repository.GetById(id);
         }
 
-        public Holiday GetById(int year, int id) 
+        public Holiday GetById(int year, int id)
         {
             Holiday Holiday = _repository.GetById(id);
 
@@ -47,9 +47,7 @@ namespace Timesheet.Application.Services
 
         public IEnumerable<Holiday> GetByMonth(int year, int month)
         {
-            if (month <= 0) throw new NonExistingMonthException("A month can't be 0 or lower.");
-
-            if (month > 12) throw new NonExistingMonthException("A month can't be more than 12.");
+            CheckMonth(month);
 
             IList<Holiday> holidayList = GetAll().ToList();
 
@@ -109,6 +107,15 @@ namespace Timesheet.Application.Services
                     holiday.Date = new DateTime(year, holiday.Date.Month, holiday.Date.Day);
                     break;
             }
+        }
+        #endregion
+
+        #region Check Methods
+        private void CheckMonth(int month)
+        {
+            if (month <= 0) throw new NonExistingMonthException("A month can't be 0 or lower.");
+
+            if (month > 12) throw new NonExistingMonthException("A month can't be more than 12.");
         }
         #endregion
     }

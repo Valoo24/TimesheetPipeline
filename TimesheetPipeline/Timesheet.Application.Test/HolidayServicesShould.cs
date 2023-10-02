@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Timesheet.Domain.Entities;
+using Timesheet.Domain.Exceptions;
 using Timesheet.Infrastrucutre.DataAccess;
 using Timesheet.Persistence.Repositories;
 
@@ -173,6 +174,23 @@ namespace Timesheet.Application.Services
             {
                 Assert.Equal(Year, holiday.Date.Year);
             }
+        }
+
+        [Fact]
+        public void ShouldThrowANotExisitingMonthExceptionFor0OrLower()
+        {
+            //Arrange
+            int Month = 0;
+
+            //Act
+            Exception Exception = Record.Exception(() => 
+            { 
+                _service.GetByMonth(2024, Month);
+            });
+
+            //Act & Assert
+            Assert.NotNull(Exception);
+            Assert.IsType<NonExistingMonthException>(Exception);
         }
     }
 }
