@@ -75,27 +75,26 @@ namespace Timesheet.Application.Test
                 }
             };
 
-        private DbContextOptions<TimesheetContext> _options = new DbContextOptionsBuilder<TimesheetContext>()
+        private static DbContextOptions<TimesheetContext> _options = new DbContextOptionsBuilder<TimesheetContext>()
             .UseInMemoryDatabase(databaseName: "TimesheetTestDB")
             .Options;
+
+        private static TimesheetContext _context = new TimesheetContext(_options);
+
+        private Mock<HolidayRepository> _mockHolidayRepository = new Mock<HolidayRepository>(_context);
 
         [Fact]
         public void GetAllHolidaysEntities()
         {
             //Arrange
-            var Context = new TimesheetContext(_options);
-
-            //Context.Database.EnsureDeleted();
-            Context.Database.EnsureCreated();
+            _context.Database.EnsureCreated();
             foreach (var holiday in _holidays)
             {
-                Context.Holidays.Add(holiday);
+                _context.Holidays.Add(holiday);
             }
-            Context.SaveChanges();
+            _context.SaveChanges();
 
-            var MockRepository = new Mock<HolidayRepository>(Context);
-
-            var Service = new HolidayService(MockRepository.Object);
+            var Service = new HolidayService(_mockHolidayRepository.Object);
 
             //Act
             var Result = Service.GetAll();
