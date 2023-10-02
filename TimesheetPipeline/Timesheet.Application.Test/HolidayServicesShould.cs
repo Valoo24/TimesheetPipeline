@@ -75,18 +75,22 @@ namespace Timesheet.Application.Test
                 }
             };
 
-        private static DbContextOptions<TimesheetContext> _options = new DbContextOptionsBuilder<TimesheetContext>()
+        private DbContextOptions<TimesheetContext> _options;
+
+        private TimesheetContext _context;
+
+        private Mock<HolidayRepository> _mockHolidayRepository;
+
+        private HolidayService _service;
+
+        public HolidayServiceShould()
+        {
+            _options = new DbContextOptionsBuilder<TimesheetContext>()
             .UseInMemoryDatabase(databaseName: "TimesheetTestDB")
             .Options;
 
-        private static TimesheetContext _context = new TimesheetContext(_options);
+            _context = new TimesheetContext(_options);
 
-        private Mock<HolidayRepository> _mockHolidayRepository = new Mock<HolidayRepository>(_context);
-
-        [Fact]
-        public void GetAllHolidaysEntities()
-        {
-            //Arrange
             _context.Database.EnsureCreated();
             foreach (var holiday in _holidays)
             {
@@ -94,13 +98,34 @@ namespace Timesheet.Application.Test
             }
             _context.SaveChanges();
 
-            var Service = new HolidayService(_mockHolidayRepository.Object);
+            _mockHolidayRepository = new Mock<HolidayRepository>(_context);
+
+            _service = new HolidayService(_mockHolidayRepository.Object);
+        }
+
+        [Fact]
+        public void GetAllHolidaysEntities()
+        {
+            //Arrange
 
             //Act
-            var Result = Service.GetAll();
+            var Result = _service.GetAll();
 
             //Assert
             Assert.Equal(_holidays, Result);
+        }
+
+        [Fact]
+        public void GetPâquesEntity()
+        {
+            //Arrange
+            int TestId = 2;
+
+            //Act
+            var Result = _service.GetById(TestId);
+
+            //Assert
+            Assert.Equal("Lundi de Pâques", Result.Name);
         }
     }
 }
