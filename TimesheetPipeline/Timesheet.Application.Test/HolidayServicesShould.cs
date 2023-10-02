@@ -93,10 +93,9 @@ namespace Timesheet.Application.Test
             }
             Context.SaveChanges();
 
-            var Service = new HolidayService
-            (
-                new HolidayRepository(Context)
-            );
+            var MockRepository = new Mock<HolidayRepository>(Context);
+
+            var Service = new HolidayService(MockRepository.Object);
 
             //Act
             var Result = Service.GetAll();
