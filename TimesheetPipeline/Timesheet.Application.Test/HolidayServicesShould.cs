@@ -1,12 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Xml;
 using Timesheet.Application.Services;
 using Timesheet.Domain.Entities;
-using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
 using Timesheet.Persistence.Repositories;
 
@@ -91,6 +86,7 @@ namespace Timesheet.Application.Test
 
             _context = new TimesheetContext(_options);
 
+            _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
             foreach (var holiday in _holidays)
             {
@@ -126,6 +122,57 @@ namespace Timesheet.Application.Test
 
             //Assert
             Assert.Equal("Lundi de Pâques", Result.Name);
+        }
+
+        [Fact]
+        public void GetPâquesEntityFrom2024()
+        {
+            //Arrange
+            int TestId = 2;
+            int Year = 2024;
+
+            //Act
+            var Result = _service.GetById(Year, TestId);
+
+            //Assert
+            Assert.Equal("Lundi de Pâques", Result.Name);
+            Assert.Equal(4, Result.Date.Month);
+            Assert.Equal(2024, Result.Date.Year);
+        }
+
+        [Fact]
+        public void GetThreeHolidaysFromMayIn2024()
+        {
+            //Arrange
+            int Month = 5;
+            int Year = 2024;
+
+            //Act
+            var Result = _service.GetByMonth(Year, Month);
+
+            //Assert
+            Assert.Equal(3, Result.Count());
+            foreach(var holiday in Result)
+            {
+                Assert.Equal(5, holiday.Date.Month);
+            }
+        }
+
+        [Fact]
+        public void ShouldGetAllHolidaysFrom2027()
+        {
+            //Arrange
+            int Year = 2027;
+
+            //Act
+            var Result = _service.GetAll(2027);
+
+            //Assert
+            Assert.Equal(10, Result.Count());
+            foreach(var holiday in Result)
+            {
+                Assert.Equal(Year, holiday.Date.Year);
+            }
         }
     }
 }

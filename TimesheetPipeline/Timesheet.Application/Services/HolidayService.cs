@@ -64,7 +64,7 @@ namespace Timesheet.Application.Services
 
         #region Méthodes HolidayRepo
         public void InitializeDatabase()
-        { 
+        {
             _repository.InitializeDatabase(); 
         }
         #endregion
