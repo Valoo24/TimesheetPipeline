@@ -11,7 +11,6 @@ namespace Timesheet.Persistence.Repositories
 {
     public class HolidayRepository : IHolidayRepository
     {
-
         private TimesheetContext _context;
 
         public HolidayRepository(TimesheetContext Context)
@@ -95,14 +94,12 @@ namespace Timesheet.Persistence.Repositories
                 }
             };
 
-            foreach(var holiay in HolidayList)
+            foreach (var holiay in HolidayList)
             {
                 _context.Add(holiay);
             }
 
             _context.SaveChanges();
-
-
         }
     }
 }
