@@ -206,5 +206,27 @@ namespace Timesheet.Persistence.Test
                 Assert.IsType<ArgumentNullException>(ex);
             }
         }
+
+        [Fact]
+        public void ThrowAnArgumentNullExceptionWhenUpdatedUserHasAnEmptyGuidAsId()
+        {
+            User userWithABadGuid = new User
+            {
+                Id = Guid.Empty,
+                FirstName = "A",
+                LastName = "B",
+                MailAdress = "C"
+            };
+
+            try
+            {
+                var result = _repository.Update(userWithABadGuid);
+            }
+            catch(ArgumentNullException ex)
+            {
+                Assert.NotNull(ex);
+                Assert.IsType<ArgumentNullException>(ex);
+            }
+        }
     }
 }
