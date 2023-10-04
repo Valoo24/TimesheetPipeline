@@ -44,6 +44,8 @@ namespace Timesheet.Persistence.Repositories
 
         public User GetById(Guid id)
         {
+            if(id == Guid.Empty) throw new ArgumentNullException(id.ToString());
+
             return _context.Users.FirstOrDefault(u => u.Id == id);
         }
 

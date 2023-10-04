@@ -88,7 +88,7 @@ namespace Timesheet.Persistence.Test
         }
 
         [Fact]
-        public void ThrowNullReferenceException()
+        public void ThrowArgumentNullExceptionWhenAddNull()
         {
             try 
             {
@@ -125,6 +125,20 @@ namespace Timesheet.Persistence.Test
 
             Assert.NotNull(result);
             Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id), result);
+        }
+
+        [Fact]
+        public void ThrowAnArgumentNullExceptionWhenGetByIdEmpty()
+        {
+            try
+            {
+                var result = _repository.GetById(Guid.Empty);
+            }
+            catch(ArgumentNullException ex) 
+            {
+                Assert.NotNull(ex);
+                Assert.IsType<ArgumentNullException>(ex);
+            }
         }
     }
 }
