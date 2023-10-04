@@ -97,15 +97,52 @@ namespace Timesheet.Persistence.Test
         [Fact]
         public void GetChristmasHolidayEntity()
         {
-            //Arrange
-
-            //Act
+            //Arrange & Act
             var result = _repository.GetById(10);
 
             //Assert
             Assert.NotNull(result);
             Assert.Equal(10, result.Id);
             Assert.Equal("Noël", result.Name);
+        }
+
+        [Fact]
+        public void GetAllChristmasEntities()
+        {
+            //Arrange & Act
+            var result = _repository.GetAll();
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(10, result.Count());
+            foreach(var holiday in result)
+            {
+                Assert.Equal(_holidays.FirstOrDefault(h => h.Id == holiday.Id).Id, holiday.Id);
+            }
+        }
+
+        [Fact]
+        public void ThrowAnArgumentOutOfRangeException()
+        {
+            //Arrange
+            Random rnd = new Random();
+            int CheckType = rnd.Next(0, 2);
+            int idToCheck = 0;
+
+            if (CheckType == 0) idToCheck = rnd.Next(int.MinValue, 1);
+            if (CheckType == 1) idToCheck = rnd.Next(11, int.MaxValue);
+
+
+            //Act & Assert
+            try
+            {
+                var result = _repository.GetById(idToCheck);
+            }
+            catch (ArgumentOutOfRangeException ex) 
+            {
+                Assert.NotNull(ex);
+                Assert.IsType<ArgumentOutOfRangeException>(ex);
+            }
         }
     }
 }

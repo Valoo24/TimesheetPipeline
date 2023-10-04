@@ -20,6 +20,8 @@ namespace Timesheet.Persistence.Repositories
 
         public Holiday GetById(int id)
         {
+            CheckIdRange(id);
+
             return _context.Holidays.FirstOrDefault(h => h.Id == id);
         }
 
@@ -95,6 +97,13 @@ namespace Timesheet.Persistence.Repositories
             }
 
             _context.SaveChanges();
+        }
+
+        private void CheckIdRange(int id)
+        {
+            if (id <= 0) throw new ArgumentOutOfRangeException("id");
+
+            if (id > 10) throw new ArgumentOutOfRangeException("id");
         }
     }
 }
