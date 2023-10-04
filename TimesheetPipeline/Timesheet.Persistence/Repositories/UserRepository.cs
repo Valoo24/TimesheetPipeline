@@ -15,7 +15,7 @@ namespace Timesheet.Persistence.Repositories
 
         public Guid Add(User entity)
         {
-            if(entity is null || entity == default) throw new ArgumentNullException();
+            if (entity is null || entity == default) throw new ArgumentNullException();
 
             _context.Users.Add(entity);
             _context.SaveChanges();
@@ -49,16 +49,18 @@ namespace Timesheet.Persistence.Repositories
 
         public User GetById(Guid id)
         {
-            if(id == Guid.Empty) throw new ArgumentNullException(id.ToString());
+            if (id == Guid.Empty) throw new ArgumentNullException(id.ToString());
 
             return _context.Users.FirstOrDefault(u => u.Id == id);
         }
 
         public Guid Delete(Guid id)
         {
+            if (id == Guid.Empty) throw new ArgumentNullException();
+
             User userToDelete = _context.Users.FirstOrDefault(u => u.Id == id);
 
-            if (userToDelete is null) throw new ArgumentNullException();
+            if (userToDelete is null || userToDelete == default) throw new ArgumentNullException();
 
             _context.Remove(userToDelete);
             _context.SaveChanges();

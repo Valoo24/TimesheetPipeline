@@ -240,5 +240,33 @@ namespace Timesheet.Persistence.Test
             Assert.Equal(userToDelete.Id, result);
             Assert.NotEqual(_testUsers, _repository.GetAll());
         }
+
+        [Fact]
+        public void ThrowAnArgumentNullExceptionWhenDeletingAnEmptyGuid()
+        {
+            try
+            {
+                var result = _repository.Delete(Guid.Empty);
+            }
+            catch(ArgumentNullException ex) 
+            {
+                Assert.NotNull(ex);
+                Assert.IsType<ArgumentNullException>(ex);
+            }
+        }
+
+        [Fact]
+        public void ThrowAnArgumentNullExceptionWhenDeletingANonExistingId()
+        {
+            try
+            {
+                var result = _repository.Delete(Guid.NewGuid());
+            }
+            catch(ArgumentNullException ex)
+            {
+                Assert.NotNull(ex);
+                Assert.IsType<ArgumentNullException>(ex);
+            }
+        }
     }
 }
