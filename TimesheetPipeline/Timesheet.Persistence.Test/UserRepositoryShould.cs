@@ -1,20 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
 using Timesheet.Persistence.Repositories;
-using Xunit;
 
 namespace Timesheet.Persistence.Test
 {
     public class UserRepositoryShould
     {
+        #region Properties
         private IList<User> _testUsers = new List<User>()
         {
             new User
@@ -45,7 +39,9 @@ namespace Timesheet.Persistence.Test
         private TimesheetContext _context;
 
         private IUserRepository _repository;
+        #endregion
 
+        #region Constructors
         public UserRepositoryShould()
         {
             _options = new DbContextOptionsBuilder<TimesheetContext>()
@@ -64,7 +60,9 @@ namespace Timesheet.Persistence.Test
 
             _repository = new UserRepository(_context);
         }
+        #endregion
 
+        #region TestAddMethods
         [Fact]
         public void AddAUserEntity()
         {
@@ -100,7 +98,9 @@ namespace Timesheet.Persistence.Test
                 Assert.IsType<ArgumentNullException>(ex);
             }
         }
+        #endregion
 
+        #region TestGetMethods
         [Fact]
         public void GetAllUserEntity()
         {
@@ -140,7 +140,9 @@ namespace Timesheet.Persistence.Test
                 Assert.IsType<ArgumentNullException>(ex);
             }
         }
+        #endregion
 
+        #region TestUpdateMethods
         [Fact]
         public void UpdateTomCruiseEntityIntoTestEntity()
         {
@@ -228,7 +230,9 @@ namespace Timesheet.Persistence.Test
                 Assert.IsType<ArgumentNullException>(ex);
             }
         }
+        #endregion
 
+        #region TestDeleteMethods
         [Fact]
         public void DeleteBriceDeNice()
         {
@@ -268,5 +272,6 @@ namespace Timesheet.Persistence.Test
                 Assert.IsType<ArgumentNullException>(ex);
             }
         }
+        #endregion
     }
 }

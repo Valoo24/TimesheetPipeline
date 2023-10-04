@@ -20,9 +20,6 @@ namespace Timesheet.Domain.Entities.Timesheets
 
         public Guid UserId { get; set; }
 
-        /// <summary>
-        /// User de la timesheet.
-        /// </summary>
         //public User User { get; set; }
 
         /// <summary>

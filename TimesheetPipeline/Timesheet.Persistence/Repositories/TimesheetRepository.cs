@@ -57,7 +57,14 @@ namespace Timesheet.Persistence.Repositories
 
         public Guid Update(TimesheetEntity entity)
         {
-            throw new NotImplementedException();
+            TimesheetEntity entityToUpdate = _context.Timesheets.FirstOrDefault(t => t.Id == entity.Id);
+
+            entityToUpdate.UserId = entity.UserId;
+            entityToUpdate.Year = entity.Year;
+            entityToUpdate.Month = entity.Month;
+            entityToUpdate.OccupationList = entity.OccupationList;
+
+            return entityToUpdate.Id;
         }
     }
 }

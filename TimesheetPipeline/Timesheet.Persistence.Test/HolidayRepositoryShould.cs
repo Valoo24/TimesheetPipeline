@@ -77,7 +77,7 @@ namespace Timesheet.Persistence.Test
         private IHolidayRepository _repository;
         #endregion
 
-        #region Constructor
+        #region Constructors
         public HolidayRepositoryShould()
         {
             _options = new DbContextOptionsBuilder<TimesheetContext>()
@@ -98,7 +98,7 @@ namespace Timesheet.Persistence.Test
         }
         #endregion
 
-        #region Tests
+        #region TestGetMethods
         [Fact]
         public void GetChristmasHolidayEntity()
         {

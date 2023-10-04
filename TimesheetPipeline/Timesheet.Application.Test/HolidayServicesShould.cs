@@ -81,7 +81,7 @@ namespace Timesheet.Application.Services
         private HolidayService _service;
         #endregion
 
-        #region Constructor
+        #region Constructors
         public HolidayServiceShould()
         {
             _options = new DbContextOptionsBuilder<TimesheetContext>()
@@ -104,7 +104,7 @@ namespace Timesheet.Application.Services
         }
         #endregion
 
-        #region Tests
+        #region TestGetMethods
         [Fact]
         public void GetAllHolidaysEntities()
         {
