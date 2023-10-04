@@ -20,9 +20,9 @@ namespace Timesheet.Persistence.Test
             new User
             {
                 Id = Guid.NewGuid(),
-                FirstName = "Toto",
-                LastName = "Foo",
-                MailAdress = "Test@mail.com",
+                FirstName = "Brice",
+                LastName = "DeNice",
+                MailAdress = "BriceDeNice@mail.com",
             },
             new User
             {
@@ -56,6 +56,10 @@ namespace Timesheet.Persistence.Test
 
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
+            foreach(var user in _testUsers) 
+            { 
+                _context.Users.Add(user);
+            }
             _context.SaveChanges();
 
             _repository = new UserRepository(_context);
@@ -65,7 +69,13 @@ namespace Timesheet.Persistence.Test
         public void AddAUserEntity()
         {
             //Arrange
-            User userToTest = _testUsers.FirstOrDefault(u => u.FirstName == "Toto" && u.LastName == "Foo" && u.MailAdress == "Test@mail.com");
+            User userToTest = new User
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Toto",
+                LastName = "Foo",
+                MailAdress = "Test@mail.com",
+            };
 
             //Act
             var result = _repository.Add(userToTest);
@@ -73,6 +83,7 @@ namespace Timesheet.Persistence.Test
             //Assert
             Assert.NotNull(userToTest.Timesheets);
             Assert.NotNull(result);
+            Assert.IsType<Guid>(result);
             Assert.Equal(userToTest.Id, result);
         }
 
@@ -93,13 +104,7 @@ namespace Timesheet.Persistence.Test
         [Fact]
         public void GetAllUserEntity()
         {
-            //Arrange
-            foreach(var user in _testUsers) 
-            { 
-                _repository.Add(user);
-            }
-
-            //Act
+            //Arrange & Act
             var result = _repository.GetAll();
 
             //Assert
@@ -111,7 +116,15 @@ namespace Timesheet.Persistence.Test
                 Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == user.Id).LastName, user.LastName);
                 Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == user.Id).MailAdress, user.MailAdress);
             }
+        }
 
+        [Fact]
+        public void GetElonMuskEntity()
+        {
+            var result = _repository.GetById(_testUsers.FirstOrDefault(tu => tu.FirstName == "Elon" && tu.LastName == "Musk" && tu.MailAdress == "ElonMusk@mail.com").Id);
+
+            Assert.NotNull(result);
+            Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id), result);
         }
     }
 }
