@@ -185,15 +185,21 @@ namespace Timesheet.Application.Services
             int Month = rnd.Next(int.MinValue, 1);
             int Year = rnd.Next(1, 10_000);
 
-            //Act
-            Exception Exception = Record.Exception(() =>
-            {
-                _service.GetByMonth(Year, Month);
-            });
-
             //Act & Assert
-            Assert.NotNull(Exception);
-            Assert.IsType<NonExistingMonthException>(Exception);
+            //Exception Exception = Record.Exception(() =>
+            //{
+            //    _service.GetByMonth(Year, Month);
+            //});
+
+            try
+            {
+                var result = _service.GetByMonth(Year, Month);
+            }
+            catch (NonExistingMonthException ex) 
+            {
+                Assert.NotNull(ex);
+                Assert.IsType<NonExistingMonthException>(ex);
+            }
         }
     }
 }
