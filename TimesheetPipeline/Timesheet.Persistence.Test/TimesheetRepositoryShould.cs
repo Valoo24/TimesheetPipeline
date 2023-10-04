@@ -145,12 +145,50 @@ namespace Timesheet.Persistence.Test
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
 
+            foreach (var timesheet in _testTimesheets)
+            {
+                _context.Timesheets.Add(timesheet);
+            }
+
             _context.SaveChanges();
 
             _repository = new TimesheetRepository(_context);
         }
         #endregion
 
+        #region TestAddMethods
+        [Fact]
+        public void AddANewTimesheetForElonMusk()
+        {
+            //Arrange
+            TimesheetEntity timesheetToAdd = new TimesheetEntity()
+            {
+                Id = Guid.NewGuid(),
+                UserId = _testUsers.FirstOrDefault(tu => tu.FirstName == "Elon").Id,
+                Year = 2026,
+                Month = 12,
+                OccupationList = new List<Occupation>() 
+                { 
+                    new Occupation
+                    {
+                        Date = new DateTime(2026, 12, 1),
+                        Title = "Thinking about buying the world"
+                    },
+                    new Occupation
+                    {
+                        Date = new DateTime(2026, 12, 2),
+                        Title = "Buying Jeff Bezos"
+                    }
+                }
+            };
 
+            //Act
+            var result = _repository.Add(timesheetToAdd);
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(timesheetToAdd.Id, result);
+        }
+        #endregion
     }
 }

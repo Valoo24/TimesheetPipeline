@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Timesheet.Domain.Entities;
 using Timesheet.Domain.Exceptions;
-using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
 using Timesheet.Persistence.Repositories;
 
