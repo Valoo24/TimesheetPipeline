@@ -81,7 +81,7 @@ namespace Timesheet.Persistence.Test
         public HolidayRepositoryShould()
         {
             _options = new DbContextOptionsBuilder<TimesheetContext>()
-            .UseInMemoryDatabase(databaseName: "TimesheetTestDB")
+            .UseInMemoryDatabase(databaseName: "TimesheetTestDBForHolidayRepository")
             .Options;
 
             _context = new TimesheetContext(_options);

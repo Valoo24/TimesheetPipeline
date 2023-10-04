@@ -15,6 +15,7 @@ namespace Timesheet.Persistence.Repositories
 
         public Guid Add(User entity)
         {
+            if(entity is null || entity == default) throw new ArgumentNullException();
 
             _context.Users.Add(entity);
             _context.SaveChanges();
@@ -26,7 +27,7 @@ namespace Timesheet.Persistence.Repositories
         {
             User entityToUpdate = _context.Users.Find(entity.Id);
 
-            if (entityToUpdate is null || entityToUpdate == default) throw new NullReferenceException();
+            if (entityToUpdate is null || entityToUpdate == default) throw new ArgumentNullException();
 
             entity.Timesheets = entityToUpdate.Timesheets;
             entityToUpdate = entity;

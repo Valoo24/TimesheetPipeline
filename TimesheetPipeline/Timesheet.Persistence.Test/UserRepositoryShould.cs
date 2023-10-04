@@ -14,6 +14,31 @@ namespace Timesheet.Persistence.Test
 {
     public class UserRepositoryShould
     {
+        private IList<User> _testUsers = new List<User>()
+        {
+            new User
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Toto",
+                LastName = "Foo",
+                MailAdress = "Test@mail.com",
+            },
+            new User
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Elon",
+                LastName = "Musk",
+                MailAdress = "ElonMusk@mail.com",
+            },
+            new User
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Tom",
+                LastName = "Cruise",
+                MailAdress = "TomCruise@mail.com",
+            }
+        };
+
         private DbContextOptions<TimesheetContext> _options;
 
         private TimesheetContext _context;
@@ -23,7 +48,7 @@ namespace Timesheet.Persistence.Test
         public UserRepositoryShould()
         {
             _options = new DbContextOptionsBuilder<TimesheetContext>()
-            .UseInMemoryDatabase(databaseName: "TimesheetTestDB")
+            .UseInMemoryDatabase(databaseName: "TimesheetTestDBForUserRepository")
             .Options;
 
             _context = new TimesheetContext(_options);
@@ -39,20 +64,29 @@ namespace Timesheet.Persistence.Test
         public void AddAUserEntity()
         {
             //Arrange
-            User userToTest = new User 
-            { 
-                Id = Guid.NewGuid(),
-                FirstName = "Toto",
-                LastName = "Foo",
-                MailAdress = "Test@mail.com",
-            };
+            User userToTest = _testUsers.FirstOrDefault(u => u.FirstName == "Toto" && u.LastName == "Foo" && u.MailAdress == "Test@mail.com");
 
             //Act
             var result = _repository.Add(userToTest);
 
             //Assert
+            Assert.NotNull(userToTest.Timesheets);
             Assert.NotNull(result);
             Assert.Equal(userToTest.Id, result);
+        }
+
+        [Fact]
+        public void ThrowNullReferenceException()
+        {
+            try 
+            {
+                var result = _repository.Add(null);
+            }
+            catch (ArgumentNullException ex) 
+            {
+                Assert.NotNull(ex);
+                Assert.IsType<ArgumentNullException>(ex);
+            }
         }
     }
 }

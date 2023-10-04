@@ -85,7 +85,7 @@ namespace Timesheet.Application.Services
         public HolidayServiceShould()
         {
             _options = new DbContextOptionsBuilder<TimesheetContext>()
-            .UseInMemoryDatabase(databaseName: "TimesheetTestDB")
+            .UseInMemoryDatabase(databaseName: "TimesheetTestDBForHolidayService")
             .Options;
 
             _context = new TimesheetContext(_options);
