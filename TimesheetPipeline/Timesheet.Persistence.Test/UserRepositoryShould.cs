@@ -228,5 +228,17 @@ namespace Timesheet.Persistence.Test
                 Assert.IsType<ArgumentNullException>(ex);
             }
         }
+
+        [Fact]
+        public void DeleteBriceDeNice()
+        {
+            User userToDelete = _testUsers.FirstOrDefault(tu => tu.FirstName == "Brice" && tu.LastName == "DeNice" && tu.MailAdress == "BriceDeNice@mail.com");
+
+            var result = _repository.Delete(userToDelete.Id);
+
+            Assert.NotNull(result);
+            Assert.Equal(userToDelete.Id, result);
+            Assert.NotEqual(_testUsers, _repository.GetAll());
+        }
     }
 }

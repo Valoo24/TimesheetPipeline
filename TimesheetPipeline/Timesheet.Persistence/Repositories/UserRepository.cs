@@ -56,7 +56,14 @@ namespace Timesheet.Persistence.Repositories
 
         public Guid Delete(Guid id)
         {
-            throw new NotImplementedException();
+            User userToDelete = _context.Users.FirstOrDefault(u => u.Id == id);
+
+            if (userToDelete is null) throw new ArgumentNullException();
+
+            _context.Remove(userToDelete);
+            _context.SaveChanges();
+
+            return userToDelete.Id;
         }
     }
 }
