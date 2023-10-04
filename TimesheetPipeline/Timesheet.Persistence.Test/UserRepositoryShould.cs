@@ -140,5 +140,33 @@ namespace Timesheet.Persistence.Test
                 Assert.IsType<ArgumentNullException>(ex);
             }
         }
+
+        [Fact]
+        public void ShouldUpdateTomCruiseEntityIntoTestEntity()
+        {
+            //Arrange
+            User userToUpdate = new User
+            {
+                Id = _testUsers.FirstOrDefault(tu => 
+                tu.FirstName == "Tom" && 
+                tu.LastName == "Cruise" && 
+                tu.MailAdress == "TomCruise@mail.com").Id,
+                FirstName = "Toto",
+                LastName = "Foo",
+                MailAdress = "Test@mail.com"
+            };
+
+            //Act
+            var result = _repository.Update(userToUpdate);
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(userToUpdate.Id, result);
+            Assert.NotEqual(_testUsers.FirstOrDefault(tu => 
+            tu.FirstName == "Tom" && 
+            tu.LastName == "Cruise" && 
+            tu.MailAdress == "TomCruise@mail.com"), 
+            _repository.GetById(userToUpdate.Id));
+        }
     }
 }
