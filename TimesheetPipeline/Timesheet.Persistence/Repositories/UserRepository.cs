@@ -29,7 +29,16 @@ namespace Timesheet.Persistence.Repositories
 
         public Guid Update(User entity)
         {
-            throw new NotImplementedException();
+            User entityToUpdate = _context.Users.Find(entity.Id);
+
+            if (entityToUpdate is null || entityToUpdate == default) throw new NullReferenceException();
+
+            entity.Timesheets = entityToUpdate.Timesheets;
+            entityToUpdate = entity;
+
+            _context.SaveChanges();
+
+            return entityToUpdate.Id;
         }
 
         public IEnumerable<User> GetAll()
