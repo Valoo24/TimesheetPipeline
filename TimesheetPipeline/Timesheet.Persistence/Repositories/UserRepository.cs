@@ -25,12 +25,13 @@ namespace Timesheet.Persistence.Repositories
 
         public Guid Update(User entity)
         {
-            User entityToUpdate = _context.Users.Find(entity.Id);
+            User entityToUpdate = _context.Users.FirstOrDefault(u => u.Id == entity.Id);
 
             if (entityToUpdate is null || entityToUpdate == default) throw new ArgumentNullException();
 
-            entity.Timesheets = entityToUpdate.Timesheets;
-            entityToUpdate = entity;
+            entityToUpdate.FirstName = entity.FirstName;
+            entityToUpdate.LastName = entity.LastName;
+            entityToUpdate.MailAdress = entity.MailAdress;
 
             _context.SaveChanges();
 

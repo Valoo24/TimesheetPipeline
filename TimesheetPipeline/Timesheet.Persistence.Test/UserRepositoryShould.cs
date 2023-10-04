@@ -165,7 +165,7 @@ namespace Timesheet.Persistence.Test
             Assert.NotEqual(_testUsers.FirstOrDefault(tu => 
             tu.FirstName == "Tom" && 
             tu.LastName == "Cruise" && 
-            tu.MailAdress == "TomCruise@mail.com"), 
+            tu.MailAdress == "TomCruise@mail.com"),
             _repository.GetById(userToUpdate.Id));
         }
     }
