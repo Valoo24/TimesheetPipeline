@@ -189,6 +189,27 @@ namespace Timesheet.Persistence.Test
             Assert.NotNull(result);
             Assert.Equal(timesheetToAdd.Id, result);
         }
+
+        [Fact]
+        public void AddANewTimesheetForTomCruiseWithEmptyOccupationList()
+        {
+            //Arrange
+            TimesheetEntity timesheetToAdd = new TimesheetEntity()
+            {
+                Id = Guid.NewGuid(),
+                UserId = _testUsers.FirstOrDefault(tu => tu.FirstName == "Tom").Id,
+                Year = 2026,
+                Month = 12,
+                OccupationList = new List<Occupation>()
+            };
+
+            //Act
+            var result = _repository.Add(timesheetToAdd);
+
+            //Assert
+            Assert.NotNull(result);
+            Assert.Equal(timesheetToAdd.Id, result);
+        }
         #endregion
     }
 }
