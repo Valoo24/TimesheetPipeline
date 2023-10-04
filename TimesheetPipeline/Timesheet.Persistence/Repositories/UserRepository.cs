@@ -25,9 +25,13 @@ namespace Timesheet.Persistence.Repositories
 
         public Guid Update(User entity)
         {
+            if (entity is null) throw new ArgumentNullException("The entity to update can't be null");
+
+            if (entity.Id == Guid.Empty) throw new ArgumentNullException("The guid of the updated entity can't be null.");
+
             User entityToUpdate = _context.Users.FirstOrDefault(u => u.Id == entity.Id);
 
-            if (entityToUpdate is null || entityToUpdate == default) throw new ArgumentNullException();
+            if (entityToUpdate is null || entityToUpdate == default) throw new ArgumentNullException("The user you try to update doesn't exist");
 
             entityToUpdate.FirstName = entity.FirstName;
             entityToUpdate.LastName = entity.LastName;

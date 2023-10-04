@@ -56,8 +56,8 @@ namespace Timesheet.Persistence.Test
 
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
-            foreach(var user in _testUsers) 
-            { 
+            foreach (var user in _testUsers)
+            {
                 _context.Users.Add(user);
             }
             _context.SaveChanges();
@@ -90,11 +90,11 @@ namespace Timesheet.Persistence.Test
         [Fact]
         public void ThrowArgumentNullExceptionWhenAddNull()
         {
-            try 
+            try
             {
                 var result = _repository.Add(null);
             }
-            catch (ArgumentNullException ex) 
+            catch (ArgumentNullException ex)
             {
                 Assert.NotNull(ex);
                 Assert.IsType<ArgumentNullException>(ex);
@@ -109,7 +109,7 @@ namespace Timesheet.Persistence.Test
 
             //Assert
             Assert.NotNull(result);
-            foreach(var user in result)
+            foreach (var user in result)
             {
                 Assert.NotNull(user.Id);
                 Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == user.Id).FirstName, user.FirstName);
@@ -134,7 +134,7 @@ namespace Timesheet.Persistence.Test
             {
                 var result = _repository.GetById(Guid.Empty);
             }
-            catch(ArgumentNullException ex) 
+            catch (ArgumentNullException ex)
             {
                 Assert.NotNull(ex);
                 Assert.IsType<ArgumentNullException>(ex);
@@ -147,9 +147,9 @@ namespace Timesheet.Persistence.Test
             //Arrange
             User userToUpdate = new User
             {
-                Id = _testUsers.FirstOrDefault(tu => 
-                tu.FirstName == "Tom" && 
-                tu.LastName == "Cruise" && 
+                Id = _testUsers.FirstOrDefault(tu =>
+                tu.FirstName == "Tom" &&
+                tu.LastName == "Cruise" &&
                 tu.MailAdress == "TomCruise@mail.com").Id,
                 FirstName = "Toto",
                 LastName = "Foo",
@@ -162,9 +162,9 @@ namespace Timesheet.Persistence.Test
             //Assert
             Assert.NotNull(result);
             Assert.Equal(userToUpdate.Id, result);
-            Assert.NotEqual(_testUsers.FirstOrDefault(tu => 
-            tu.FirstName == "Tom" && 
-            tu.LastName == "Cruise" && 
+            Assert.NotEqual(_testUsers.FirstOrDefault(tu =>
+            tu.FirstName == "Tom" &&
+            tu.LastName == "Cruise" &&
             tu.MailAdress == "TomCruise@mail.com"),
             _repository.GetById(userToUpdate.Id));
         }
@@ -186,8 +186,22 @@ namespace Timesheet.Persistence.Test
             {
                 var result = _repository.Update(userThatDoesNotExist);
             }
-            catch(ArgumentNullException ex) 
-            { 
+            catch (ArgumentNullException ex)
+            {
+                Assert.NotNull(ex);
+                Assert.IsType<ArgumentNullException>(ex);
+            }
+        }
+
+        [Fact]
+        public void ThrowAnArgumentNullExceptionWhenUpdateWithANullEntity()
+        {
+            try
+            {
+                var result = _repository.Update(null);
+            }
+            catch (ArgumentNullException ex)
+            {
                 Assert.NotNull(ex);
                 Assert.IsType<ArgumentNullException>(ex);
             }
