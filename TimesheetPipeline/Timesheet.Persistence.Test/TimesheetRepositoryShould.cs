@@ -231,6 +231,44 @@ namespace Timesheet.Persistence.Test
             Assert.Equal(timesheetToAdd.Id, result);
             Assert.False(timesheetToAdd.OccupationList is null);
         }
+
+        [Fact]
+        public void ThrowArgumentNullExceptionIfAddingANullTimesheet()
+        {
+            try
+            {
+                var result = _repository.Add(null);
+            }
+            catch(ArgumentNullException ex)
+            {
+                Assert.NotNull(ex);
+                Assert.IsType<ArgumentNullException>(ex);
+            }
+        }
+
+        [Fact]
+        public void ThrowArgumentNullExceptionIfTimesheetEntityHasAnEmptyUserId()
+        {
+            //Arrange
+            TimesheetEntity timesheetToAdd = new TimesheetEntity()
+            {
+                Id = Guid.NewGuid(),
+                UserId = Guid.Empty,
+                Year = 2026,
+                Month = 6
+            };
+
+            //Act
+            try
+            {
+                var result = _repository.Add(timesheetToAdd);
+            }
+            catch(ArgumentNullException ex)
+            {
+                Assert.NotNull(ex);
+                Assert.IsType<ArgumentNullException>(ex);
+            }
+        }
         #endregion
     }
 }

@@ -1,12 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Timesheet.Domain.Entities;
-using Timesheet.Domain.Entities.Timesheets;
-using Timesheet.Domain.Entities.Users;
+﻿using Timesheet.Domain.Entities.Timesheets;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
 
@@ -24,8 +16,12 @@ namespace Timesheet.Persistence.Repositories
 
         public Guid Add(TimesheetEntity entity)
         {
-            foreach(var Occupation in entity.OccupationList) 
-            { 
+            if (entity is null) throw new ArgumentNullException();
+
+            if (entity.UserId == Guid.Empty) throw new ArgumentNullException();
+
+            foreach (var Occupation in entity.OccupationList)
+            {
                 _context.Occupations.Add(Occupation);
             }
 
@@ -43,7 +39,7 @@ namespace Timesheet.Persistence.Repositories
         public IEnumerable<TimesheetEntity> GetAll()
         {
             List<TimesheetEntity> TimesheetList = _context.Timesheets.ToList();
-            foreach(var timesheet in TimesheetList)
+            foreach (var timesheet in TimesheetList)
             {
                 timesheet.OccupationList = _context.Occupations.Where(o => o.TimesheetId == timesheet.Id).ToList();
             }
