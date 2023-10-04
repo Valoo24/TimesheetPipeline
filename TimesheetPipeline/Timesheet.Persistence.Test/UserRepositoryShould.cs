@@ -142,7 +142,7 @@ namespace Timesheet.Persistence.Test
         }
 
         [Fact]
-        public void ShouldUpdateTomCruiseEntityIntoTestEntity()
+        public void UpdateTomCruiseEntityIntoTestEntity()
         {
             //Arrange
             User userToUpdate = new User
@@ -167,6 +167,30 @@ namespace Timesheet.Persistence.Test
             tu.LastName == "Cruise" && 
             tu.MailAdress == "TomCruise@mail.com"),
             _repository.GetById(userToUpdate.Id));
+        }
+
+        [Fact]
+        public void ThrowAnArgumentNullExceptionWhenUpdateANonExistingUserId()
+        {
+            //Arrange
+            User userThatDoesNotExist = new User
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Not",
+                LastName = "Existing",
+                MailAdress = "NotExisiting@Mail.com"
+            };
+
+            //Act & Assert
+            try
+            {
+                var result = _repository.Update(userThatDoesNotExist);
+            }
+            catch(ArgumentNullException ex) 
+            { 
+                Assert.NotNull(ex);
+                Assert.IsType<ArgumentNullException>(ex);
+            }
         }
     }
 }
