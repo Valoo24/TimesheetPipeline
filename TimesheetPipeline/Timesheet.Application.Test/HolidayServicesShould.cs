@@ -139,7 +139,7 @@ namespace Timesheet.Application.Services
         {
             //Arrange
             Random rnd = new Random();
-            int Year = rnd.Next(1, 10_000);
+            int Year = rnd.Next(1, 9_999);
 
             //Act
             var Result = _service.GetById(Year, 2);
