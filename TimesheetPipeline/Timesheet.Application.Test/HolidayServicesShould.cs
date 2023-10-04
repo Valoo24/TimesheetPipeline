@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Timesheet.Domain.Entities;
 using Timesheet.Domain.Exceptions;
+using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
 using Timesheet.Persistence.Repositories;
 
@@ -9,6 +10,7 @@ namespace Timesheet.Application.Services
 {
     public class HolidayServiceShould
     {
+        #region Properties
         private IEnumerable<Holiday> _holidays = new List<Holiday>()
             {
                 new Holiday
@@ -77,7 +79,9 @@ namespace Timesheet.Application.Services
         private Mock<HolidayRepository> _mockHolidayRepository;
 
         private HolidayService _service;
+        #endregion
 
+        #region Constructor
         public HolidayServiceShould()
         {
             _options = new DbContextOptionsBuilder<TimesheetContext>()
@@ -98,7 +102,9 @@ namespace Timesheet.Application.Services
 
             _service = new HolidayService(_mockHolidayRepository.Object);
         }
+        #endregion
 
+        #region Tests
         [Fact]
         public void GetAllHolidaysEntities()
         {
@@ -201,5 +207,6 @@ namespace Timesheet.Application.Services
                 Assert.IsType<NonExistingMonthException>(ex);
             }
         }
+        #endregion
     }
 }

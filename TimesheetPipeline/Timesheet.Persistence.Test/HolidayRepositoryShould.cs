@@ -8,6 +8,7 @@ namespace Timesheet.Persistence.Test
 {
     public class HolidayRepositoryShould
     {
+        #region Properties
         private IEnumerable<Holiday> _holidays = new List<Holiday>()
             {
                 new Holiday
@@ -74,7 +75,9 @@ namespace Timesheet.Persistence.Test
         private TimesheetContext _context;
 
         private IHolidayRepository _repository;
+        #endregion
 
+        #region Constructor
         public HolidayRepositoryShould()
         {
             _options = new DbContextOptionsBuilder<TimesheetContext>()
@@ -93,7 +96,9 @@ namespace Timesheet.Persistence.Test
 
             _repository = new HolidayRepository(_context);
         }
+        #endregion
 
+        #region Tests
         [Fact]
         public void GetChristmasHolidayEntity()
         {
@@ -144,5 +149,6 @@ namespace Timesheet.Persistence.Test
                 Assert.IsType<ArgumentOutOfRangeException>(ex);
             }
         }
+        #endregion
     }
 }

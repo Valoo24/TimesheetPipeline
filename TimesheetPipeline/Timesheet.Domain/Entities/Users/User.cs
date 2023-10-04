@@ -34,5 +34,10 @@ namespace Timesheet.Domain.Entities.Users
         public string MailAdress { get; set; }
 
         public List<TimesheetEntity> Timesheets { get; set; }
+
+        public User()
+        {
+            Timesheets = new List<TimesheetEntity>();
+        }
     }
 }
