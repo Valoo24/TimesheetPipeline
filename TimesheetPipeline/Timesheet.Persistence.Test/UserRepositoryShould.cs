@@ -9,6 +9,7 @@ using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
 using Timesheet.Persistence.Repositories;
+using Xunit;
 
 namespace Timesheet.Persistence.Test
 {
@@ -87,6 +88,30 @@ namespace Timesheet.Persistence.Test
                 Assert.NotNull(ex);
                 Assert.IsType<ArgumentNullException>(ex);
             }
+        }
+
+        [Fact]
+        public void GetAllUserEntity()
+        {
+            //Arrange
+            foreach(var user in _testUsers) 
+            { 
+                _repository.Add(user);
+            }
+
+            //Act
+            var result = _repository.GetAll();
+
+            //Assert
+            Assert.NotNull(result);
+            foreach(var user in result)
+            {
+                Assert.NotNull(user.Id);
+                Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == user.Id).FirstName, user.FirstName);
+                Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == user.Id).LastName, user.LastName);
+                Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == user.Id).MailAdress, user.MailAdress);
+            }
+
         }
     }
 }
