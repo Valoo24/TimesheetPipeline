@@ -269,6 +269,69 @@ namespace Timesheet.Persistence.Test
                 Assert.IsType<ArgumentNullException>(ex);
             }
         }
+
+        [Fact]
+        public void GetAllTimesheetsEntity()
+        {
+            var result = _repository.GetAll();
+
+            Assert.NotNull(result);
+            Assert.Equal(4, result.Count());
+            foreach(var timesheet in result)
+            {
+                Assert.NotNull(timesheet.OccupationList);
+                Assert.Equal(2, timesheet.OccupationList.Count);
+            }
+        }
+
+        [Fact]
+        public void GetTomCruiseTimesheetEntityById()
+        {
+            User tomCruise = _testUsers.FirstOrDefault(u => u.FirstName == "Tom");
+            Guid timesheetIdToFind = _testTimesheets.FirstOrDefault(t => 
+            t.UserId == tomCruise.Id).Id;
+
+            var result = _repository.GetById(timesheetIdToFind);
+
+            Assert.NotNull(result);
+            Assert.Equal(tomCruise.Id, result.UserId);
+            Assert.Equal(1, result.Month);
+            Assert.Equal(2, result.OccupationList.Count);
+            Assert.Equal("Taking Pictures with people", result.OccupationList.FirstOrDefault(o => o.Date == new DateTime(2025, 1, 6)).Title);
+        }
+
+        [Fact]
+        public void UpdateJanuaryBriceDeNiceTimesheetForATomCruiseTimesheet()
+        {
+            User briceDeNice = _testUsers.FirstOrDefault(u => u.FirstName == "Brice");
+            User tomCruise = _testUsers.FirstOrDefault(u => u.FirstName == "Tom");
+
+            TimesheetEntity timesheetToUpdate = _repository.GetById(
+                _testTimesheets.FirstOrDefault(
+                    t => t.UserId == briceDeNice.Id 
+                    && t.Month == 1).Id);
+
+            Occupation occupationToRemove = timesheetToUpdate.OccupationList.FirstOrDefault(o => o.Title == "Big Meeting");
+
+            timesheetToUpdate.UserId = tomCruise.Id;
+            timesheetToUpdate.OccupationList.Remove(occupationToRemove);
+            timesheetToUpdate.OccupationList.Add(new Occupation
+            {
+                Date = new DateTime(2025, 1, 7),
+                Title = "First Update"
+            });
+            timesheetToUpdate.OccupationList.Add(new Occupation
+            {
+                Date = new DateTime(2025, 1, 8),
+                Title = "Second Update"
+            });
+
+            var result = _repository.Update(timesheetToUpdate);
+
+            Assert.NotNull(result);
+            Assert.Equal(timesheetToUpdate.Id, result);
+            Assert.Equal(timesheetToUpdate, _repository.GetById(timesheetToUpdate.Id));
+        }
         #endregion
     }
 }
