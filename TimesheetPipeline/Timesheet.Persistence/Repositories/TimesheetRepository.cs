@@ -33,7 +33,14 @@ namespace Timesheet.Persistence.Repositories
 
         public Guid Delete(Guid id)
         {
-            throw new NotImplementedException();
+            TimesheetEntity entityToDelete = _context.Timesheets.FirstOrDefault(t => t.Id == id);
+
+            if(entityToDelete is null || entityToDelete == default) throw new ArgumentNullException();
+
+            _context.Remove(entityToDelete);
+            _context.SaveChanges();
+
+            return id;
         }
 
         public IEnumerable<TimesheetEntity> GetAll()

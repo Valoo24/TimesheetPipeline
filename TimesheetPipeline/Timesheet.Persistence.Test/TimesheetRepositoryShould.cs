@@ -332,6 +332,21 @@ namespace Timesheet.Persistence.Test
             Assert.Equal(timesheetToUpdate.Id, result);
             Assert.Equal(timesheetToUpdate, _repository.GetById(timesheetToUpdate.Id));
         }
+
+        [Fact]
+        public void DeleteElonMuskTimesheetEntity()
+        {
+            User elonMusk = _testUsers.FirstOrDefault(u => u.FirstName == "Elon");
+            Guid timesheetIdToDelete = _testTimesheets.FirstOrDefault(t => t.UserId == elonMusk.Id).Id;
+
+            var result = _repository.Delete(timesheetIdToDelete);
+            var resultAllTimesheet = _repository.GetAll();
+
+
+            Assert.NotNull(result);
+            Assert.Equal(3, resultAllTimesheet.Count());
+            Assert.Equal(default, resultAllTimesheet.FirstOrDefault(t => t.UserId == elonMusk.Id));
+        }
         #endregion
     }
 }
