@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Timesheet.Domain.Entities;
 using Timesheet.Domain.Entities.Timesheets;
 using Timesheet.Domain.Entities.Users;

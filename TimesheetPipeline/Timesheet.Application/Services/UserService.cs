@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Timesheet.Application.Mappers;
-using Timesheet.Domain.Entities;
+﻿using Timesheet.Application.Mappers;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 

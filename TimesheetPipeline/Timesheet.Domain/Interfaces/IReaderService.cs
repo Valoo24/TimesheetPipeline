@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Timesheet.Domain.Interfaces
+﻿namespace Timesheet.Domain.Interfaces
 {
     /// <summary>
     /// Interface à implémenter dans les services concrets pour implémenter toutes les méthodes de lecture d'un service.

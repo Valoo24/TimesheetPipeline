@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Timesheet.Domain.Entities.Users
+﻿namespace Timesheet.Domain.Entities.Users
 {
     /// <summary>
     /// Formulaire de création de nouveau User.

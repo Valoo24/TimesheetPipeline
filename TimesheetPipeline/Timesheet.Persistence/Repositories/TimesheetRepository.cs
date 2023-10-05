@@ -13,7 +13,6 @@ namespace Timesheet.Persistence.Repositories
             _context = Context;
         }
 
-
         public Guid Add(TimesheetEntity entity)
         {
             if (entity is null) throw new ArgumentNullException();
