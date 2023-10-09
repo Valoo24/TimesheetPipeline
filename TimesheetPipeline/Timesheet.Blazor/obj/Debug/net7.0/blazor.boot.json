@@ -199,14 +199,14 @@
       "netstandard.dll": "sha256-5SHKPh1PcuJjq4lIo7ymdIyhb9d3++oMAjr46auhUSc=",
       "System.Private.CoreLib.dll": "sha256-eH+XIsCUG5oZ0k8AIzNtRLTCLiV\/8Zv0RFCPMsIkdYY=",
       "Timesheet.Domain.dll": "sha256-r02W4jocD+oZVx0ncrHQIUKoOHTYva6odjwZwGy5w38=",
-      "Timesheet.Blazor.dll": "sha256-T5LrE\/6EWW3Wm3nBaM6vDhdWg7NfVrgXpHFUK\/rydw0="
+      "Timesheet.Blazor.dll": "sha256-1VltiVMDqL\/h+DeyPoV8dB8Kc+h3vJfZyM0YCSUPXj0="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
       "Timesheet.Domain.pdb": "sha256-mG2Bhds7Dh6dS5t4H5UAd85mWiXE5xXGQ8G68cEDL6I=",
-      "Timesheet.Blazor.pdb": "sha256-VMzzMBfSile03QboAlWT9EPQRXBmErgOlp9RC7XL3LY="
+      "Timesheet.Blazor.pdb": "sha256-XIaw79N7swdidwZeHRUQASiVrRZcKLU4DonYmaovDhI="
     },
     "runtime": {
       "dotnet.7.0.9.ccypbefl01.js": "sha256-dUIY5Mz0ozZWqtTfBb7ArJKbdh5IIp8BXeq6UjK4u\/c=",
