@@ -158,7 +158,7 @@ namespace Timesheet.Blazor.FakeDB
                     }
                 },
                 new TimesheetDTO 
-                { 
+                {
                     Id = Guid.NewGuid(),
                     User = Users.FirstOrDefault(u => u.FirstName == "Brice"),
                     Year = 2024,
