@@ -10,8 +10,8 @@ namespace Timesheet.Blazor.FakeDB
         private static List<User> _users = default!;
         private static List<TimesheetEntity> _timesheets = default!;
 
-        public static List<Holiday> Holidays 
-        { 
+        public static List<Holiday> Holidays
+        {
             get
             {
                 _holidays ??= InitializeMockHolidays();
@@ -19,7 +19,16 @@ namespace Timesheet.Blazor.FakeDB
             }
         }
 
-        private static List<Holiday> InitializeMockHolidays() 
+        public static List<User> Users
+        {
+            get
+            {
+                _users ??= InitializeMockUsers();
+                return _users;
+            }
+        }
+
+        private static List<Holiday> InitializeMockHolidays()
         {
             return new List<Holiday>()
             {
@@ -82,6 +91,33 @@ namespace Timesheet.Blazor.FakeDB
                     Id = 10,
                     Name = "Noël",
                     Date = new DateTime(2024, 12, 25)
+                }
+            };
+        }
+        private static List<User> InitializeMockUsers()
+        {
+            return new List<User>
+            {
+                new User
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "Brice",
+                    LastName = "DeNice",
+                    MailAdress = "BriceDeNice@mail.com",
+                },
+                new User
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "Elon",
+                    LastName = "Musk",
+                    MailAdress = "ElonMusk@mail.com",
+                },
+                new User
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "Tom",
+                    LastName = "Cruise",
+                    MailAdress = "TomCruise@mail.com",
                 }
             };
         }
