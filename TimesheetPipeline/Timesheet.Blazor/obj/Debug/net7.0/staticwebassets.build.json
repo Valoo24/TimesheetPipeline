@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "QwwVVmp2k3hHfCQVVtzK3v2KVHlbyhpMwOjPrZZLYik=",
+  "Hash": "Wsmwm8fHiFyr0cS/aCFMJ9iUT0plaQhfQ6vEcOmOxg0=",
   "Source": "Timesheet.Blazor",
   "BasePath": "/",
   "Mode": "Root",
@@ -3434,6 +3434,40 @@
       "OriginalItemSpec": "obj\\Debug\\net7.0\\Timesheet.Blazor.pdb"
     },
     {
+      "Identity": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Timesheet.Domain.dll",
+      "SourceId": "Timesheet.Blazor",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Timesheet.Domain.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Domain\\bin\\Debug\\net7.0\\Timesheet.Domain.dll"
+    },
+    {
+      "Identity": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Timesheet.Domain.pdb",
+      "SourceId": "Timesheet.Blazor",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Timesheet.Domain.pdb",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "symbol",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Domain\\bin\\Debug\\net7.0\\Timesheet.Domain.pdb"
+    },
+    {
       "Identity": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\bin\\Debug\\net7.0\\wwwroot\\_framework\\WindowsBase.dll",
       "SourceId": "Timesheet.Blazor",
       "SourceType": "Computed",
@@ -3840,6 +3874,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\bin\\Debug\\net7.0\\wwwroot\\_framework\\WindowsBase.dll"
+    },
+    {
+      "Identity": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\obj\\Debug\\net7.0\\build-gz\\3NIiTYG4.gz",
+      "SourceId": "Timesheet.Blazor",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Timesheet.Domain.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Timesheet.Domain.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Timesheet.Domain.dll"
     },
     {
       "Identity": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\obj\\Debug\\net7.0\\build-gz\\3w+Ac9Ic.gz",
@@ -5897,6 +5948,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\bin\\Debug\\net7.0\\wwwroot\\_framework\\System.Net.ServicePoint.dll"
+    },
+    {
+      "Identity": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\obj\\Debug\\net7.0\\build-gz\\QTM+C6BY.gz",
+      "SourceId": "Timesheet.Blazor",
+      "SourceType": "Computed",
+      "ContentRoot": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\bin\\Debug\\net7.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Timesheet.Domain.pdb.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Timesheet.Domain.pdb",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\bin\\Debug\\net7.0\\wwwroot\\_framework\\Timesheet.Domain.pdb"
     },
     {
       "Identity": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Blazor\\obj\\Debug\\net7.0\\build-gz\\rgoUTtVe.gz",

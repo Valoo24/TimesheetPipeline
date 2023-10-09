@@ -475,6 +475,16 @@
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
+      },
+      "Timesheet.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/Timesheet.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Timesheet.Domain.dll": {}
+        }
       }
     },
     "net7.0/browser-wasm": {
@@ -944,6 +954,16 @@
         },
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
+        }
+      },
+      "Timesheet.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/Timesheet.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Timesheet.Domain.dll": {}
         }
       }
     }
@@ -1792,12 +1812,18 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Timesheet.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Timesheet.Domain/Timesheet.Domain.csproj",
+      "msbuildProject": "../Timesheet.Domain/Timesheet.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
       "Microsoft.AspNetCore.Components.WebAssembly >= 7.0.9",
-      "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 7.0.9"
+      "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 7.0.9",
+      "Timesheet.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1832,7 +1858,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Domain\\Timesheet.Domain.csproj": {
+              "projectPath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Domain\\Timesheet.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

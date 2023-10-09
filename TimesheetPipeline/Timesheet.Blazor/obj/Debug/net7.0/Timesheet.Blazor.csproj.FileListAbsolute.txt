@@ -826,3 +826,11 @@ C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Time
 C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Blazor\obj\Debug\net7.0\refint\Timesheet.Blazor.dll
 C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Blazor\obj\Debug\net7.0\Timesheet.Blazor.pdb
 C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Blazor\obj\Debug\net7.0\ref\Timesheet.Blazor.dll
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Blazor\bin\Debug\net7.0\wwwroot\_framework\Timesheet.Domain.dll
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Blazor\bin\Debug\net7.0\wwwroot\_framework\Timesheet.Domain.pdb
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Blazor\bin\Debug\net7.0\wwwroot\_framework\Timesheet.Domain.dll.gz
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Blazor\bin\Debug\net7.0\wwwroot\_framework\Timesheet.Domain.pdb.gz
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Blazor\bin\Debug\net7.0\Timesheet.Domain.dll
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Blazor\bin\Debug\net7.0\Timesheet.Domain.pdb
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Blazor\obj\Debug\net7.0\build-gz\3NIiTYG4.gz
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Blazor\obj\Debug\net7.0\build-gz\QTM+C6BY.gz
