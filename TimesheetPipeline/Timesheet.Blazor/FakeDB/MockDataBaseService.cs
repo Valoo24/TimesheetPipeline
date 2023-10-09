@@ -8,7 +8,7 @@ namespace Timesheet.Blazor.FakeDB
     {
         private static List<Holiday> _holidays = default!;
         private static List<User> _users = default!;
-        private static List<TimesheetEntity> _timesheets = default!;
+        private static List<TimesheetDTO> _timesheets = default!;
 
         public static List<Holiday> Holidays
         {
@@ -18,13 +18,20 @@ namespace Timesheet.Blazor.FakeDB
                 return _holidays;
             }
         }
-
         public static List<User> Users
         {
             get
             {
                 _users ??= InitializeMockUsers();
                 return _users;
+            }
+        }
+        public static List<TimesheetDTO> Timesheets
+        {
+            get 
+            { 
+                _timesheets ??= InitializeMockTimesheets();
+                return _timesheets;
             }
         }
 
@@ -119,6 +126,207 @@ namespace Timesheet.Blazor.FakeDB
                     LastName = "Cruise",
                     MailAdress = "TomCruise@mail.com",
                 }
+            };
+        }
+        private static List<TimesheetDTO> InitializeMockTimesheets()
+        {
+            return new List<TimesheetDTO>()
+            {
+                new TimesheetDTO
+                {
+                    Id = Guid.NewGuid(),
+                    User = Users.FirstOrDefault(u => u.FirstName == "Brice"),
+                    Year = 2024,
+                    Month = 1,
+                    OccupationList = new List<Occupation> 
+                    {
+                        new Occupation 
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Date.Month == 1).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Date.Month == 1).Date
+                        },
+                        new Occupation 
+                        { 
+                            Title = "Premier jour de travail",
+                            Date = new DateTime(2024, 1, 2)
+                        },
+                        new Occupation 
+                        {
+                            Title = "Première Réunion",
+                            Date = new DateTime(2024, 1, 3),
+                        }
+                    }
+                },
+                new TimesheetDTO 
+                { 
+                    Id = Guid.NewGuid(),
+                    User = Users.FirstOrDefault(u => u.FirstName == "Brice"),
+                    Year = 2024,
+                    Month = 4,
+                    OccupationList = new List<Occupation> 
+                    {
+                        new Occupation
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Date.Month == 4).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Date.Month == 4).Date
+                        }
+                    }
+                },
+                new TimesheetDTO 
+                { 
+                    Id = Guid.NewGuid(),
+                    User = Users.FirstOrDefault(u => u.FirstName == "Brice"),
+                    Year = 2024,
+                    Month = 4,
+                    OccupationList = new List<Occupation> 
+                    { 
+                        new Occupation
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Id == 3).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Id == 3).Date
+                        },
+                        new Occupation
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Id == 4).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Id == 4).Date
+                        },
+                        new Occupation
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Id == 5).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Id == 5).Date
+                        }
+                    }
+                },
+                new TimesheetDTO
+                {
+                    Id = Guid.NewGuid(),
+                    User = Users.FirstOrDefault(u => u.FirstName == "Tom"),
+                    Year = 2024,
+                    Month = 1,
+                    OccupationList = new List<Occupation>
+                    {
+                        new Occupation
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Date.Month == 1).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Date.Month == 1).Date
+                        }
+                    }
+                },
+                new TimesheetDTO
+                {
+                    Id = Guid.NewGuid(),
+                    User = Users.FirstOrDefault(u => u.FirstName == "Tom"),
+                    Year = 2024,
+                    Month = 4,
+                    OccupationList = new List<Occupation>
+                    {
+                        new Occupation
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Date.Month == 4).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Date.Month == 4).Date
+                        }
+                    }
+                },
+                new TimesheetDTO
+                {
+                    Id = Guid.NewGuid(),
+                    User = Users.FirstOrDefault(u => u.FirstName == "Tom"),
+                    Year = 2024,
+                    Month = 4,
+                    OccupationList = new List<Occupation>
+                    {
+                        new Occupation
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Id == 3).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Id == 3).Date
+                        },
+                        new Occupation
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Id == 4).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Id == 4).Date
+                        },
+                        new Occupation
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Id == 5).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Id == 5).Date
+                        }
+                    }
+                },
+                                new TimesheetDTO
+                {
+                    Id = Guid.NewGuid(),
+                    User = Users.FirstOrDefault(u => u.FirstName == "Elon"),
+                    Year = 2024,
+                    Month = 1,
+                    OccupationList = new List<Occupation>
+                    {
+                        new Occupation
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Date.Month == 1).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Date.Month == 1).Date
+                        },
+                        new Occupation
+                        {
+                            Title = "Tweeter des billevesées",
+                            Date = new DateTime(2024, 1, 2)
+                        },
+                        new Occupation
+                        {
+                            Title = "Tweeter des pécadilles",
+                            Date = new DateTime(2024, 1, 3),
+                        },
+                        new Occupation
+                        {
+                            Title = "Tweeter des sornettes",
+                            Date = new DateTime(2024, 1, 4),
+                        },
+                        new Occupation
+                        {
+                            Title = "Tweeter des galéjades",
+                            Date = new DateTime(2024, 1, 5),
+                        },
+                    }
+                },
+                new TimesheetDTO
+                {
+                    Id = Guid.NewGuid(),
+                    User = Users.FirstOrDefault(u => u.FirstName == "Elon"),
+                    Year = 2024,
+                    Month = 4,
+                    OccupationList = new List<Occupation>
+                    {
+                        new Occupation
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Date.Month == 4).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Date.Month == 4).Date
+                        }
+                    }
+                },
+                new TimesheetDTO
+                {
+                    Id = Guid.NewGuid(),
+                    User = Users.FirstOrDefault(u => u.FirstName == "Elon"),
+                    Year = 2024,
+                    Month = 4,
+                    OccupationList = new List<Occupation>
+                    {
+                        new Occupation
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Id == 3).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Id == 3).Date
+                        },
+                        new Occupation
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Id == 4).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Id == 4).Date
+                        },
+                        new Occupation
+                        {
+                            Title = Holidays.FirstOrDefault(h => h.Id == 5).Name,
+                            Date = Holidays.FirstOrDefault(h => h.Id == 5).Date
+                        }
+                    }
+                },
             };
         }
     }
