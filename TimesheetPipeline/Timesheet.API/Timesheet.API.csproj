@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Timesheet.Application\Timesheet.Application.csproj" />
-    <ProjectReference Include="..\Timesheet.Blazor\Timesheet.Blazor.csproj" />
     <ProjectReference Include="..\Timesheet.Infrastrucutre\Timesheet.Infrastrucutre.csproj" />
     <ProjectReference Include="..\Timesheet.Persistence\Timesheet.Persistence.csproj" />
   </ItemGroup>
