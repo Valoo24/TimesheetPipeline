@@ -9,10 +9,11 @@ namespace Timesheet.API.Controllers
     public class UserController : Controller
     {
         private IUserService _service;
-
-        public UserController(IUserService Service)
+        private ITokenManager _tokenManager;
+        public UserController(IUserService Service, ITokenManager tokenManager)
         {
             _service = Service;
+            _tokenManager = tokenManager;
         }
 
         [HttpPost("Add")]
