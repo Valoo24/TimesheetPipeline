@@ -1,0 +1,29 @@
+﻿@page "/holidayoverview"
+<PageTitle>Holiday Overview</PageTitle>
+
+<h2>2024 Belgian Holidays Overview</h2>
+
+@if (Holidays is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table table-light">
+        <thead class="table-primary">
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var holiday in Holidays)
+            {
+                <tr>
+                    <td>@holiday.Name</td>
+                    <td>@holiday.Date.ToShortDateString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

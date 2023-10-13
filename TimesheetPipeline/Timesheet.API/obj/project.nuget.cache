@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "wg9XyH41J8HcrRczwAM/30gElmZrBYgTsZKaOdS/pFQfJu9nLGgstj9/6aRw7mPDG9ezGkrLar3h2qh/IRsULw==",
+  "dgSpecHash": "ybNnwX3s8gWuzEPfHA8xZIlrmjXiaIT2HUorPkG9P0CTqnk6R7J6fCpSY0ojt0Y+8ktaWO12HGfmNLu/Ca/x1A==",
   "success": true,
   "projectFilePath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.API\\Timesheet.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\benja\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
-    "C:\\Users\\benja\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.9\\microsoft.aspnetcore.openapi.7.0.9.nupkg.sha512",
+    "C:\\Users\\benja\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.server\\7.0.11\\microsoft.aspnetcore.components.webassembly.server.7.0.11.nupkg.sha512",
+    "C:\\Users\\benja\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.11\\microsoft.aspnetcore.openapi.7.0.11.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.1\\microsoft.data.sqlclient.5.1.1.nupkg.sha512",

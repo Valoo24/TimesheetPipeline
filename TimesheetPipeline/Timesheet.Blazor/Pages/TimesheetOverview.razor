@@ -1,0 +1,41 @@
+﻿@page "/timesheetoverview"
+<PageTitle>Timesheet Overview</PageTitle>
+
+<h2>Timesheets Overview</h2>
+
+@if (Timesheets is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    StringWriter writer = new StringWriter();
+    string userNameResult;
+    DateTime occupationDateResult;
+    <table class="table table-light">
+        <thead class="table-primary">
+            <tr>
+                <th>Id</th>
+                <th>User Name</th>
+                <th>Date</th>
+                <th>Occupation</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var timesheet in Timesheets)
+            {
+                @foreach (var occupation in timesheet.OccupationList)
+                {
+                    userNameResult = $"{timesheet.User.FirstName} {timesheet.User.LastName}";
+                    occupationDateResult = new DateTime(timesheet.Year, timesheet.Month, occupation.Date.Day);
+                    <tr>
+                        <td>@timesheet.Id</td>
+                        <td>@userNameResult</td>
+                        <td>@occupationDateResult.Date.ToShortDateString()</td>
+                        <td>@occupation.Title</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}

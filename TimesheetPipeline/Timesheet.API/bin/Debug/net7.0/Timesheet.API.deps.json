@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v7.0": {
       "Timesheet.API/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.OpenApi": "7.0.9",
+          "Microsoft.AspNetCore.Components.WebAssembly.Server": "7.0.11",
+          "Microsoft.AspNetCore.OpenApi": "7.0.11",
           "Swashbuckle.AspNetCore": "6.5.0",
           "Timesheet.Application": "1.0.0",
           "Timesheet.Infrastrucutre": "1.0.0",
@@ -52,14 +53,22 @@
           }
         }
       },
-      "Microsoft.AspNetCore.OpenApi/7.0.9": {
+      "Microsoft.AspNetCore.Components.WebAssembly.Server/7.0.11": {
+        "runtime": {
+          "lib/net7.0/Microsoft.AspNetCore.Components.WebAssembly.Server.dll": {
+            "assemblyVersion": "7.0.11.0",
+            "fileVersion": "7.0.1123.42502"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.OpenApi/7.0.11": {
         "dependencies": {
           "Microsoft.OpenApi": "1.4.3"
         },
         "runtime": {
           "lib/net7.0/Microsoft.AspNetCore.OpenApi.dll": {
-            "assemblyVersion": "7.0.9.0",
-            "fileVersion": "7.0.923.32110"
+            "assemblyVersion": "7.0.11.0",
+            "fileVersion": "7.0.1123.42502"
           }
         }
       },
@@ -608,12 +617,19 @@
       "path": "azure.identity/1.7.0",
       "hashPath": "azure.identity.1.7.0.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.OpenApi/7.0.9": {
+    "Microsoft.AspNetCore.Components.WebAssembly.Server/7.0.11": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-5kBnHntQTJqmYV66Khdl9OJ/j2Pw8cOKj8kNQuLCpfCsPbSijp334Vaad3vaGnG9Wpgq/VbSUSRxZOoroOe8zQ==",
-      "path": "microsoft.aspnetcore.openapi/7.0.9",
-      "hashPath": "microsoft.aspnetcore.openapi.7.0.9.nupkg.sha512"
+      "sha512": "sha512-LFup2a+LmkYniE02yhDwOxNc4udztxulfcm0aa8Cq9R/WcdTGCBAr8Ybx/zLYFfzescr2oE8174ezizriSAPxg==",
+      "path": "microsoft.aspnetcore.components.webassembly.server/7.0.11",
+      "hashPath": "microsoft.aspnetcore.components.webassembly.server.7.0.11.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.OpenApi/7.0.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+3PUTx950QiUzw9CriQfCpfv11cJ0uMzQrDS3BwkEDlRduAh/2+1mxDy2S8wS1j3zyQpjbtQU0fFeWTU8j0Ljg==",
+      "path": "microsoft.aspnetcore.openapi/7.0.11",
+      "hashPath": "microsoft.aspnetcore.openapi.7.0.11.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
       "type": "package",
