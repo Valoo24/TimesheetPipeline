@@ -46,6 +46,20 @@ namespace Timesheet.Application.Services
             return _repository.GetById(id);
         }
 
+        public User Login(LoginForm form)
+        {
+            string hashedPassword = _repository.GetUserHashedPasswordByMailAdress(form.Credentials);
+
+            if(Argon2.Verify(hashedPassword,form.Password))
+            {
+                return _repository.GetByMailAdress(form.Credentials);
+            }
+            else
+            {
+                throw new Exception("Le mot de passe de corresponds pas.");
+            }
+        }
+
         public Guid Update(User entity)
         {
             return _repository.Update(entity);

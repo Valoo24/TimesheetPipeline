@@ -6,5 +6,6 @@ namespace Timesheet.Domain.Interfaces
     {
         public Guid Add(UserAddForm form);
         public Guid Update(Guid userIdToUpdate, UserAddForm form);
+        public User Login(LoginForm form);
     }
 }
