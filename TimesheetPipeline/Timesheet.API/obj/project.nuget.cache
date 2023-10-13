@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "0NViQsNZLzBwgerBu0uwi+ySurr0pbREWZbQD0woW9YRonm+Z4gaVmbcdDYEXo/U/v9qVKs2MHRjtK9WDqfNjg==",
+  "dgSpecHash": "PIEpRWoxextcbSlBGsvz8WI7uuUTiwjPO3A6EwkR+Vb1iZSHSbnXDqx7ZIzE1bQYpMM1JI+IN7Wz0T3ggthLFg==",
   "success": true,
   "projectFilePath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.API\\Timesheet.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\benja\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\benja\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.12\\microsoft.aspnetcore.authentication.jwtbearer.7.0.12.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.server\\7.0.11\\microsoft.aspnetcore.components.webassembly.server.7.0.11.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.11\\microsoft.aspnetcore.openapi.7.0.11.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
