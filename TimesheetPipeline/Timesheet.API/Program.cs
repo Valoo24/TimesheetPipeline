@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TimesheetContext>(
     option => option.UseSqlServer(builder.Configuration.GetConnectionString("TimesheetConnection"))
     .EnableSensitiveDataLogging()
-    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+    .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll));
 
 builder.Services.AddSingleton<ITokenManager, TokenManager>();
 

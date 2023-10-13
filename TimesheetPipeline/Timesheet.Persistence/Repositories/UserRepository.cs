@@ -31,13 +31,23 @@ namespace Timesheet.Persistence.Repositories
 
             if (entity.Id == Guid.Empty) throw new ArgumentNullException("The guid of the updated entity can't be null.");
 
-            UserDTO UpdatedEntity = entity.ToDTO();
+            UserDTO userToUpdate = _context.Users.FirstOrDefault(u => u.Id == entity.Id);
 
-            _context.Users.Update(UpdatedEntity);
+            if (userToUpdate is null || userToUpdate == default) throw new ArgumentNullException("L'id du User à mettre à jour n'existe pas.");
+
+            //UserDTO UpdatedEntity = entity.ToDTO();
+
+            userToUpdate.FirstName = entity.FirstName;
+            userToUpdate.LastName = entity.LastName;
+            userToUpdate.MailAdress = entity.MailAdress;
+            userToUpdate.HashedPassword = entity.HashedPassword;
+            userToUpdate.Role = entity.Role;
+
+            //_context.Users.Update(UpdatedEntity);
 
             _context.SaveChanges();
 
-            return UpdatedEntity.Id;
+            return userToUpdate.Id;
         }
 
         public IEnumerable<User> GetAll()
