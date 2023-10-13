@@ -1,4 +1,5 @@
-﻿using Timesheet.Domain.Entities.Users;
+﻿using Timesheet.Application.Mappers;
+using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
 
@@ -17,7 +18,7 @@ namespace Timesheet.Persistence.Repositories
         {
             if (entity is null || entity == default) throw new ArgumentNullException();
 
-            _context.Users.Add(entity);
+            _context.Users.Add(entity.ToDTO());
             _context.SaveChanges();
 
             return entity.Id;
@@ -44,14 +45,17 @@ namespace Timesheet.Persistence.Repositories
 
         public IEnumerable<User> GetAll()
         {
-            return _context.Users.ToList();
+            foreach(var user in _context.Users)
+            {
+                yield return user.ToEntity();
+            }
         }
 
         public User GetById(Guid id)
         {
             if (id == Guid.Empty) throw new ArgumentNullException(id.ToString());
 
-            return _context.Users.FirstOrDefault(u => u.Id == id);
+            return _context.Users.FirstOrDefault(u => u.Id == id).ToEntity();
         }
 
         public Guid Delete(Guid id)

@@ -8,7 +8,7 @@ namespace Timesheet.Infrastrucutre.DataAccess
     public class TimesheetContext : DbContext
     {
         public DbSet<Holiday> Holidays { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserDTO> Users { get; set; }
         public DbSet<TimesheetEntity> Timesheets { get; set; }
         public DbSet<Occupation> Occupations { get; set; }
 

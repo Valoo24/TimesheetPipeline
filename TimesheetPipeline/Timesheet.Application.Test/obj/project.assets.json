@@ -2709,6 +2709,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
+          "Timesheet.Application": "1.0.0",
           "Timesheet.Domain": "1.0.0",
           "Timesheet.Infrastrucutre": "1.0.0"
         },
