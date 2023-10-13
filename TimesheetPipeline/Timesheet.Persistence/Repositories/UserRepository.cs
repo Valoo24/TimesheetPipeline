@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Timesheet.Application.Mappers;
+﻿using Timesheet.Application.Mappers;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
@@ -60,7 +59,7 @@ namespace Timesheet.Persistence.Repositories
 
         public User GetById(Guid id)
         {
-            if (id == Guid.Empty) throw new ArgumentNullException($"Impossible de rechercher un id vide : {id.ToString()}");
+            if (id == Guid.Empty) throw new ArgumentNullException($"Impossible de rechercher un id vide : {id}");
 
             UserDTO userToFind = _context.Users.FirstOrDefault(u => u.Id == id);
 
