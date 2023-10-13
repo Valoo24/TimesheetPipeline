@@ -1,4 +1,5 @@
 ﻿using Timesheet.Domain.Entities.Timesheets;
+using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
 
@@ -55,6 +56,11 @@ namespace Timesheet.Persistence.Repositories
         public TimesheetEntity GetById(Guid id)
         {
             return GetAll().FirstOrDefault(t => t.Id == id);
+        }
+
+        public User GetByMail(string mail)
+        {
+            return _context.Users.FirstOrDefault(u => u.MailAdress == mail).ToEntity();
         }
 
         public Guid Update(TimesheetEntity entity)
