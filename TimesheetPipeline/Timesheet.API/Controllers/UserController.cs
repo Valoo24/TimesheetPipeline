@@ -80,5 +80,20 @@ namespace Timesheet.API.Controllers
                 return NotFound(ex.Message);
             }
         }
+
+        [HttpGet("Login")]
+        public IActionResult Login(LoginForm form)
+        {
+            try
+            {
+                User loginUser = _service.Login(form);
+                loginUser.Token = _tokenManager.GenerateToken(loginUser);
+                return Ok(loginUser);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
     }
 }
