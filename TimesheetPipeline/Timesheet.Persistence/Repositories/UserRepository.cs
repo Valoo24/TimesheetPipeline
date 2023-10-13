@@ -30,7 +30,7 @@ namespace Timesheet.Persistence.Repositories
 
             if (entity.Id == Guid.Empty) throw new ArgumentNullException("The guid of the updated entity can't be null.");
 
-            User entityToUpdate = _context.Users.FirstOrDefault(u => u.Id == entity.Id);
+            UserDTO entityToUpdate = _context.Users.FirstOrDefault(u => u.Id == entity.Id);
 
             if (entityToUpdate is null || entityToUpdate == default) throw new ArgumentNullException("The user you try to update doesn't exist");
 
@@ -62,7 +62,7 @@ namespace Timesheet.Persistence.Repositories
         {
             if (id == Guid.Empty) throw new ArgumentNullException();
 
-            User userToDelete = _context.Users.FirstOrDefault(u => u.Id == id);
+            UserDTO userToDelete = _context.Users.FirstOrDefault(u => u.Id == id);
 
             if (userToDelete is null || userToDelete == default) throw new ArgumentNullException();
 
