@@ -72,9 +72,14 @@ namespace Timesheet.Persistence.Repositories
             return userToDelete.Id;
         }
 
-        public string GetHashedPasswordByMail(string mail)
+        public string GetUserHashedPasswordByMailAdress(string mailAdress)
         {
-            return _context.Users.FirstOrDefault(u => u.MailAdress == mail).HashedPassword;
+            return _context.Users.FirstOrDefault(u => u.MailAdress == mailAdress).HashedPassword;
+        }
+
+        public User GetByMailAdress(string mailAdress)
+        {
+            return _context.Users.FirstOrDefault(u => u.MailAdress == mailAdress).ToEntity();
         }
     }
 }
