@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Timesheet.Domain\Timesheet.Domain.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Tokens\" />
+    <ProjectReference Include="..\Timesheet.Domain\Timesheet.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "Wdr8OhR4Z8OuulT2btmybuXgX3t9351HZpaKCsyQWPZisDZOd61KZjuEttYs9o9F9QJF2FBxX0mHm4geAyJ1+w==",
+  "dgSpecHash": "LETNHZUcN+ZfSbYpSeJf7aUvrvjDOiYYB3BnYR49VgCzbqmGrWrQaFRQrDnxfmB/mUIjDYP17o0/SyLqqVOYyQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Application\\Timesheet.Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\benja\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\benja\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "C:\\Users\\benja\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.0.2\\microsoft.identitymodel.abstractions.7.0.2.nupkg.sha512",
+    "C:\\Users\\benja\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.0.2\\microsoft.identitymodel.jsonwebtokens.7.0.2.nupkg.sha512",
+    "C:\\Users\\benja\\.nuget\\packages\\microsoft.identitymodel.logging\\7.0.2\\microsoft.identitymodel.logging.7.0.2.nupkg.sha512",
+    "C:\\Users\\benja\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.0.2\\microsoft.identitymodel.tokens.7.0.2.nupkg.sha512",
+    "C:\\Users\\benja\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.0.2\\system.identitymodel.tokens.jwt.7.0.2.nupkg.sha512"
+  ],
   "logs": []
 }
