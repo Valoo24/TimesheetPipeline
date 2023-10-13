@@ -16,7 +16,9 @@ namespace Timesheet.Application.Tokens
 
         public TokenManager(IConfiguration config)
         {
-            
+            _issuer = config.GetSection("TokenInfo").GetSection("issuer").Value;
+            _audience = config.GetSection("TokenInfo").GetSection("audience").Value;
+            _secret = config.GetSection("TokenInfo").GetSection("secret").Value;
         }
 
         public string GenerateToken(User user)
@@ -27,7 +29,15 @@ namespace Timesheet.Application.Tokens
             SigningCredentials credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);
 
             //Remplir ici les claims pour l'entity user.
-            Claim[] claims = new Claim[] { };
+            Claim[] claims = new Claim[]
+            {
+                new Claim(ClaimTypes.Sid, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.FirstName),
+                new Claim(ClaimTypes.Surname, user.LastName),
+                new Claim(ClaimTypes.Email, user.MailAdress),
+                new Claim(ClaimTypes.Hash, user.HashedPassword),
+                new Claim(ClaimTypes.Role, user.Role.ToString())
+            };
 
             //Configuration du Token
             JwtSecurityToken token = new JwtSecurityToken(

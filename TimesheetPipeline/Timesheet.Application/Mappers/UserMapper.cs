@@ -28,6 +28,19 @@ namespace Timesheet.Application.Mappers
             };
         }
 
+        public static User ToEntity(this UserUpdateForm form, Guid id) 
+        {
+            return new User
+            {
+                Id = id,
+                FirstName = form.FirstName,
+                LastName = form.LastName,
+                MailAdress = form.MailAdress,
+                HashedPassword = form.Password,
+                Role = form.Role
+            };
+        }
+
         public static User ToEntity(this UserDTO dto)
         {
             return new User

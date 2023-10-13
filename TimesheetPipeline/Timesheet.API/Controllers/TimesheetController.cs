@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Timesheet.Application.Mappers;
 using Timesheet.Domain.Entities;
 using Timesheet.Domain.Entities.Timesheets;
@@ -63,6 +64,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [Authorize("Admin")]
         [HttpGet("Get")]
         public IActionResult GetAll()
         {

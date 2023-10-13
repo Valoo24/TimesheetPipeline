@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 
@@ -30,7 +31,7 @@ namespace Timesheet.API.Controllers
         }
 
         [HttpPut("Update/{userIdToUpdate}")]
-        public IActionResult Update(Guid userIdToUpdate, UserAddForm form)
+        public IActionResult Update(Guid userIdToUpdate, UserUpdateForm form)
         {
             try
             {
@@ -55,6 +56,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [Authorize("Auth")]
         [HttpGet("Get")]
         public IActionResult GetAll()
         {
@@ -81,14 +83,14 @@ namespace Timesheet.API.Controllers
             }
         }
 
-        [HttpGet("Login")]
+        [HttpPost("Login")]
         public IActionResult Login(LoginForm form)
         {
             try
             {
                 User loginUser = _service.Login(form);
                 loginUser.Token = _tokenManager.GenerateToken(loginUser);
-                return Ok(loginUser);
+                return Ok(loginUser.Token);
             }
             catch (Exception ex)
             {

@@ -66,6 +66,8 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("Auth", policy => policy.RequireAuthenticatedUser());
     options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("Regular", policy => policy.RequireRole("Regular"));
+    options.AddPolicy("Premium", policy => policy.RequireRole("Premium"));
 });
 
 //Ajout de l'authentification par les jwt.

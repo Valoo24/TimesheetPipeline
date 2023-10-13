@@ -16,9 +16,9 @@ namespace Timesheet.Application.Services
 
         public Guid Add(User entity)
         {
-            entity.Role = RoleType.Regular;
             string hashedPassword = Argon2.Hash(entity.HashedPassword);
             entity.HashedPassword = hashedPassword;
+            entity.Role = RoleType.Regular;
             return _repository.Add(entity);
         }
 
@@ -48,11 +48,11 @@ namespace Timesheet.Application.Services
 
         public User Login(LoginForm form)
         {
-            string hashedPassword = _repository.GetUserHashedPasswordByMailAdress(form.Credentials);
+            string hashedPassword = _repository.GetUserHashedPasswordByMailAdress(form.MailAdress);
 
             if(Argon2.Verify(hashedPassword,form.Password))
             {
-                return _repository.GetByMailAdress(form.Credentials);
+                return _repository.GetByMailAdress(form.MailAdress);
             }
             else
             {
@@ -65,8 +65,10 @@ namespace Timesheet.Application.Services
             return _repository.Update(entity);
         }
 
-        public Guid Update(Guid userIdToUpdate, UserAddForm form)
+        public Guid Update(Guid userIdToUpdate, UserUpdateForm form)
         {
+            string hashedPassword = Argon2.Hash(form.Password);
+            form.Password = hashedPassword;
             return _repository.Update(form.ToEntity(userIdToUpdate));
         }
     }

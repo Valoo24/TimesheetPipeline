@@ -1,4 +1,5 @@
-﻿using Timesheet.Application.Mappers;
+﻿using System.Diagnostics;
+using Timesheet.Application.Mappers;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
@@ -30,17 +31,13 @@ namespace Timesheet.Persistence.Repositories
 
             if (entity.Id == Guid.Empty) throw new ArgumentNullException("The guid of the updated entity can't be null.");
 
-            UserDTO entityToUpdate = _context.Users.FirstOrDefault(u => u.Id == entity.Id);
+            UserDTO UpdatedEntity = entity.ToDTO();
 
-            if (entityToUpdate is null || entityToUpdate == default) throw new ArgumentNullException("The user you try to update doesn't exist");
-
-            entityToUpdate.FirstName = entity.FirstName;
-            entityToUpdate.LastName = entity.LastName;
-            entityToUpdate.MailAdress = entity.MailAdress;
+            _context.Users.Update(UpdatedEntity);
 
             _context.SaveChanges();
 
-            return entityToUpdate.Id;
+            return UpdatedEntity.Id;
         }
 
         public IEnumerable<User> GetAll()
@@ -53,9 +50,13 @@ namespace Timesheet.Persistence.Repositories
 
         public User GetById(Guid id)
         {
-            if (id == Guid.Empty) throw new ArgumentNullException(id.ToString());
+            if (id == Guid.Empty) throw new ArgumentNullException($"Impossible de rechercher un id vide : {id.ToString()}");
 
-            return _context.Users.FirstOrDefault(u => u.Id == id).ToEntity();
+            UserDTO userToFind = _context.Users.FirstOrDefault(u => u.Id == id);
+
+            if (userToFind is null || userToFind == default) throw new ArgumentNullException($"Le user avec l'ID {id} n'existe pas.");
+
+            return userToFind.ToEntity();
         }
 
         public Guid Delete(Guid id)

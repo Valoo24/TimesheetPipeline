@@ -18,7 +18,7 @@ namespace Timesheet.Infrastrucutre.DataAccess
         {
             modelBuilder.Entity<Holiday>().HasKey(h => h.Id);
 
-            modelBuilder.Entity<User>().HasKey(u => u.Id);
+            modelBuilder.Entity<UserDTO>().HasKey(u => u.Id);
 
             modelBuilder.Entity<TimesheetEntity>().HasKey(t => t.Id);
 
