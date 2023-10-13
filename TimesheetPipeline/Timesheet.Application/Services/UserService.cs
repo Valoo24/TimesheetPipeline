@@ -16,6 +16,7 @@ namespace Timesheet.Application.Services
 
         public Guid Add(User entity)
         {
+            entity.Role = RoleType.Regular;
             string hashedPassword = Argon2.Hash(entity.HashedPassword);
             entity.HashedPassword = hashedPassword;
             return _repository.Add(entity);
@@ -25,7 +26,9 @@ namespace Timesheet.Application.Services
         {
             string hashedPassword = Argon2.Hash(form.Password);
             form.Password = hashedPassword;
-            return _repository.Add(form.ToEntity());
+            User entityToAdd = form.ToEntity();
+            entityToAdd.Role = RoleType.Regular;
+            return _repository.Add(entityToAdd);
         }
 
         public Guid Delete(Guid id)
