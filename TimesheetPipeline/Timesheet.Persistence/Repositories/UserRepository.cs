@@ -1,4 +1,5 @@
-﻿using Timesheet.Domain.Entities.Users;
+﻿using Timesheet.Application.Mappers;
+using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
 
@@ -17,7 +18,7 @@ namespace Timesheet.Persistence.Repositories
         {
             if (entity is null || entity == default) throw new ArgumentNullException();
 
-            _context.Users.Add(entity);
+            _context.Users.Add(entity.ToDTO());
             _context.SaveChanges();
 
             return entity.Id;
@@ -29,36 +30,49 @@ namespace Timesheet.Persistence.Repositories
 
             if (entity.Id == Guid.Empty) throw new ArgumentNullException("The guid of the updated entity can't be null.");
 
-            User entityToUpdate = _context.Users.FirstOrDefault(u => u.Id == entity.Id);
+            UserDTO userToUpdate = _context.Users.FirstOrDefault(u => u.Id == entity.Id);
 
-            if (entityToUpdate is null || entityToUpdate == default) throw new ArgumentNullException("The user you try to update doesn't exist");
+            if (userToUpdate is null || userToUpdate == default) throw new ArgumentNullException("L'id du User à mettre à jour n'existe pas.");
 
-            entityToUpdate.FirstName = entity.FirstName;
-            entityToUpdate.LastName = entity.LastName;
-            entityToUpdate.MailAdress = entity.MailAdress;
+            //UserDTO UpdatedEntity = entity.ToDTO();
+
+            userToUpdate.FirstName = entity.FirstName;
+            userToUpdate.LastName = entity.LastName;
+            userToUpdate.MailAdress = entity.MailAdress;
+            userToUpdate.HashedPassword = entity.HashedPassword;
+            userToUpdate.Role = entity.Role;
+
+            //_context.Users.Update(UpdatedEntity);
 
             _context.SaveChanges();
 
-            return entityToUpdate.Id;
+            return userToUpdate.Id;
         }
 
         public IEnumerable<User> GetAll()
         {
-            return _context.Users.ToList();
+            foreach(var user in _context.Users)
+            {
+                yield return user.ToEntity();
+            }
         }
 
         public User GetById(Guid id)
         {
-            if (id == Guid.Empty) throw new ArgumentNullException(id.ToString());
+            if (id == Guid.Empty) throw new ArgumentNullException($"Impossible de rechercher un id vide : {id}");
 
-            return _context.Users.FirstOrDefault(u => u.Id == id);
+            UserDTO userToFind = _context.Users.FirstOrDefault(u => u.Id == id);
+
+            if (userToFind is null || userToFind == default) throw new ArgumentNullException($"Le user avec l'ID {id} n'existe pas.");
+
+            return userToFind.ToEntity();
         }
 
         public Guid Delete(Guid id)
         {
             if (id == Guid.Empty) throw new ArgumentNullException();
 
-            User userToDelete = _context.Users.FirstOrDefault(u => u.Id == id);
+            UserDTO userToDelete = _context.Users.FirstOrDefault(u => u.Id == id);
 
             if (userToDelete is null || userToDelete == default) throw new ArgumentNullException();
 
@@ -66,6 +80,16 @@ namespace Timesheet.Persistence.Repositories
             _context.SaveChanges();
 
             return userToDelete.Id;
+        }
+
+        public string GetUserHashedPasswordByMailAdress(string mailAdress)
+        {
+            return _context.Users.FirstOrDefault(u => u.MailAdress == mailAdress).HashedPassword;
+        }
+
+        public User GetByMailAdress(string mailAdress)
+        {
+            return _context.Users.FirstOrDefault(u => u.MailAdress == mailAdress).ToEntity();
         }
     }
 }

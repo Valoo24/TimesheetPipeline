@@ -15,3 +15,5 @@ C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Time
 C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Persistence\obj\Debug\net7.0\ref\Timesheet.Persistence.dll
 C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Persistence\bin\Debug\net7.0\Timesheet.Infrastrucutre.dll
 C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Persistence\bin\Debug\net7.0\Timesheet.Infrastrucutre.pdb
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Persistence\bin\Debug\net7.0\Timesheet.Application.dll
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.Persistence\bin\Debug\net7.0\Timesheet.Application.pdb

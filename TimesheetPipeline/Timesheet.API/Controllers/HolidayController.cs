@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.API.Controllers
@@ -14,6 +15,7 @@ namespace Timesheet.API.Controllers
             _service = Service;
         }
 
+        [Authorize("Auth")]
         [HttpGet("Get/{year}")]
         public IActionResult GetAll(int year)
         {
@@ -27,6 +29,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [Authorize("Auth")]
         [HttpGet("GetById/{year}/{id}")]
         public IActionResult GetById(int year, int id)
         {
@@ -40,6 +43,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [Authorize("Auth")]
         [HttpGet("GetByMonth/{year}/{month}")]
         public IActionResult GetByMonth(int year, int month)
         {
@@ -53,18 +57,22 @@ namespace Timesheet.API.Controllers
             }
         }
 
-        [HttpPost("CreateDb")]
-        public IActionResult CreateDb()
-        {
-            try
-            {
-                _service.InitializeDatabase();
-                return Ok("La base de donnée a bien été crée et initialisée.");
-            }
-            catch(Exception ex) 
-            { 
-                return BadRequest(ex.Message);
-            }
-        }
+        //-------------------------------------------------------
+        // A N'utiliser que lorsqe la db doit être ré-initialisée
+        //-------------------------------------------------------
+
+        //[HttpPost("CreateDb")]
+        //public IActionResult CreateDb()
+        //{
+        //    try
+        //    {
+        //        _service.InitializeDatabase();
+        //        return Ok("La base de donnée a bien été crée et initialisée.");
+        //    }
+        //    catch(Exception ex) 
+        //    { 
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
     }
 }

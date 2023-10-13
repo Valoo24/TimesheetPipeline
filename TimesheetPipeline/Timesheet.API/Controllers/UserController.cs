@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 
@@ -9,10 +10,11 @@ namespace Timesheet.API.Controllers
     public class UserController : Controller
     {
         private IUserService _service;
-
-        public UserController(IUserService Service)
+        private ITokenManager _tokenManager;
+        public UserController(IUserService Service, ITokenManager tokenManager)
         {
             _service = Service;
+            _tokenManager = tokenManager;
         }
 
         [HttpPost("Add")]
@@ -28,8 +30,9 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [Authorize("Auth")]
         [HttpPut("Update/{userIdToUpdate}")]
-        public IActionResult Update(Guid userIdToUpdate, UserAddForm form)
+        public IActionResult Update(Guid userIdToUpdate, UserUpdateForm form)
         {
             try
             {
@@ -41,6 +44,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [Authorize("Auth")]
         [HttpDelete("Delete/{userIdToDelete}")]
         public IActionResult Delete(Guid userIdToDelete)
         {
@@ -54,6 +58,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [Authorize("Admin")]
         [HttpGet("Get")]
         public IActionResult GetAll()
         {
@@ -67,12 +72,28 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [Authorize("Auth")]
         [HttpGet("Get/{id}")]
         public IActionResult GetById(Guid id)
         {
             try
             {
                 return Ok(_service.GetById(id));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpPost("Login")]
+        public IActionResult Login(LoginForm form)
+        {
+            try
+            {
+                User loginUser = _service.Login(form);
+                loginUser.Token = _tokenManager.GenerateToken(loginUser);
+                return Ok(loginUser.Token);
             }
             catch (Exception ex)
             {

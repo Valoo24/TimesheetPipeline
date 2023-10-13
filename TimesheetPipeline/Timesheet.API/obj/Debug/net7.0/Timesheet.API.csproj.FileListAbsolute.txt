@@ -87,3 +87,7 @@ C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Time
 C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.API\bin\Debug\net7.0\BlazorDebugProxy\Newtonsoft.Json.dll
 C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.API\bin\Debug\net7.0\Timesheet.API.staticwebassets.runtime.json
 C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.API\bin\Debug\net7.0\Microsoft.AspNetCore.Components.WebAssembly.Server.dll
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.API\bin\Debug\net7.0\Isopoh.Cryptography.Argon2.dll
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.API\bin\Debug\net7.0\Isopoh.Cryptography.Blake2b.dll
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.API\bin\Debug\net7.0\Isopoh.Cryptography.SecureArray.dll
+C:\Users\benja\Formation\Repository\TimesheetPiepline.git\TimesheetPipeline\Timesheet.API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
