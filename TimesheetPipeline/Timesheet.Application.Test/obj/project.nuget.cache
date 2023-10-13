@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "C9uN/pucNfFBIIQXs2LXr5LBRjXfxzFULciyZVzIyzwt3zBMWE2M97zedoYWNSfBuhcU/mvQDLfhacMRTRFsDA==",
+  "dgSpecHash": "ltCoHECLmQgM43ZIyg9zZTSitbZpdkTJKWNxJpd0OmGgp4qUaOM46GX8Qd2y5j98EQk8Eg7jzuVzkg20QJilBA==",
   "success": true,
   "projectFilePath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Application.Test\\Timesheet.Application.Test.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,9 @@
     "C:\\Users\\benja\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
+    "C:\\Users\\benja\\.nuget\\packages\\isopoh.cryptography.argon2\\2.0.0\\isopoh.cryptography.argon2.2.0.0.nupkg.sha512",
+    "C:\\Users\\benja\\.nuget\\packages\\isopoh.cryptography.blake2b\\2.0.0\\isopoh.cryptography.blake2b.2.0.0.nupkg.sha512",
+    "C:\\Users\\benja\\.nuget\\packages\\isopoh.cryptography.securearray\\2.0.0\\isopoh.cryptography.securearray.2.0.0.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\microsoft.codecoverage\\17.7.2\\microsoft.codecoverage.17.7.2.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.1\\microsoft.data.sqlclient.5.1.1.nupkg.sha512",

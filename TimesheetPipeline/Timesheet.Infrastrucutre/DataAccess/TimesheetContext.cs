@@ -24,10 +24,6 @@ namespace Timesheet.Infrastrucutre.DataAccess
 
             modelBuilder.Entity<Occupation>().HasKey(o => o.Id);
 
-            //modelBuilder.Entity<TimesheetEntity>().HasOne(t => t.User).WithMany().HasForeignKey(t => t.UserId);
-
-            //modelBuilder.Entity<User>().HasMany(u => u.Timesheets).WithOne(t => t.User).HasForeignKey(t => t.UserId);
-
             modelBuilder.Entity<TimesheetEntity>().HasMany(t => t.OccupationList).WithOne(o => o.Timesheet).HasForeignKey(o => o.TimesheetId);
 
             base.OnModelCreating(modelBuilder);

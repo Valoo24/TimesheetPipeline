@@ -12,6 +12,7 @@ namespace Timesheet.Application.Mappers
                 FirstName = form.FirstName,
                 LastName = form.LastName,
                 MailAdress = form.MailAdress,
+                HashedPassword = form.Password
             };
         }
 
@@ -23,6 +24,7 @@ namespace Timesheet.Application.Mappers
                 FirstName = form.FirstName,
                 LastName = form.LastName,
                 MailAdress = form.MailAdress,
+                HashedPassword = form.Password
             };
         }
     }

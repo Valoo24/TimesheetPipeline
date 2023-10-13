@@ -1,4 +1,5 @@
-﻿using Timesheet.Application.Mappers;
+﻿using Isopoh.Cryptography.Argon2;
+using Timesheet.Application.Mappers;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 
@@ -15,11 +16,15 @@ namespace Timesheet.Application.Services
 
         public Guid Add(User entity)
         {
+            string hashedPassword = Argon2.Hash(entity.HashedPassword);
+            entity.HashedPassword = hashedPassword;
             return _repository.Add(entity);
         }
 
         public Guid Add(UserAddForm form) 
-        { 
+        {
+            string hashedPassword = Argon2.Hash(form.Password);
+            form.Password = hashedPassword;
             return _repository.Add(form.ToEntity());
         }
 

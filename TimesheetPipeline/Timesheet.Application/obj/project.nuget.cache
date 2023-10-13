@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "LETNHZUcN+ZfSbYpSeJf7aUvrvjDOiYYB3BnYR49VgCzbqmGrWrQaFRQrDnxfmB/mUIjDYP17o0/SyLqqVOYyQ==",
+  "dgSpecHash": "Quag8JHcHF/3KxCn5Pdm43DNOfzk71s7mu9fCFklrVFFaD4wwxs3+2lTIj/6JlYf/p9mRAG3/Kg2qxLgn9t+zQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\benja\\Formation\\Repository\\TimesheetPiepline.git\\TimesheetPipeline\\Timesheet.Application\\Timesheet.Application.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\benja\\.nuget\\packages\\isopoh.cryptography.argon2\\2.0.0\\isopoh.cryptography.argon2.2.0.0.nupkg.sha512",
+    "C:\\Users\\benja\\.nuget\\packages\\isopoh.cryptography.blake2b\\2.0.0\\isopoh.cryptography.blake2b.2.0.0.nupkg.sha512",
+    "C:\\Users\\benja\\.nuget\\packages\\isopoh.cryptography.securearray\\2.0.0\\isopoh.cryptography.securearray.2.0.0.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\benja\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.0.2\\microsoft.identitymodel.abstractions.7.0.2.nupkg.sha512",
