@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Isopoh.Cryptography.Argon2;
+using Microsoft.EntityFrameworkCore;
+using Timesheet.Application.Mappers;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
@@ -9,28 +11,31 @@ namespace Timesheet.Persistence.Test
     public class UserRepositoryShould
     {
         #region Properties
-        private IList<User> _testUsers = new List<User>()
+        private IList<UserDTO> _testUsers = new List<UserDTO>()
         {
-            new User
+            new UserDTO
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Brice",
                 LastName = "DeNice",
                 MailAdress = "BriceDeNice@mail.com",
+                HashedPassword = Argon2.Hash("Turlututu")
             },
-            new User
+            new UserDTO
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Elon",
                 LastName = "Musk",
                 MailAdress = "ElonMusk@mail.com",
+                HashedPassword = Argon2.Hash("Chapopointu")
             },
-            new User
+            new UserDTO
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Tom",
                 LastName = "Cruise",
                 MailAdress = "TomCruise@mail.com",
+                HashedPassword = Argon2.Hash("Topgun")
             }
         };
 
@@ -73,6 +78,7 @@ namespace Timesheet.Persistence.Test
                 FirstName = "Toto",
                 LastName = "Foo",
                 MailAdress = "Test@mail.com",
+                HashedPassword = Argon2.Hash("AttaqueNapolitaine")
             };
 
             //Act
@@ -124,7 +130,10 @@ namespace Timesheet.Persistence.Test
             var result = _repository.GetById(_testUsers.FirstOrDefault(tu => tu.FirstName == "Elon" && tu.LastName == "Musk" && tu.MailAdress == "ElonMusk@mail.com").Id);
 
             Assert.NotNull(result);
-            Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id), result);
+            Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id).FirstName, result.FirstName);
+            Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id).LastName, result.LastName);
+            Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id).MailAdress, result.MailAdress);
+            Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id).HashedPassword, result.HashedPassword);
         }
 
         [Fact]
@@ -168,7 +177,7 @@ namespace Timesheet.Persistence.Test
             tu.FirstName == "Tom" &&
             tu.LastName == "Cruise" &&
             tu.MailAdress == "TomCruise@mail.com"),
-            _repository.GetById(userToUpdate.Id));
+            _repository.GetById(userToUpdate.Id).ToDTO());
         }
 
         [Fact]
@@ -236,13 +245,22 @@ namespace Timesheet.Persistence.Test
         [Fact]
         public void DeleteBriceDeNice()
         {
-            User userToDelete = _testUsers.FirstOrDefault(tu => tu.FirstName == "Brice" && tu.LastName == "DeNice" && tu.MailAdress == "BriceDeNice@mail.com");
+            UserDTO userToDelete = _testUsers.FirstOrDefault(tu => tu.FirstName == "Brice" && tu.LastName == "DeNice" && tu.MailAdress == "BriceDeNice@mail.com");
 
             var result = _repository.Delete(userToDelete.Id);
 
+            var userList = _repository.GetAll();
+
+            IList<UserDTO> userToCompare = new List<UserDTO>();
+
+            foreach(var user in userList) 
+            {
+                userToCompare.Add(user.ToDTO());
+            }
+
             Assert.NotNull(result);
             Assert.Equal(userToDelete.Id, result);
-            Assert.NotEqual(_testUsers, _repository.GetAll());
+            Assert.NotEqual(_testUsers, userToCompare);
         }
 
         [Fact]

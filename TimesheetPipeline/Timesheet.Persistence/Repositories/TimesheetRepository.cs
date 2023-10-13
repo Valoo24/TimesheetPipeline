@@ -58,11 +58,6 @@ namespace Timesheet.Persistence.Repositories
             return GetAll().FirstOrDefault(t => t.Id == id);
         }
 
-        public User GetByMail(string mail)
-        {
-            return _context.Users.FirstOrDefault(u => u.MailAdress == mail).ToEntity();
-        }
-
         public Guid Update(TimesheetEntity entity)
         {
             TimesheetEntity entityToUpdate = _context.Timesheets.FirstOrDefault(t => t.Id == entity.Id);
