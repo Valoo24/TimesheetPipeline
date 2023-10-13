@@ -30,6 +30,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [Authorize("Auth")]
         [HttpPut("Update/{userIdToUpdate}")]
         public IActionResult Update(Guid userIdToUpdate, UserUpdateForm form)
         {
@@ -43,6 +44,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [Authorize("Auth")]
         [HttpDelete("Delete/{userIdToDelete}")]
         public IActionResult Delete(Guid userIdToDelete)
         {
@@ -56,7 +58,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
-        [Authorize("Auth")]
+        [Authorize("Admin")]
         [HttpGet("Get")]
         public IActionResult GetAll()
         {
@@ -70,6 +72,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [Authorize("Auth")]
         [HttpGet("Get/{id}")]
         public IActionResult GetById(Guid id)
         {

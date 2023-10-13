@@ -18,6 +18,7 @@ namespace Timesheet.API.Controllers
             _service = Service;
         }
 
+        [Authorize("Auth")]
         [HttpPost("CreateNewTimesheet")]
         public IActionResult CreateNewTimesheet(TimesheetCreateForm form)
         {
@@ -31,6 +32,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [Authorize("Auth")]
         [HttpPut("AddOccupation/{idToUpdate}")]
         public IActionResult AddOccupation(Guid idToUpdate, Occupation form)
         {
@@ -51,6 +53,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [Authorize("Auth")]
         [HttpDelete("Delete/{id}")]
         public IActionResult Delete(Guid id)
         {
@@ -78,6 +81,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
+        [Authorize("Auth")]
         [HttpGet("Get/{id}")]
         public IActionResult GetById(Guid id)
         {
