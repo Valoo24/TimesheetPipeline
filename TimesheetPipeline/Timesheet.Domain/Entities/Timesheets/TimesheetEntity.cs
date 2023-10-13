@@ -14,8 +14,6 @@ namespace Timesheet.Domain.Entities.Timesheets
 
         public Guid UserId { get; set; }
 
-        //public User User { get; set; }
-
         /// <summary>
         /// Année de la timesheet.
         /// </summary>

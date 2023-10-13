@@ -1,4 +1,5 @@
-﻿using Timesheet.Domain.Entities.Timesheets;
+﻿using Timesheet.Domain.Entities;
+using Timesheet.Domain.Entities.Timesheets;
 using Timesheet.Domain.Entities.Users;
 
 namespace Timesheet.Application.Mappers
@@ -12,6 +13,7 @@ namespace Timesheet.Application.Mappers
                 UserId = form.UserId,
                 Year = form.Year,
                 Month = form.Month,
+                OccupationList = new List<Occupation>()
             };
         }
 
@@ -20,7 +22,7 @@ namespace Timesheet.Application.Mappers
             return new TimesheetDTO
             {
                 Id = entity.Id,
-                User = new User 
+                User = new User
                 { 
                     Id = entity.UserId
                 },
