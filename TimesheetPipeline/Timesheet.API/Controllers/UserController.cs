@@ -174,6 +174,25 @@ namespace Timesheet.API.Controllers
                 return NotFound(ex.Message);
             }
         }
+
+        [Authorize("Admin")]
+        [Authorize("Premium")]
+        [HttpPatch("BecomeRegular/{userIdToUpdate}")]
+        public async Task<IActionResult> BecomeRegular(Guid userIdToUpdate)
+        {
+            try
+            {
+                return Ok($"{await _service.UpdateAsync(userIdToUpdate, RoleType.Regular)}");
+            }
+            catch (UselessUpdateException ex)
+            {
+                return BadRequest(ex);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
         #endregion
 
         #region Delete
