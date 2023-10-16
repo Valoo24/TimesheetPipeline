@@ -183,7 +183,7 @@ namespace Timesheet.Persistence.Test
             };
 
             //Act
-            var result = _repository.Add(timesheetToAdd);
+            var result = _repository.AddAsync(timesheetToAdd);
 
             //Assert
             Assert.NotNull(result);
@@ -204,7 +204,7 @@ namespace Timesheet.Persistence.Test
             };
 
             //Act
-            var result = _repository.Add(timesheetToAdd);
+            var result = _repository.AddAsync(timesheetToAdd);
 
             //Assert
             Assert.NotNull(result);
@@ -224,7 +224,7 @@ namespace Timesheet.Persistence.Test
             };
 
             //Act
-            var result = _repository.Add(timesheetToAdd);
+            var result = _repository.AddAsync(timesheetToAdd);
 
             //Assert
             Assert.NotNull(result);
@@ -237,7 +237,7 @@ namespace Timesheet.Persistence.Test
         {
             try
             {
-                var result = _repository.Add(null);
+                var result = _repository.AddAsync(null);
             }
             catch(ArgumentNullException ex)
             {
@@ -261,7 +261,7 @@ namespace Timesheet.Persistence.Test
             //Act
             try
             {
-                var result = _repository.Add(timesheetToAdd);
+                var result = _repository.AddAsync(timesheetToAdd);
             }
             catch(ArgumentNullException ex)
             {
@@ -273,7 +273,7 @@ namespace Timesheet.Persistence.Test
         [Fact]
         public void GetAllTimesheetsEntity()
         {
-            var result = _repository.GetAll();
+            var result = _repository.GetAllAsync();
 
             Assert.NotNull(result);
             Assert.Equal(4, result.Count());
@@ -291,7 +291,7 @@ namespace Timesheet.Persistence.Test
             Guid timesheetIdToFind = _testTimesheets.FirstOrDefault(t => 
             t.UserId == tomCruise.Id).Id;
 
-            var result = _repository.GetById(timesheetIdToFind);
+            var result = _repository.GetByIdAsync(timesheetIdToFind);
 
             Assert.NotNull(result);
             Assert.Equal(tomCruise.Id, result.UserId);
@@ -306,7 +306,7 @@ namespace Timesheet.Persistence.Test
             User briceDeNice = _testUsers.FirstOrDefault(u => u.FirstName == "Brice");
             User tomCruise = _testUsers.FirstOrDefault(u => u.FirstName == "Tom");
 
-            TimesheetEntity timesheetToUpdate = _repository.GetById(
+            TimesheetEntity timesheetToUpdate = _repository.GetByIdAsync(
                 _testTimesheets.FirstOrDefault(
                     t => t.UserId == briceDeNice.Id 
                     && t.Month == 1).Id);
@@ -326,11 +326,11 @@ namespace Timesheet.Persistence.Test
                 Title = "Second Update"
             });
 
-            var result = _repository.Update(timesheetToUpdate);
+            var result = _repository.UpdateAsync(timesheetToUpdate);
 
             Assert.NotNull(result);
             Assert.Equal(timesheetToUpdate.Id, result);
-            Assert.Equal(timesheetToUpdate, _repository.GetById(timesheetToUpdate.Id));
+            Assert.Equal(timesheetToUpdate, _repository.GetByIdAsync(timesheetToUpdate.Id));
         }
 
         [Fact]
@@ -339,8 +339,8 @@ namespace Timesheet.Persistence.Test
             User elonMusk = _testUsers.FirstOrDefault(u => u.FirstName == "Elon");
             Guid timesheetIdToDelete = _testTimesheets.FirstOrDefault(t => t.UserId == elonMusk.Id).Id;
 
-            var result = _repository.Delete(timesheetIdToDelete);
-            var resultAllTimesheet = _repository.GetAll();
+            var result = _repository.DeleteAsync(timesheetIdToDelete);
+            var resultAllTimesheet = _repository.GetAllAsync();
 
 
             Assert.NotNull(result);

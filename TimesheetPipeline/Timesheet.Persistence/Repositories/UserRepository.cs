@@ -1,5 +1,5 @@
 ﻿using Isopoh.Cryptography.Argon2;
-using Timesheet.Application.Mappers;
+using Microsoft.EntityFrameworkCore;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
@@ -15,27 +15,25 @@ namespace Timesheet.Persistence.Repositories
             _context = Context;
         }
 
-        public Guid Add(User entity)
+        public async Task<Guid> AddAsync(User entity)
         {
             if (entity is null || entity == default) throw new ArgumentNullException();
 
-            _context.Users.Add(entity);
-            _context.SaveChanges();
+            await _context.Users.AddAsync(entity);
+            await _context.SaveChangesAsync();
 
             return entity.Id;
         }
 
-        public Guid Update(User entity)
+        public async Task<Guid> UpdateAsync(User entity)
         {
             if (entity is null) throw new ArgumentNullException("The entity to update can't be null");
 
             if (entity.Id == Guid.Empty) throw new ArgumentNullException("The guid of the updated entity can't be null.");
 
-            User userToUpdate = _context.Users.FirstOrDefault(u => u.Id == entity.Id);
+            User? userToUpdate = await _context.Users.FirstOrDefaultAsync(u => u.Id == entity.Id);
 
             if (userToUpdate is null || userToUpdate == default) throw new ArgumentNullException("L'id du User à mettre à jour n'existe pas.");
-
-            //UserDTO UpdatedEntity = entity.ToDTO();
 
             userToUpdate.FirstName = entity.FirstName;
             userToUpdate.LastName = entity.LastName;
@@ -43,57 +41,60 @@ namespace Timesheet.Persistence.Repositories
             userToUpdate.HashedPassword = entity.HashedPassword;
             userToUpdate.Role = entity.Role;
 
-            //_context.Users.Update(UpdatedEntity);
-
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return userToUpdate.Id;
         }
 
-        public IEnumerable<User> GetAll()
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
-            foreach(var user in _context.Users)
-            {
-                yield return user;
-            }
+            return await _context.Users.ToListAsync();
         }
 
-        public User GetById(Guid id)
+        public async Task<User> GetByIdAsync(Guid id)
         {
             if (id == Guid.Empty) throw new ArgumentNullException($"Impossible de rechercher un id vide : {id}");
 
-            User? userToFind = _context.Users.FirstOrDefault(u => u.Id == id);
+            User? userToFind = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
 
             if (userToFind is null || userToFind == default) throw new ArgumentNullException($"Le user avec l'ID {id} n'existe pas.");
 
             return userToFind;
         }
 
-        public Guid Delete(Guid id)
+        public async Task<Guid> DeleteAsync(Guid id)
         {
             if (id == Guid.Empty) throw new ArgumentNullException();
 
-            User? userToDelete = _context.Users.FirstOrDefault(u => u.Id == id);
+            User? userToDelete = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
 
             if (userToDelete is null || userToDelete == default) throw new ArgumentNullException();
 
             _context.Remove(userToDelete);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return userToDelete.Id;
         }
 
-        public string GetUserHashedPasswordByMailAdress(string mailAdress)
+        public async Task<string> GetUserHashedPasswordByMailAdressAsync(string mailAdress)
         {
-            return _context.Users.FirstOrDefault(u => u.MailAdress == mailAdress).HashedPassword;
+            User? userForPassword = await _context.Users.FirstOrDefaultAsync(u => u.MailAdress == mailAdress);
+
+            if (userForPassword is null || userForPassword == default) throw new ArgumentNullException();
+
+            return userForPassword.HashedPassword;
         }
 
-        public User GetByMailAdress(string mailAdress)
+        public async Task<User> GetByMailAdressAsync(string mailAdress)
         {
-            return _context.Users.FirstOrDefault(u => u.MailAdress == mailAdress);
+            User? user = await _context.Users.FirstOrDefaultAsync(u => u.MailAdress == mailAdress);
+
+            if(user is null || user == default) throw new ArgumentNullException();
+
+            return user;
         }
 
-        public async Task InitializeDatabase()
+        public async Task InitializeDatabaseAsync()
         {
             await _context.Database.EnsureCreatedAsync();
 

@@ -38,17 +38,17 @@ namespace Timesheet.Application.Services
                     });
             }
 
-            return _timesheetRepository.Add(entity);
+            return _timesheetRepository.AddAsync(entity);
         }
 
         public Guid Delete(Guid id)
         {
-            return _timesheetRepository.Delete(id);
+            return _timesheetRepository.DeleteAsync(id);
         }
 
         public IEnumerable<TimesheetEntity> GetAll()
         {
-            IList<TimesheetEntity> TimesheetList = _timesheetRepository.GetAll().ToList();
+            IList<TimesheetEntity> TimesheetList = _timesheetRepository.GetAllAsync().ToList();
 
             foreach (var Timesheet in TimesheetList)
             {
@@ -65,7 +65,7 @@ namespace Timesheet.Application.Services
             foreach(var timesheet in GetAll())
             {
                 TimesheetEntity TimesheetDTO = timesheet;
-                TimesheetDTO.User = _userRepository.GetById(TimesheetDTO.User.Id);
+                TimesheetDTO.User = _userRepository.GetByIdAsync(TimesheetDTO.User.Id);
                 TimesheetList.Add(TimesheetDTO);
             }
 
@@ -74,7 +74,7 @@ namespace Timesheet.Application.Services
 
         public TimesheetEntity GetById(Guid id)
         {
-            TimesheetEntity Timesheet = _timesheetRepository.GetById(id);
+            TimesheetEntity Timesheet = _timesheetRepository.GetByIdAsync(id);
 
             OrderOccupationList(Timesheet);
 
@@ -95,13 +95,13 @@ namespace Timesheet.Application.Services
                 TimesheetToUpdate.OccupationList.Add(occupation);
             }
 
-            return _timesheetRepository.Update(TimesheetToUpdate);
+            return _timesheetRepository.UpdateAsync(TimesheetToUpdate);
         }
 
         public async Task InitializeDatabaseAsync()
         {
             await _holidayRepository.InitializeDatabase();
-            await _userRepository.InitializeDatabase();
+            await _userRepository.InitializeDatabaseAsync();
         }
 
         private void OrderOccupationList(TimesheetEntity timesheet)

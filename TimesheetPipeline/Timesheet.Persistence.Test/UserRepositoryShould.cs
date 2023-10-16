@@ -82,7 +82,7 @@ namespace Timesheet.Persistence.Test
             };
 
             //Act
-            var result = _repository.Add(userToTest);
+            var result = _repository.AddAsync(userToTest);
 
             //Assert
             Assert.NotNull(userToTest.Timesheets);
@@ -96,7 +96,7 @@ namespace Timesheet.Persistence.Test
         {
             try
             {
-                var result = _repository.Add(null);
+                var result = _repository.AddAsync(null);
             }
             catch (ArgumentNullException ex)
             {
@@ -111,7 +111,7 @@ namespace Timesheet.Persistence.Test
         public void GetAllUserEntity()
         {
             //Arrange & Act
-            var result = _repository.GetAll();
+            var result = _repository.GetAllAsync();
 
             //Assert
             Assert.NotNull(result);
@@ -141,7 +141,7 @@ namespace Timesheet.Persistence.Test
         {
             try
             {
-                var result = _repository.GetById(Guid.Empty);
+                var result = _repository.GetByIdAsync(Guid.Empty);
             }
             catch (ArgumentNullException ex)
             {
@@ -168,7 +168,7 @@ namespace Timesheet.Persistence.Test
             };
 
             //Act
-            var result = _repository.Update(userToUpdate);
+            var result = _repository.UpdateAsync(userToUpdate);
 
             //Assert
             Assert.NotNull(result);
@@ -177,7 +177,7 @@ namespace Timesheet.Persistence.Test
             tu.FirstName == "Tom" &&
             tu.LastName == "Cruise" &&
             tu.MailAdress == "TomCruise@mail.com"),
-            _repository.GetById(userToUpdate.Id).ToDTO());
+            _repository.GetByIdAsync(userToUpdate.Id).ToDTO());
         }
 
         [Fact]
@@ -195,7 +195,7 @@ namespace Timesheet.Persistence.Test
             //Act & Assert
             try
             {
-                var result = _repository.Update(userThatDoesNotExist);
+                var result = _repository.UpdateAsync(userThatDoesNotExist);
             }
             catch (ArgumentNullException ex)
             {
@@ -209,7 +209,7 @@ namespace Timesheet.Persistence.Test
         {
             try
             {
-                var result = _repository.Update(null);
+                var result = _repository.UpdateAsync(null);
             }
             catch (ArgumentNullException ex)
             {
@@ -231,7 +231,7 @@ namespace Timesheet.Persistence.Test
 
             try
             {
-                var result = _repository.Update(userWithABadGuid);
+                var result = _repository.UpdateAsync(userWithABadGuid);
             }
             catch(ArgumentNullException ex)
             {
@@ -249,7 +249,7 @@ namespace Timesheet.Persistence.Test
 
             var result = _repository.Delete(userToDelete.Id);
 
-            var userList = _repository.GetAll();
+            var userList = _repository.GetAllAsync();
 
             IList<UserDTO> userToCompare = new List<UserDTO>();
 
@@ -268,7 +268,7 @@ namespace Timesheet.Persistence.Test
         {
             try
             {
-                var result = _repository.Delete(Guid.Empty);
+                var result = _repository.DeleteAsync(Guid.Empty);
             }
             catch(ArgumentNullException ex) 
             {
@@ -282,7 +282,7 @@ namespace Timesheet.Persistence.Test
         {
             try
             {
-                var result = _repository.Delete(Guid.NewGuid());
+                var result = _repository.DeleteAsync(Guid.NewGuid());
             }
             catch(ArgumentNullException ex)
             {

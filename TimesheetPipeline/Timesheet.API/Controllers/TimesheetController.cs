@@ -26,7 +26,7 @@ namespace Timesheet.API.Controllers
             {
                 try
                 {
-                    return Ok(_service.Add(form.ToEntity()));
+                    return Ok(_service.AddAsync(form.ToEntity()));
                 }
                 catch (Exception ex)
                 {
@@ -47,7 +47,7 @@ namespace Timesheet.API.Controllers
             {
                 try
                 {
-                    return Ok(_service.Update(new TimesheetEntity
+                    return Ok(_service.UpdateAsync(new TimesheetEntity
                     {
                         Id = idToUpdate,
                         OccupationList = new List<Occupation>
@@ -73,7 +73,7 @@ namespace Timesheet.API.Controllers
         {
             try
             {
-                return Ok(_service.Delete(id));
+                return Ok(_service.DeleteAsync(id));
             }
             catch (Exception ex)
             {

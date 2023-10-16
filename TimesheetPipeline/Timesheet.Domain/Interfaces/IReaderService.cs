@@ -11,13 +11,13 @@
         /// Renvoie un IEnumerable d'Entity implémenté dans le service.
         /// </summary>
         /// <returns>Un IEnumerable d'Entity implémenté dans le service.</returns>
-        public IEnumerable<TEntity> GetAll();
+        Task<IEnumerable<TEntity>> GetAllAsync();
 
         /// <summary>
         /// Renvoie un Entity selon son Id.
         /// </summary>
         /// <param name="id">Id de l'Entity à récupérer.</param>
         /// <returns>Un Entity du type implémenté dans le service.</returns>
-        public TEntity GetById (Tkey id);
+        Task<TEntity> GetByIdAsync (Tkey id);
     }
 }

@@ -4,8 +4,8 @@ namespace Timesheet.Domain.Interfaces
 {
     public interface IUserService : IReaderService<User, Guid>, IWriterService<User, Guid>
     {
-        public Guid Add(UserAddForm form);
-        public Guid Update(Guid userIdToUpdate, UserUpdateForm form);
-        public User Login(LoginForm form);
+        Task<Guid> AddAsync(UserAddForm form);
+        Task<Guid> UpdateAsync(Guid userIdToUpdate, UserUpdateForm form);
+        Task<User> LoginAsync(LoginForm form);
     }
 }

@@ -103,7 +103,7 @@ namespace Timesheet.Persistence.Test
         public void GetChristmasHolidayEntity()
         {
             //Arrange & Act
-            var result = _repository.GetById(10);
+            var result = _repository.GetByIdAsync(10);
 
             //Assert
             Assert.NotNull(result);
@@ -115,7 +115,7 @@ namespace Timesheet.Persistence.Test
         public void GetAllChristmasEntities()
         {
             //Arrange & Act
-            var result = _repository.GetAll();
+            var result = _repository.GetAllAsync();
 
             //Assert
             Assert.NotNull(result);
@@ -141,7 +141,7 @@ namespace Timesheet.Persistence.Test
             //Act & Assert
             try
             {
-                var result = _repository.GetById(idToCheck);
+                var result = _repository.GetByIdAsync(idToCheck);
             }
             catch (ArgumentOutOfRangeException ex) 
             {

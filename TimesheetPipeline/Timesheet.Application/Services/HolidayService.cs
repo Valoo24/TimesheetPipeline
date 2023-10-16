@@ -16,12 +16,12 @@ namespace Timesheet.Application.Services
         #region Méthodes Read
         public IEnumerable<Holiday> GetAll()
         {
-            return _repository.GetAll();
+            return _repository.GetAllAsync();
         }
 
         public IEnumerable<Holiday> GetAll(int year)
         {
-            IList<Holiday> HolidayList = _repository.GetAll().ToList();
+            IList<Holiday> HolidayList = _repository.GetAllAsync().ToList();
 
             foreach (var holiday in HolidayList)
             {
@@ -33,12 +33,12 @@ namespace Timesheet.Application.Services
 
         public Holiday GetById(int id)
         {
-            return _repository.GetById(id);
+            return _repository.GetByIdAsync(id);
         }
 
         public Holiday GetById(int year, int id)
         {
-            Holiday Holiday = _repository.GetById(id);
+            Holiday Holiday = _repository.GetByIdAsync(id);
 
             ChangeDate(Holiday, year);
 

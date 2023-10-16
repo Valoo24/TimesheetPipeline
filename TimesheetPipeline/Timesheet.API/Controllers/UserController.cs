@@ -18,13 +18,13 @@ namespace Timesheet.API.Controllers
         }
 
         [HttpPost("Add")]
-        public IActionResult Add(UserAddForm form)
+        public async Task<IActionResult> Add(UserAddForm form)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    return Ok($"{_service.Add(form)}");
+                    return Ok($"{await _service.AddAsync(form)}");
                 }
                 catch (Exception ex)
                 {
@@ -39,13 +39,13 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpPut("Update/{userIdToUpdate}")]
-        public IActionResult Update(Guid userIdToUpdate, UserUpdateForm form)
+        public async Task<IActionResult> Update(Guid userIdToUpdate, UserUpdateForm form)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    return Ok($"{_service.Update(userIdToUpdate, form)}");
+                    return Ok($"{await _service.UpdateAsync(userIdToUpdate, form)}");
                 }
                 catch (Exception ex)
                 {
@@ -60,11 +60,11 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpDelete("Delete/{userIdToDelete}")]
-        public IActionResult Delete(Guid userIdToDelete)
+        public async Task<IActionResult> Delete(Guid userIdToDelete)
         {
             try
             {
-                return Ok($"{_service.Delete(userIdToDelete)}");
+                return Ok($"{await _service.DeleteAsync(userIdToDelete)}");
             }
             catch (Exception ex)
             {
@@ -74,11 +74,11 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Admin")]
         [HttpGet("Get")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                return Ok(_service.GetAll());
+                return Ok(await _service.GetAllAsync());
             }
             catch (Exception ex)
             {
@@ -88,11 +88,11 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpGet("Get/{id}")]
-        public IActionResult GetById(Guid id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             try
             {
-                return Ok(_service.GetById(id));
+                return Ok(await _service.GetByIdAsync(id));
             }
             catch (Exception ex)
             {
@@ -101,13 +101,13 @@ namespace Timesheet.API.Controllers
         }
 
         [HttpPost("Login")]
-        public IActionResult Login(LoginForm form)
+        public async Task<IActionResult> Login(LoginForm form)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    User loginUser = _service.Login(form);
+                    User loginUser = await _service.LoginAsync(form);
                     loginUser.Token = _tokenManager.GenerateToken(loginUser);
                     return Ok(loginUser.Token);
                 }

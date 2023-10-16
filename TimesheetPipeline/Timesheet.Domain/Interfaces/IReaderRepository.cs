@@ -11,13 +11,13 @@
         /// Méthode à implémenter servant à récupérer tous les entity du repository.
         /// </summary>
         /// <returns>Un IEnumerable des entités implémentées.</returns>
-        public IEnumerable<TEntity> GetAll();
+        Task<IEnumerable<TEntity>> GetAllAsync();
 
         /// <summary>
         /// Méthode à implémenter servant à récupérer une entity particulière du repository selon son id. 
         /// </summary>
         /// <param name="id">Identifiant de l'entity à récupérer</param>
         /// <returns>Un Entity.</returns>
-        public TEntity GetById(TKey id);
+        Task<TEntity> GetByIdAsync(TKey id);
     }
 }

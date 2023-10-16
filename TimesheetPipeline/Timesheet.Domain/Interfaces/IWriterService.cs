@@ -2,8 +2,8 @@
 {
     public interface IWriterService<TEntity, TKey> where TEntity : IEntity<TKey>
     {
-        public TKey Add(TEntity entity);
-        public TKey Update(TEntity entity);
-        public TKey Delete(TKey id);
+        Task<TKey> AddAsync(TEntity entity);
+        Task<TKey> UpdateAsync(TEntity entity);
+        Task<TKey> DeleteAsync(TKey id);
     }
 }

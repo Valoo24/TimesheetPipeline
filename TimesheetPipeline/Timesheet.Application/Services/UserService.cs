@@ -14,45 +14,45 @@ namespace Timesheet.Application.Services
             _repository = Repository;
         }
 
-        public Guid Add(User entity)
+        public async Task<Guid> AddAsync(User entity)
         {
             string hashedPassword = Argon2.Hash(entity.HashedPassword);
             entity.HashedPassword = hashedPassword;
             entity.Role = RoleType.Regular;
-            return _repository.Add(entity);
+            return await _repository.AddAsync(entity);
         }
 
-        public Guid Add(UserAddForm form) 
+        public async Task<Guid> AddAsync(UserAddForm form) 
         {
             string hashedPassword = Argon2.Hash(form.Password);
             form.Password = hashedPassword;
             User entityToAdd = form.ToEntity();
             entityToAdd.Role = RoleType.Regular;
-            return _repository.Add(entityToAdd);
+            return await _repository.AddAsync(entityToAdd);
         }
 
-        public Guid Delete(Guid id)
+        public async Task<Guid> DeleteAsync(Guid id)
         {
-            return _repository.Delete(id);
+            return await _repository.DeleteAsync(id);
         }
 
-        public IEnumerable<User> GetAll()
+        public async Task<IEnumerable<User>> GetAllAsync()
         {
-            return _repository.GetAll();
+            return await _repository.GetAllAsync();
         }
 
-        public User GetById(Guid id)
+        public async Task<User> GetByIdAsync(Guid id)
         {
-            return _repository.GetById(id);
+            return await _repository.GetByIdAsync(id);
         }
 
-        public User Login(LoginForm form)
+        public async Task<User> LoginAsync(LoginForm form)
         {
-            string hashedPassword = _repository.GetUserHashedPasswordByMailAdress(form.MailAdress);
+            string hashedPassword = await _repository.GetUserHashedPasswordByMailAdressAsync(form.MailAdress);
 
             if(Argon2.Verify(hashedPassword,form.Password))
             {
-                return _repository.GetByMailAdress(form.MailAdress);
+                return await _repository.GetByMailAdressAsync(form.MailAdress);
             }
             else
             {
@@ -60,16 +60,16 @@ namespace Timesheet.Application.Services
             }
         }
 
-        public Guid Update(User entity)
+        public async Task<Guid> UpdateAsync(User entity)
         {
-            return _repository.Update(entity);
+            return await _repository.UpdateAsync(entity);
         }
 
-        public Guid Update(Guid userIdToUpdate, UserUpdateForm form)
+        public async Task<Guid> UpdateAsync(Guid userIdToUpdate, UserUpdateForm form)
         {
             string hashedPassword = Argon2.Hash(form.Password);
             form.Password = hashedPassword;
-            return _repository.Update(form.ToEntity(userIdToUpdate));
+            return await _repository.UpdateAsync(form.ToEntity(userIdToUpdate));
         }
     }
 }
