@@ -103,15 +103,22 @@ namespace Timesheet.API.Controllers
         [HttpPost("Login")]
         public IActionResult Login(LoginForm form)
         {
-            try
+            if (ModelState.IsValid)
             {
-                User loginUser = _service.Login(form);
-                loginUser.Token = _tokenManager.GenerateToken(loginUser);
-                return Ok(loginUser.Token);
+                try
+                {
+                    User loginUser = _service.Login(form);
+                    loginUser.Token = _tokenManager.GenerateToken(loginUser);
+                    return Ok(loginUser.Token);
+                }
+                catch (Exception ex)
+                {
+                    return NotFound(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return NotFound(ex.Message);
+                return BadRequest("Le formulaire n\'a pas été rempli correctement.");
             }
         }
     }
