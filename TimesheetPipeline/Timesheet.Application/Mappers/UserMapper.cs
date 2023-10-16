@@ -1,4 +1,5 @@
-﻿using Timesheet.Domain.Entities.Users;
+﻿using Isopoh.Cryptography.Argon2;
+using Timesheet.Domain.Entities.Users;
 
 namespace Timesheet.Application.Mappers
 {
@@ -12,19 +13,8 @@ namespace Timesheet.Application.Mappers
                 FirstName = form.FirstName,
                 LastName = form.LastName,
                 MailAdress = form.MailAdress,
-                HashedPassword = form.Password
-            };
-        }
-
-        public static User ToEntity(this UserAddForm form, Guid id)
-        {
-            return new User
-            {
-                Id = id,
-                FirstName = form.FirstName,
-                LastName = form.LastName,
-                MailAdress = form.MailAdress,
-                HashedPassword = form.Password
+                HashedPassword = Argon2.Hash(form.Password),
+                Role = RoleType.Regular
             };
         }
 
@@ -36,7 +26,7 @@ namespace Timesheet.Application.Mappers
                 FirstName = form.FirstName,
                 LastName = form.LastName,
                 MailAdress = form.MailAdress,
-                HashedPassword = form.Password,
+                HashedPassword = Argon2.Hash(form.Password),
                 Role = form.Role
             };
         }

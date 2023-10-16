@@ -16,19 +16,16 @@ namespace Timesheet.Application.Services
 
         public async Task<Guid> AddAsync(User entity)
         {
-            string hashedPassword = Argon2.Hash(entity.HashedPassword);
-            entity.HashedPassword = hashedPassword;
-            entity.Role = RoleType.Regular;
+            //string hashedPassword = Argon2.Hash(entity.HashedPassword);
+            //entity.HashedPassword = hashedPassword;
+            //entity.Role = RoleType.Regular;
             return await _repository.AddAsync(entity);
         }
 
-        public async Task<Guid> AddAsync(UserAddForm form) 
+        public async Task<Guid> AddAsync(User entity, RoleType entityRole)
         {
-            string hashedPassword = Argon2.Hash(form.Password);
-            form.Password = hashedPassword;
-            User entityToAdd = form.ToEntity();
-            entityToAdd.Role = RoleType.Regular;
-            return await _repository.AddAsync(entityToAdd);
+            entity.Role = entityRole;
+            return await _repository.AddAsync(entity);
         }
 
         public async Task<Guid> DeleteAsync(Guid id)
@@ -62,14 +59,9 @@ namespace Timesheet.Application.Services
 
         public async Task<Guid> UpdateAsync(User entity)
         {
+            //string hashedPassword = Argon2.Hash(entity.HashedPassword);
+            //entity.HashedPassword = hashedPassword;
             return await _repository.UpdateAsync(entity);
-        }
-
-        public async Task<Guid> UpdateAsync(Guid userIdToUpdate, UserUpdateForm form)
-        {
-            string hashedPassword = Argon2.Hash(form.Password);
-            form.Password = hashedPassword;
-            return await _repository.UpdateAsync(form.ToEntity(userIdToUpdate));
         }
     }
 }

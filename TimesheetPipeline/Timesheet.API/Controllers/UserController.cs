@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Timesheet.Application.Mappers;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 
@@ -17,14 +18,15 @@ namespace Timesheet.API.Controllers
             _tokenManager = tokenManager;
         }
 
-        [HttpPost("Add")]
-        public async Task<IActionResult> Add(UserAddForm form)
+        #region Create
+        [HttpPost("Subscribe/Free")]
+        public async Task<IActionResult> FreeSubscription(UserAddForm form)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    return Ok($"{await _service.AddAsync(form)}");
+                    return Ok($"{await _service.AddAsync(form.ToEntity())}");
                 }
                 catch (Exception ex)
                 {
@@ -33,9 +35,51 @@ namespace Timesheet.API.Controllers
             }
             else
             {
-                return BadRequest("Le formulaire n\'a pas été rempli correctement.");
+                return BadRequest(ModelState);
             }
         }
+
+        [HttpPost("Subscribe/Premium")]
+        public async Task<IActionResult> PremiumSubscription(UserAddForm form)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    return Ok($"{await _service.AddAsync(form.ToEntity(), RoleType.Premium)}");
+                }
+                catch (Exception ex)
+                {
+                    return NotFound(ex.Message);
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
+        [Authorize("Admin")]
+        [HttpPost("AddNewAdministrator")]
+        public async Task<IActionResult> AddNewAdmin(UserAddForm form)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    return Ok($"{await _service.AddAsync(form.ToEntity(), RoleType.Admin)}");
+                }
+                catch (Exception ex)
+                {
+                    return NotFound(ex.Message);
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+        #endregion
 
         [Authorize("Auth")]
         [HttpPut("Update/{userIdToUpdate}")]
@@ -45,7 +89,7 @@ namespace Timesheet.API.Controllers
             {
                 try
                 {
-                    return Ok($"{await _service.UpdateAsync(userIdToUpdate, form)}");
+                    return Ok($"{await _service.UpdateAsync(form.ToEntity(userIdToUpdate))}");
                 }
                 catch (Exception ex)
                 {
@@ -54,7 +98,7 @@ namespace Timesheet.API.Controllers
             }
             else
             {
-                return BadRequest("Le formulaire n\'a pas été rempli correctement.");
+                return BadRequest(ModelState);
             }
         }
 
@@ -118,7 +162,7 @@ namespace Timesheet.API.Controllers
             }
             else
             {
-                return BadRequest("Le formulaire n\'a pas été rempli correctement.");
+                return BadRequest(ModelState);
             }
         }
     }

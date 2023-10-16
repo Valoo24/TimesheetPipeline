@@ -35,7 +35,7 @@ namespace Timesheet.API.Controllers
             }
             else
             {
-                return BadRequest("Le formulaire n\'a pas été rempli correctement.");
+                return BadRequest(ModelState);
             }
         }
 
@@ -63,7 +63,7 @@ namespace Timesheet.API.Controllers
             }
             else
             {
-                return BadRequest("Le formulaire n\'a pas été rempli correctement.");
+                return BadRequest(ModelState);
             }
         }
 
