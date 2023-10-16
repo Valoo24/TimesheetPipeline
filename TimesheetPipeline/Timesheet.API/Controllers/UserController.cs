@@ -74,7 +74,7 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Admin")]
         [HttpGet("Get")]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<IEnumerable<User>>> GetAll()
         {
             try
             {
@@ -88,7 +88,7 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpGet("Get/{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<ActionResult<User>> GetById(Guid id)
         {
             try
             {

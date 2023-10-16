@@ -20,13 +20,13 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpPost("CreateNewTimesheet")]
-        public IActionResult CreateNewTimesheet(TimesheetCreateForm form)
+        public async Task<IActionResult> CreateNewTimesheet(TimesheetCreateForm form)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    return Ok(_service.AddAsync(form.ToEntity()));
+                    return Ok(await _service.AddAsync(form.ToEntity()));
                 }
                 catch (Exception ex)
                 {
@@ -41,13 +41,13 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpPut("AddOccupation/{idToUpdate}")]
-        public IActionResult AddOccupation(Guid idToUpdate, Occupation form)
+        public async Task<IActionResult> AddOccupation(Guid idToUpdate, Occupation form)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    return Ok(_service.UpdateAsync(new TimesheetEntity
+                    return Ok(await _service.UpdateAsync(new TimesheetEntity
                     {
                         Id = idToUpdate,
                         OccupationList = new List<Occupation>
@@ -58,7 +58,7 @@ namespace Timesheet.API.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return NotFound();
+                    return NotFound(ex.Message);
                 }
             }
             else
@@ -69,11 +69,11 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpDelete("Delete/{id}")]
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             try
             {
-                return Ok(_service.DeleteAsync(id));
+                return Ok(await _service.DeleteAsync(id));
             }
             catch (Exception ex)
             {
@@ -83,11 +83,11 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Admin")]
         [HttpGet("Get")]
-        public IActionResult GetAll()
+        public async Task<ActionResult<IEnumerable<TimesheetEntity>>> GetAll()
         {
             try
             {
-                return Ok(_service.GetAllDTO());
+                return Ok(await _service.GetAllAsync());
             }
             catch (Exception ex)
             {
@@ -97,11 +97,11 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpGet("Get/{id}")]
-        public IActionResult GetById(Guid id)
+        public async Task<ActionResult<TimesheetEntity>> GetById(Guid id)
         {
             try
             {
-                return Ok(_service.GetDTOById(id));
+                return Ok(_service.GetByIdAsync(id));
             }
             catch (Exception ex)
             {
@@ -113,18 +113,18 @@ namespace Timesheet.API.Controllers
         // A N'utiliser que lorsqe la db doit être ré-initialisée
         //-------------------------------------------------------
 
-        [HttpPost("CreateDb")]
-        public async Task<IActionResult> CreateDb()
-        {
-            try
-            {
-                await _service.InitializeDatabaseAsync();
-                return Ok("La base de donnée a bien été crée et initialisée.");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        //[HttpPost("CreateDb")]
+        //public async Task<IActionResult> CreateDb()
+        //{
+        //    try
+        //    {
+        //        await _service.InitializeDatabaseAsync();
+        //        return Ok("La base de donnée a bien été crée et initialisée.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
     }
 }

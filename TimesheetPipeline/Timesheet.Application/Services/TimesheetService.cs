@@ -1,5 +1,4 @@
-﻿using Timesheet.Application.Mappers;
-using Timesheet.Domain.Entities;
+﻿using Timesheet.Domain.Entities;
 using Timesheet.Domain.Entities.Timesheets;
 using Timesheet.Domain.Interfaces;
 
@@ -24,9 +23,9 @@ namespace Timesheet.Application.Services
 
         }
 
-        public Guid Add(TimesheetEntity entity)
+        public async Task<Guid> AddAsync(TimesheetEntity entity)
         {
-            IList<Holiday> holidayList = _holidayService.GetByMonthAsync(entity.Year, entity.Month).ToList();
+            IEnumerable<Holiday> holidayList = await _holidayService.GetByMonthAsync(entity.Year, entity.Month);
 
             foreach (var holiday in holidayList)
             {
@@ -38,17 +37,17 @@ namespace Timesheet.Application.Services
                     });
             }
 
-            return _timesheetRepository.AddAsync(entity);
+            return await _timesheetRepository.AddAsync(entity);
         }
 
-        public Guid Delete(Guid id)
+        public async Task<Guid> DeleteAsync(Guid id)
         {
-            return _timesheetRepository.DeleteAsync(id);
+            return await _timesheetRepository.DeleteAsync(id);
         }
 
-        public IEnumerable<TimesheetEntity> GetAll()
+        public async Task<IEnumerable<TimesheetEntity>> GetAllAsync()
         {
-            IList<TimesheetEntity> TimesheetList = _timesheetRepository.GetAllAsync().ToList();
+            IEnumerable<TimesheetEntity> TimesheetList = await _timesheetRepository.GetAllAsync();
 
             foreach (var Timesheet in TimesheetList)
             {
@@ -58,44 +57,25 @@ namespace Timesheet.Application.Services
             return TimesheetList;
         }
 
-        public IEnumerable<TimesheetEntity> GetAllDTO()
+        public async Task<TimesheetEntity> GetByIdAsync(Guid id)
         {
-            IList<TimesheetEntity> TimesheetList = new List<TimesheetEntity>();
-
-            foreach(var timesheet in GetAll())
-            {
-                TimesheetEntity TimesheetDTO = timesheet;
-                TimesheetDTO.User = _userRepository.GetByIdAsync(TimesheetDTO.User.Id);
-                TimesheetList.Add(TimesheetDTO);
-            }
-
-            return TimesheetList;
-        }
-
-        public TimesheetEntity GetById(Guid id)
-        {
-            TimesheetEntity Timesheet = _timesheetRepository.GetByIdAsync(id);
+            TimesheetEntity Timesheet = await _timesheetRepository.GetByIdAsync(id);
 
             OrderOccupationList(Timesheet);
 
             return Timesheet;
         }
 
-        public TimesheetEntity GetDTOById(Guid id)
+        public async Task<Guid> UpdateAsync(TimesheetEntity entity)
         {
-            return GetAllDTO().FirstOrDefault(t => t.Id == id);
-        }
-
-        public Guid Update(TimesheetEntity entity)
-        {
-            TimesheetEntity TimesheetToUpdate = GetById(entity.Id);
+            TimesheetEntity TimesheetToUpdate = await GetByIdAsync(entity.Id);
 
             foreach(var occupation in entity.OccupationList)
             {
                 TimesheetToUpdate.OccupationList.Add(occupation);
             }
 
-            return _timesheetRepository.UpdateAsync(TimesheetToUpdate);
+            return await _timesheetRepository.UpdateAsync(TimesheetToUpdate);
         }
 
         public async Task InitializeDatabaseAsync()

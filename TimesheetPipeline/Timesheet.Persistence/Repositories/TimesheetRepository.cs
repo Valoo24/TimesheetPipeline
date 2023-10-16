@@ -1,5 +1,5 @@
-﻿using Timesheet.Domain.Entities.Timesheets;
-using Timesheet.Domain.Entities.Users;
+﻿using Microsoft.EntityFrameworkCore;
+using Timesheet.Domain.Entities.Timesheets;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
 
@@ -14,7 +14,7 @@ namespace Timesheet.Persistence.Repositories
             _context = Context;
         }
 
-        public Guid Add(TimesheetEntity entity)
+        public async Task<Guid> AddAsync(TimesheetEntity entity)
         {
             if (entity is null) throw new ArgumentNullException();
 
@@ -22,45 +22,53 @@ namespace Timesheet.Persistence.Repositories
 
             foreach (var Occupation in entity.OccupationList)
             {
-                _context.Occupations.Add(Occupation);
+                await _context.Occupations.AddAsync(Occupation);
             }
 
-            _context.Timesheets.Add(entity);
-            _context.SaveChanges();
+            await _context.Timesheets.AddAsync(entity);
+            await _context.SaveChangesAsync();
 
             return entity.Id;
         }
 
-        public Guid Delete(Guid id)
+        public async Task<Guid> DeleteAsync(Guid id)
         {
-            TimesheetEntity entityToDelete = _context.Timesheets.FirstOrDefault(t => t.Id == id);
+            TimesheetEntity? entityToDelete = await _context.Timesheets.FirstOrDefaultAsync(t => t.Id == id);
 
             if(entityToDelete is null || entityToDelete == default) throw new ArgumentNullException();
 
             _context.Remove(entityToDelete);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return id;
         }
 
-        public IEnumerable<TimesheetEntity> GetAll()
+        public async Task<IEnumerable<TimesheetEntity>> GetAllAsync()
         {
-            List<TimesheetEntity> TimesheetList = _context.Timesheets.ToList();
+            IList<TimesheetEntity> TimesheetList = await _context.Timesheets.ToListAsync();
+
             foreach (var timesheet in TimesheetList)
             {
-                timesheet.OccupationList = _context.Occupations.Where(o => o.TimesheetId == timesheet.Id).ToList();
+                timesheet.OccupationList = await _context.Occupations.Where(o => o.TimesheetId == timesheet.Id).ToListAsync();
             }
+
             return TimesheetList;
         }
 
-        public TimesheetEntity GetById(Guid id)
+        public async Task<TimesheetEntity> GetByIdAsync(Guid id)
         {
-            return GetAll().FirstOrDefault(t => t.Id == id);
+            TimesheetEntity? timesheet = await _context.Timesheets.FirstOrDefaultAsync(t => t.Id == id);
+
+            if(timesheet is null || timesheet == default) throw new ArgumentNullException();
+
+            return timesheet;
         }
 
-        public Guid Update(TimesheetEntity entity)
+        public async Task<Guid> UpdateAsync(TimesheetEntity entity)
         {
-            TimesheetEntity entityToUpdate = _context.Timesheets.FirstOrDefault(t => t.Id == entity.Id);
+            TimesheetEntity? entityToUpdate = await _context.Timesheets.FirstOrDefaultAsync(t => t.Id == entity.Id);
+
+            if(entityToUpdate is null || entityToUpdate == default) throw new ArgumentNullException();
 
             entityToUpdate.UserId = entity.UserId;
             entityToUpdate.Year = entity.Year;
