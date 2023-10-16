@@ -33,7 +33,7 @@ namespace Timesheet.API.Controllers
             }
             else
             {
-                return BadRequest("Le formulaire n'a pas été rempli correctement.");
+                return BadRequest("Le formulaire n\'a pas été rempli correctement.");
             }
         }
 
@@ -41,13 +41,20 @@ namespace Timesheet.API.Controllers
         [HttpPut("Update/{userIdToUpdate}")]
         public IActionResult Update(Guid userIdToUpdate, UserUpdateForm form)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return Ok($"{_service.Update(userIdToUpdate, form)}");
+                try
+                {
+                    return Ok($"{_service.Update(userIdToUpdate, form)}");
+                }
+                catch (Exception ex)
+                {
+                    return NotFound(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return NotFound(ex.Message);
+                return BadRequest("Le formulaire n\'a pas été rempli correctement.");
             }
         }
 
