@@ -1,4 +1,5 @@
-﻿using Timesheet.Domain.Entities.Timesheets;
+﻿using System.ComponentModel.DataAnnotations;
+using Timesheet.Domain.Entities.Timesheets;
 
 namespace Timesheet.Domain.Entities.Users
 {
@@ -7,6 +8,7 @@ namespace Timesheet.Domain.Entities.Users
         /// <summary>
         /// Id du User.
         /// </summary>
+        [Key]
         public Guid Id { get; set; }
 
         /// <summary>

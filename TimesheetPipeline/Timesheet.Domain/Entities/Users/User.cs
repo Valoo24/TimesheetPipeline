@@ -1,4 +1,6 @@
-﻿using Timesheet.Domain.Entities.Timesheets;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Timesheet.Domain.Entities.Timesheets;
 using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.Domain.Entities.Users
@@ -16,6 +18,7 @@ namespace Timesheet.Domain.Entities.Users
         /// <summary>
         /// Id du User.
         /// </summary>
+        [Key]
         public Guid Id { get; set; }
 
         /// <summary>
@@ -46,6 +49,7 @@ namespace Timesheet.Domain.Entities.Users
         /// <summary>
         /// Token du user.
         /// </summary>
+        [NotMapped]
         public string Token { get; set; } = string.Empty;
 
         /// <summary>
