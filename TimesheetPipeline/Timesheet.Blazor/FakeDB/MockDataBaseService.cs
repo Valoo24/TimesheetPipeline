@@ -34,6 +34,7 @@ namespace Timesheet.Blazor.FakeDB
                 return _timesheets;
             }
         }
+
         private static List<Holiday> InitializeMockHolidays()
         {
             return new List<Holiday>()

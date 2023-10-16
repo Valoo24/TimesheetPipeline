@@ -11,9 +11,9 @@ namespace Timesheet.Persistence.Test
     public class UserRepositoryShould
     {
         #region Properties
-        private IList<UserDTO> _testUsers = new List<UserDTO>()
+        private IList<User> _testUsers = new List<User>()
         {
-            new UserDTO
+            new User
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Brice",
@@ -21,7 +21,7 @@ namespace Timesheet.Persistence.Test
                 MailAdress = "BriceDeNice@mail.com",
                 HashedPassword = Argon2.Hash("Turlututu")
             },
-            new UserDTO
+            new User
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Elon",
@@ -29,7 +29,7 @@ namespace Timesheet.Persistence.Test
                 MailAdress = "ElonMusk@mail.com",
                 HashedPassword = Argon2.Hash("Chapopointu")
             },
-            new UserDTO
+            new User
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Tom",
@@ -69,7 +69,7 @@ namespace Timesheet.Persistence.Test
 
         #region TestAddMethods
         [Fact]
-        public void AddAUserEntity()
+        public async Task AddAUserEntity()
         {
             //Arrange
             User userToTest = new User
@@ -82,21 +82,20 @@ namespace Timesheet.Persistence.Test
             };
 
             //Act
-            var result = _repository.AddAsync(userToTest);
+            var result = await _repository.AddAsync(userToTest);
 
             //Assert
             Assert.NotNull(userToTest.Timesheets);
-            Assert.NotNull(result);
             Assert.IsType<Guid>(result);
             Assert.Equal(userToTest.Id, result);
         }
 
         [Fact]
-        public void ThrowArgumentNullExceptionWhenAddNull()
+        public async Task ThrowArgumentNullExceptionWhenAddNull()
         {
             try
             {
-                var result = _repository.AddAsync(null);
+                var result = await _repository.AddAsync(null);
             }
             catch (ArgumentNullException ex)
             {
@@ -108,32 +107,31 @@ namespace Timesheet.Persistence.Test
 
         #region TestGetMethods
         [Fact]
-        public void GetAllUserEntity()
+        public async Task GetAllUserEntity()
         {
             //Arrange & Act
-            var result = _repository.GetAllAsync();
+            var result = await _repository.GetAllAsync();
 
             //Assert
             Assert.NotNull(result);
             foreach (var user in result)
             {
-                Assert.NotNull(user.Id);
-                Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == user.Id).FirstName, user.FirstName);
-                Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == user.Id).LastName, user.LastName);
-                Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == user.Id).MailAdress, user.MailAdress);
+                Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == user.Id)?.FirstName, user.FirstName);
+                Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == user.Id)?.LastName, user.LastName);
+                Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == user.Id)?.MailAdress, user.MailAdress);
             }
         }
 
         [Fact]
-        public void GetElonMuskEntity()
+        public async Task GetElonMuskEntity()
         {
-            var result = _repository.GetById(_testUsers.FirstOrDefault(tu => tu.FirstName == "Elon" && tu.LastName == "Musk" && tu.MailAdress == "ElonMusk@mail.com").Id);
+            var result = await _repository.GetByIdAsync(_testUsers.FirstOrDefault(tu => tu.FirstName == "Elon" && tu.LastName == "Musk" && tu.MailAdress == "ElonMusk@mail.com").Id);
 
             Assert.NotNull(result);
-            Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id).FirstName, result.FirstName);
-            Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id).LastName, result.LastName);
-            Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id).MailAdress, result.MailAdress);
-            Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id).HashedPassword, result.HashedPassword);
+            Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id)?.FirstName, result.FirstName);
+            Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id)?.LastName, result.LastName);
+            Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id)?.MailAdress, result.MailAdress);
+            Assert.Equal(_testUsers.FirstOrDefault(tu => tu.Id == result.Id)?.HashedPassword, result.HashedPassword);
         }
 
         [Fact]
@@ -153,7 +151,7 @@ namespace Timesheet.Persistence.Test
 
         #region TestUpdateMethods
         [Fact]
-        public void UpdateTomCruiseEntityIntoTestEntity()
+        public async Task UpdateTomCruiseEntityIntoTestEntity()
         {
             //Arrange
             User userToUpdate = new User
@@ -168,16 +166,15 @@ namespace Timesheet.Persistence.Test
             };
 
             //Act
-            var result = _repository.UpdateAsync(userToUpdate);
+            var result = await _repository.UpdateAsync(userToUpdate);
 
             //Assert
-            Assert.NotNull(result);
             Assert.Equal(userToUpdate.Id, result);
             Assert.NotEqual(_testUsers.FirstOrDefault(tu =>
             tu.FirstName == "Tom" &&
             tu.LastName == "Cruise" &&
             tu.MailAdress == "TomCruise@mail.com"),
-            _repository.GetByIdAsync(userToUpdate.Id).ToDTO());
+            await _repository.GetByIdAsync(userToUpdate.Id));
         }
 
         [Fact]
@@ -205,11 +202,11 @@ namespace Timesheet.Persistence.Test
         }
 
         [Fact]
-        public void ThrowAnArgumentNullExceptionWhenUpdateWithANullEntity()
+        public async Task ThrowAnArgumentNullExceptionWhenUpdateWithANullEntity()
         {
             try
             {
-                var result = _repository.UpdateAsync(null);
+                var result = await _repository.UpdateAsync(null);
             }
             catch (ArgumentNullException ex)
             {
@@ -243,22 +240,21 @@ namespace Timesheet.Persistence.Test
 
         #region TestDeleteMethods
         [Fact]
-        public void DeleteBriceDeNice()
+        public async Task DeleteBriceDeNice()
         {
-            UserDTO userToDelete = _testUsers.FirstOrDefault(tu => tu.FirstName == "Brice" && tu.LastName == "DeNice" && tu.MailAdress == "BriceDeNice@mail.com");
+            User? userToDelete = _testUsers.FirstOrDefault(tu => tu.FirstName == "Brice" && tu.LastName == "DeNice" && tu.MailAdress == "BriceDeNice@mail.com");
 
-            var result = _repository.Delete(userToDelete.Id);
+            var result = await _repository.DeleteAsync(userToDelete.Id);
 
-            var userList = _repository.GetAllAsync();
+            var userList = await _repository.GetAllAsync();
 
-            IList<UserDTO> userToCompare = new List<UserDTO>();
+            IList<User> userToCompare = new List<User>();
 
             foreach(var user in userList) 
             {
-                userToCompare.Add(user.ToDTO());
+                userToCompare.Add(user);
             }
 
-            Assert.NotNull(result);
             Assert.Equal(userToDelete.Id, result);
             Assert.NotEqual(_testUsers, userToCompare);
         }

@@ -100,10 +100,10 @@ namespace Timesheet.Persistence.Test
 
         #region TestGetMethods
         [Fact]
-        public void GetChristmasHolidayEntity()
+        public async Task GetChristmasHolidayEntity()
         {
             //Arrange & Act
-            var result = _repository.GetByIdAsync(10);
+            var result = await _repository.GetByIdAsync(10);
 
             //Assert
             Assert.NotNull(result);
@@ -112,22 +112,22 @@ namespace Timesheet.Persistence.Test
         }
 
         [Fact]
-        public void GetAllChristmasEntities()
+        public async Task GetAllChristmasEntities()
         {
             //Arrange & Act
-            var result = _repository.GetAllAsync();
+            var result = await _repository.GetAllAsync();
 
             //Assert
             Assert.NotNull(result);
             Assert.Equal(10, result.Count());
             foreach(var holiday in result)
             {
-                Assert.Equal(_holidays.FirstOrDefault(h => h.Id == holiday.Id).Id, holiday.Id);
+                Assert.Equal(_holidays.FirstOrDefault(h => h.Id == holiday.Id)?.Id, holiday.Id);
             }
         }
 
         [Fact]
-        public void ThrowAnArgumentOutOfRangeException()
+        public async Task ThrowAnArgumentOutOfRangeException()
         {
             //Arrange
             Random rnd = new Random();
@@ -141,7 +141,7 @@ namespace Timesheet.Persistence.Test
             //Act & Assert
             try
             {
-                var result = _repository.GetByIdAsync(idToCheck);
+                var result = await _repository.GetByIdAsync(idToCheck);
             }
             catch (ArgumentOutOfRangeException ex) 
             {

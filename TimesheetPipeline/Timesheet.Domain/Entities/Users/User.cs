@@ -24,22 +24,22 @@ namespace Timesheet.Domain.Entities.Users
         /// <summary>
         /// Prénom du User.
         /// </summary>
-        public string FirstName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         /// <summary>
         /// Nom de famille du User.
         /// </summary>
-        public string LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
         /// <summary>
         /// Adresse Mail du User.
         /// </summary>
-        public string MailAdress { get; set; }
+        public string MailAdress { get; set; } = string.Empty;
 
         /// <summary>
         /// Mot de passe hashé du user.
         /// </summary>
-        public string HashedPassword { get; set; }
+        public string HashedPassword { get; set; } = string.Empty;
 
         /// <summary>
         /// Rôle du user.

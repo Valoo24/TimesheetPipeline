@@ -17,7 +17,7 @@ namespace Timesheet.Domain.Entities
         /// <summary>
         /// Nom du congé légal.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Date du congé légal.

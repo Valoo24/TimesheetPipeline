@@ -27,7 +27,7 @@ namespace Timesheet.Domain.Entities
         /// </summary>
         [Required]
         [MinLength(2), MaxLength(255)]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         /// <summary>
         /// Id de la Timesheet qui contient cette occupation.
