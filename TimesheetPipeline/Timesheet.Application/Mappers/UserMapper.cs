@@ -40,33 +40,5 @@ namespace Timesheet.Application.Mappers
                 Role = form.Role
             };
         }
-
-        public static User ToEntity(this UserDTO dto)
-        {
-            return new User
-            {
-                Id = dto.Id,
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
-                MailAdress = dto.MailAdress,
-                HashedPassword = dto.HashedPassword,
-                Role = dto.Role,
-                Timesheets = dto.Timesheets
-            };
-        }
-
-        public static UserDTO ToDTO(this User user) 
-        {
-            return new UserDTO
-            {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                MailAdress = user.MailAdress,
-                HashedPassword = user.HashedPassword,
-                Role = user.Role,
-                Timesheets = user.Timesheets
-            };
-        }
     }
 }

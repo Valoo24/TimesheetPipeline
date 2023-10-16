@@ -25,7 +25,7 @@ namespace Timesheet.Domain.Entities.Timesheets
         /// <summary>
         /// User concret de l'entity Timesheet.
         /// </summary>
-        public User User { get; set; }
+        public User User { get; set; } = new User();
 
         /// <summary>
         /// Année de la timesheet.

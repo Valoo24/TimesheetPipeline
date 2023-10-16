@@ -5,7 +5,7 @@ namespace Timesheet.Blazor.Pages
 {
     public partial class TimesheetOverview
     {
-        public List<TimesheetDTO> Timesheets { get; set; } = default!;
+        public List<TimesheetEntity> Timesheets { get; set; } = default!;
 
         protected override void OnInitialized()
         {

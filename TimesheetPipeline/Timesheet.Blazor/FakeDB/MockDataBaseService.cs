@@ -8,7 +8,7 @@ namespace Timesheet.Blazor.FakeDB
     {
         private static List<Holiday> _holidays = default!;
         private static List<User> _users = default!;
-        private static List<TimesheetDTO> _timesheets = default!;
+        private static List<TimesheetEntity> _timesheets = default!;
 
         public static List<Holiday> Holidays
         {
@@ -26,7 +26,7 @@ namespace Timesheet.Blazor.FakeDB
                 return _users;
             }
         }
-        public static List<TimesheetDTO> Timesheets
+        public static List<TimesheetEntity> Timesheets
         {
             get 
             { 
@@ -34,7 +34,6 @@ namespace Timesheet.Blazor.FakeDB
                 return _timesheets;
             }
         }
-
         private static List<Holiday> InitializeMockHolidays()
         {
             return new List<Holiday>()
@@ -128,11 +127,11 @@ namespace Timesheet.Blazor.FakeDB
                 }
             };
         }
-        private static List<TimesheetDTO> InitializeMockTimesheets()
+        private static List<TimesheetEntity> InitializeMockTimesheets()
         {
-            return new List<TimesheetDTO>()
+            return new List<TimesheetEntity>()
             {
-                new TimesheetDTO
+                new TimesheetEntity
                 {
                     Id = Guid.NewGuid(),
                     User = Users.FirstOrDefault(u => u.FirstName == "Brice"),
@@ -157,7 +156,7 @@ namespace Timesheet.Blazor.FakeDB
                         }
                     }
                 },
-                new TimesheetDTO 
+                new TimesheetEntity
                 {
                     Id = Guid.NewGuid(),
                     User = Users.FirstOrDefault(u => u.FirstName == "Brice"),
@@ -172,7 +171,7 @@ namespace Timesheet.Blazor.FakeDB
                         }
                     }
                 },
-                new TimesheetDTO 
+                new TimesheetEntity
                 { 
                     Id = Guid.NewGuid(),
                     User = Users.FirstOrDefault(u => u.FirstName == "Brice"),
@@ -197,7 +196,7 @@ namespace Timesheet.Blazor.FakeDB
                         }
                     }
                 },
-                new TimesheetDTO
+                new TimesheetEntity
                 {
                     Id = Guid.NewGuid(),
                     User = Users.FirstOrDefault(u => u.FirstName == "Tom"),
@@ -212,7 +211,7 @@ namespace Timesheet.Blazor.FakeDB
                         }
                     }
                 },
-                new TimesheetDTO
+                new TimesheetEntity
                 {
                     Id = Guid.NewGuid(),
                     User = Users.FirstOrDefault(u => u.FirstName == "Tom"),
@@ -227,7 +226,7 @@ namespace Timesheet.Blazor.FakeDB
                         }
                     }
                 },
-                new TimesheetDTO
+                new TimesheetEntity
                 {
                     Id = Guid.NewGuid(),
                     User = Users.FirstOrDefault(u => u.FirstName == "Tom"),
@@ -252,7 +251,7 @@ namespace Timesheet.Blazor.FakeDB
                         }
                     }
                 },
-                                new TimesheetDTO
+                new TimesheetEntity
                 {
                     Id = Guid.NewGuid(),
                     User = Users.FirstOrDefault(u => u.FirstName == "Elon"),
@@ -287,7 +286,7 @@ namespace Timesheet.Blazor.FakeDB
                         },
                     }
                 },
-                new TimesheetDTO
+                new TimesheetEntity
                 {
                     Id = Guid.NewGuid(),
                     User = Users.FirstOrDefault(u => u.FirstName == "Elon"),
@@ -302,7 +301,7 @@ namespace Timesheet.Blazor.FakeDB
                         }
                     }
                 },
-                new TimesheetDTO
+                new TimesheetEntity
                 {
                     Id = Guid.NewGuid(),
                     User = Users.FirstOrDefault(u => u.FirstName == "Elon"),
