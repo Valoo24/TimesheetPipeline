@@ -20,13 +20,20 @@ namespace Timesheet.API.Controllers
         [HttpPost("Add")]
         public IActionResult Add(UserAddForm form)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return Ok($"{_service.Add(form)}");
+                try
+                {
+                    return Ok($"{_service.Add(form)}");
+                }
+                catch (Exception ex)
+                {
+                    return NotFound(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return NotFound(ex.Message);
+                return BadRequest("Le formulaire n'a pas été rempli correctement.");
             }
         }
 
