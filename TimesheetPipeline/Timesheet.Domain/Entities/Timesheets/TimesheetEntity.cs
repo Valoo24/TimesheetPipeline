@@ -23,6 +23,11 @@ namespace Timesheet.Domain.Entities.Timesheets
         public Guid UserId { get; set; }
 
         /// <summary>
+        /// User concret de l'entity Timesheet.
+        /// </summary>
+        public User User { get; set; }
+
+        /// <summary>
         /// Année de la timesheet.
         /// </summary>
         [Required]
@@ -39,12 +44,6 @@ namespace Timesheet.Domain.Entities.Timesheets
         /// <summary>
         /// Liste d'occupations qui composent la timesheet.
         /// </summary>
-        public List<Occupation> OccupationList { get; set; }
-
-        public TimesheetEntity()
-        {
-            Id = Guid.NewGuid();
-            OccupationList = new List<Occupation>();
-        }
+        public List<Occupation> OccupationList { get; set; } = new List<Occupation>();
     }
 }

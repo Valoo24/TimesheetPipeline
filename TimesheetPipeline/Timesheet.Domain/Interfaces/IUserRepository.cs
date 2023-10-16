@@ -6,5 +6,6 @@ namespace Timesheet.Domain.Interfaces
     {
         public User GetByMailAdress(string mailAdress);
         public string GetUserHashedPasswordByMailAdress(string mailAdress);
+        public Task InitializeDatabase();
     }
 }

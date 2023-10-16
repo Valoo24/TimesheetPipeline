@@ -58,13 +58,13 @@ namespace Timesheet.Application.Services
             return TimesheetList;
         }
 
-        public IEnumerable<TimesheetDTO> GetAllDTO()
+        public IEnumerable<TimesheetEntity> GetAllDTO()
         {
-            IList<TimesheetDTO> TimesheetList = new List<TimesheetDTO>();
+            IList<TimesheetEntity> TimesheetList = new List<TimesheetEntity>();
 
             foreach(var timesheet in GetAll())
             {
-                TimesheetDTO TimesheetDTO = timesheet.ToDTO();
+                TimesheetEntity TimesheetDTO = timesheet;
                 TimesheetDTO.User = _userRepository.GetById(TimesheetDTO.User.Id);
                 TimesheetList.Add(TimesheetDTO);
             }
@@ -81,7 +81,7 @@ namespace Timesheet.Application.Services
             return Timesheet;
         }
 
-        public TimesheetDTO GetDTOById(Guid id)
+        public TimesheetEntity GetDTOById(Guid id)
         {
             return GetAllDTO().FirstOrDefault(t => t.Id == id);
         }
@@ -96,6 +96,12 @@ namespace Timesheet.Application.Services
             }
 
             return _timesheetRepository.Update(TimesheetToUpdate);
+        }
+
+        public async Task InitializeDatabaseAsync()
+        {
+            await _holidayRepository.InitializeDatabase();
+            await _userRepository.InitializeDatabase();
         }
 
         private void OrderOccupationList(TimesheetEntity timesheet)

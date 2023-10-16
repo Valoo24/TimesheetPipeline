@@ -16,20 +16,5 @@ namespace Timesheet.Application.Mappers
                 OccupationList = new List<Occupation>()
             };
         }
-
-        public static TimesheetDTO ToDTO(this TimesheetEntity entity) 
-        {
-            return new TimesheetDTO
-            {
-                Id = entity.Id,
-                User = new User
-                { 
-                    Id = entity.UserId
-                },
-                Year = entity.Year,
-                Month = entity.Month,
-                OccupationList = entity.OccupationList
-            };
-        }
     }
 }

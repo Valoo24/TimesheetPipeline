@@ -108,5 +108,23 @@ namespace Timesheet.API.Controllers
                 return NotFound(ex.Message);
             }
         }
+
+        //-------------------------------------------------------
+        // A N'utiliser que lorsqe la db doit être ré-initialisée
+        //-------------------------------------------------------
+
+        [HttpPost("CreateDb")]
+        public async Task<IActionResult> CreateDb()
+        {
+            try
+            {
+                await _service.InitializeDatabaseAsync();
+                return Ok("La base de donnée a bien été crée et initialisée.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

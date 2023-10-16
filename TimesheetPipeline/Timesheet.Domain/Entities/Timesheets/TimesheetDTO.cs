@@ -15,7 +15,7 @@ namespace Timesheet.Domain.Entities.Timesheets
         /// <summary>
         /// Objet User lié à la timesheet.
         /// </summary>
-        public User User { get; set; }
+        public User User { get; set; } = new User();
 
         /// <summary>
         /// Année de la timesheet
@@ -30,12 +30,6 @@ namespace Timesheet.Domain.Entities.Timesheets
         /// <summary>
         /// Liste des occupations de la timesheet.
         /// </summary>
-        public List<Occupation> OccupationList { get; set; }
-
-        public TimesheetDTO()
-        {
-            OccupationList = new List<Occupation>();
-            User = new User();
-        }
+        public List<Occupation> OccupationList { get; set; } = new List<Occupation>();
     }
 }

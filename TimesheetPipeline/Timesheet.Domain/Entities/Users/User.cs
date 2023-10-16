@@ -55,11 +55,6 @@ namespace Timesheet.Domain.Entities.Users
         /// <summary>
         /// Liste des Timesheets liés au user.
         /// </summary>
-        public List<TimesheetEntity> Timesheets { get; set; }
-
-        public User()
-        {
-            Timesheets = new List<TimesheetEntity>();
-        }
+        public List<TimesheetEntity> Timesheets { get; set; } = new List<TimesheetEntity>();
     }
 }

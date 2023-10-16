@@ -1,4 +1,5 @@
-﻿using Timesheet.Application.Mappers;
+﻿using Isopoh.Cryptography.Argon2;
+using Timesheet.Application.Mappers;
 using Timesheet.Domain.Entities.Users;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
@@ -18,7 +19,7 @@ namespace Timesheet.Persistence.Repositories
         {
             if (entity is null || entity == default) throw new ArgumentNullException();
 
-            _context.Users.Add(entity.ToDTO());
+            _context.Users.Add(entity);
             _context.SaveChanges();
 
             return entity.Id;
@@ -30,7 +31,7 @@ namespace Timesheet.Persistence.Repositories
 
             if (entity.Id == Guid.Empty) throw new ArgumentNullException("The guid of the updated entity can't be null.");
 
-            UserDTO userToUpdate = _context.Users.FirstOrDefault(u => u.Id == entity.Id);
+            User userToUpdate = _context.Users.FirstOrDefault(u => u.Id == entity.Id);
 
             if (userToUpdate is null || userToUpdate == default) throw new ArgumentNullException("L'id du User à mettre à jour n'existe pas.");
 
@@ -53,7 +54,7 @@ namespace Timesheet.Persistence.Repositories
         {
             foreach(var user in _context.Users)
             {
-                yield return user.ToEntity();
+                yield return user;
             }
         }
 
@@ -61,18 +62,18 @@ namespace Timesheet.Persistence.Repositories
         {
             if (id == Guid.Empty) throw new ArgumentNullException($"Impossible de rechercher un id vide : {id}");
 
-            UserDTO userToFind = _context.Users.FirstOrDefault(u => u.Id == id);
+            User? userToFind = _context.Users.FirstOrDefault(u => u.Id == id);
 
             if (userToFind is null || userToFind == default) throw new ArgumentNullException($"Le user avec l'ID {id} n'existe pas.");
 
-            return userToFind.ToEntity();
+            return userToFind;
         }
 
         public Guid Delete(Guid id)
         {
             if (id == Guid.Empty) throw new ArgumentNullException();
 
-            UserDTO userToDelete = _context.Users.FirstOrDefault(u => u.Id == id);
+            User? userToDelete = _context.Users.FirstOrDefault(u => u.Id == id);
 
             if (userToDelete is null || userToDelete == default) throw new ArgumentNullException();
 
@@ -89,7 +90,24 @@ namespace Timesheet.Persistence.Repositories
 
         public User GetByMailAdress(string mailAdress)
         {
-            return _context.Users.FirstOrDefault(u => u.MailAdress == mailAdress).ToEntity();
+            return _context.Users.FirstOrDefault(u => u.MailAdress == mailAdress);
+        }
+
+        public async Task InitializeDatabase()
+        {
+            await _context.Database.EnsureCreatedAsync();
+
+            _context.Users.Add(new User
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Admin",
+                LastName = "System",
+                MailAdress = "AdminSystem@mail.com",
+                HashedPassword = Argon2.Hash("SysAdmin1234!"),
+                Role = RoleType.Admin
+            });
+
+            await _context.SaveChangesAsync();
         }
     }
 }

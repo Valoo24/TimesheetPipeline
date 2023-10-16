@@ -25,10 +25,9 @@ namespace Timesheet.Persistence.Repositories
             return _context.Holidays.FirstOrDefault(h => h.Id == id);
         }
 
-        public void InitializeDatabase()
+        public async Task InitializeDatabase()
         {
-            _context.Database.EnsureDeleted();
-            _context.Database.EnsureCreated();
+            await _context.Database.EnsureCreatedAsync();
 
             IEnumerable<Holiday> HolidayList = new List<Holiday>
             {
@@ -96,7 +95,7 @@ namespace Timesheet.Persistence.Repositories
                 _context.Add(holiay);
             }
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         private void CheckIdRange(int id)
