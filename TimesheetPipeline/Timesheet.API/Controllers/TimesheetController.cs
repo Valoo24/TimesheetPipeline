@@ -22,13 +22,20 @@ namespace Timesheet.API.Controllers
         [HttpPost("CreateNewTimesheet")]
         public IActionResult CreateNewTimesheet(TimesheetCreateForm form)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return Ok(_service.Add(form.ToEntity()));
+                try
+                {
+                    return Ok(_service.Add(form.ToEntity()));
+                }
+                catch (Exception ex)
+                {
+                    return NotFound(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return NotFound(ex.Message);
+                return BadRequest("Le formulaire n\'a pas été rempli correctement.");
             }
         }
 
@@ -36,20 +43,27 @@ namespace Timesheet.API.Controllers
         [HttpPut("AddOccupation/{idToUpdate}")]
         public IActionResult AddOccupation(Guid idToUpdate, Occupation form)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return Ok(_service.Update(new TimesheetEntity
+                try
                 {
-                    Id = idToUpdate,
-                    OccupationList = new List<Occupation>
+                    return Ok(_service.Update(new TimesheetEntity
+                    {
+                        Id = idToUpdate,
+                        OccupationList = new List<Occupation>
                     {
                         form
                     }
-                }));
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    return NotFound();
+                }
             }
-            catch (Exception ex) 
-            { 
-                return NotFound();
+            else
+            {
+                return BadRequest("Le formulaire n\'a pas été rempli correctement.");
             }
         }
 
@@ -62,7 +76,7 @@ namespace Timesheet.API.Controllers
                 return Ok(_service.Delete(id));
             }
             catch (Exception ex)
-            { 
+            {
                 return NotFound(ex.Message);
             }
         }
