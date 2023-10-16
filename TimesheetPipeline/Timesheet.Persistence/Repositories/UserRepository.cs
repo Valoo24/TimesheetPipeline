@@ -46,6 +46,23 @@ namespace Timesheet.Persistence.Repositories
             return userToUpdate.Id;
         }
 
+        public async Task<Guid> UpdateRoleAsync(User entity)
+        {
+            if (entity is null) throw new ArgumentNullException("The entity to update can't be null");
+
+            if (entity.Id == Guid.Empty) throw new ArgumentNullException("The guid of the updated entity can't be null.");
+
+            User? userToUpdate = await _context.Users.FirstOrDefaultAsync(u => u.Id == entity.Id);
+
+            if (userToUpdate is null || userToUpdate == default) throw new ArgumentNullException("L'id du User à mettre à jour n'existe pas.");
+
+            userToUpdate.Role = entity.Role;
+
+            await _context.SaveChangesAsync();
+
+            return userToUpdate.Id;
+        }
+
         public async Task<IEnumerable<User>> GetAllAsync()
         {
             return await _context.Users.ToListAsync();

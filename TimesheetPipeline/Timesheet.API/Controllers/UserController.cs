@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Timesheet.Application.Mappers;
 using Timesheet.Domain.Entities.Users;
+using Timesheet.Domain.Exceptions;
 using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.API.Controllers
@@ -103,41 +104,7 @@ namespace Timesheet.API.Controllers
         }
         #endregion
 
-        [Authorize("Auth")]
-        [HttpPut("Update/{userIdToUpdate}")]
-        public async Task<IActionResult> Update(Guid userIdToUpdate, UserUpdateForm form)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    return Ok($"{await _service.UpdateAsync(form.ToEntity(userIdToUpdate))}");
-                }
-                catch (Exception ex)
-                {
-                    return NotFound(ex.Message);
-                }
-            }
-            else
-            {
-                return BadRequest(ModelState);
-            }
-        }
-
-        [Authorize("Auth")]
-        [HttpDelete("Delete/{userIdToDelete}")]
-        public async Task<IActionResult> Delete(Guid userIdToDelete)
-        {
-            try
-            {
-                return Ok($"{await _service.DeleteAsync(userIdToDelete)}");
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
-        }
-
+        #region Read
         [Authorize("Admin")]
         [HttpGet("Get")]
         public async Task<ActionResult<IEnumerable<User>>> GetAll()
@@ -165,5 +132,64 @@ namespace Timesheet.API.Controllers
                 return NotFound(ex.Message);
             }
         }
+        #endregion
+
+        #region Update/Patch
+        [Authorize("Admin")]
+        [HttpPut("UpdateUserInfo/{userIdToUpdate}")]
+        public async Task<IActionResult> UpdateUser(Guid userIdToUpdate, UserUpdateForm form)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    return Ok($"{await _service.UpdateAsync(form.ToEntity(userIdToUpdate))}");
+                }
+                catch (Exception ex)
+                {
+                    return NotFound(ex.Message);
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
+
+        [Authorize("Admin")]
+        [Authorize("Regular")]
+        [HttpPatch("BecomePremium/{userIdToUpdate}")]
+        public async Task<IActionResult> BecomePremium(Guid userIdToUpdate)
+        {
+            try
+            {
+                return Ok($"{await _service.UpdateAsync(userIdToUpdate, RoleType.Premium)}");
+            }
+            catch(UselessUpdateException ex)
+            {
+                return BadRequest(ex);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+        #endregion
+
+        #region Delete
+        [Authorize("Auth")]
+        [HttpDelete("Delete/{userIdToDelete}")]
+        public async Task<IActionResult> Delete(Guid userIdToDelete)
+        {
+            try
+            {
+                return Ok($"{await _service.DeleteAsync(userIdToDelete)}");
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+        #endregion
     }
 }

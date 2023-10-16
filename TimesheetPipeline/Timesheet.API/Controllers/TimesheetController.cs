@@ -101,7 +101,7 @@ namespace Timesheet.API.Controllers
         {
             try
             {
-                return Ok(_service.GetByIdAsync(id));
+                return Ok(await _service.GetByIdAsync(id));
             }
             catch (Exception ex)
             {

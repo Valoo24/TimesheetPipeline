@@ -7,5 +7,6 @@ namespace Timesheet.Domain.Interfaces
         Task<User> GetByMailAdressAsync(string mailAdress);
         Task<string> GetUserHashedPasswordByMailAdressAsync(string mailAdress);
         Task InitializeDatabaseAsync();
+        Task<Guid> UpdateRoleAsync(User entity);
     }
 }

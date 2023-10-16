@@ -1,6 +1,7 @@
 ﻿using Isopoh.Cryptography.Argon2;
 using Timesheet.Application.Mappers;
 using Timesheet.Domain.Entities.Users;
+using Timesheet.Domain.Exceptions;
 using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.Application.Services
@@ -62,6 +63,16 @@ namespace Timesheet.Application.Services
             //string hashedPassword = Argon2.Hash(entity.HashedPassword);
             //entity.HashedPassword = hashedPassword;
             return await _repository.UpdateAsync(entity);
+        }
+
+        public async Task<Guid> UpdateAsync(Guid id, RoleType entityRole)
+        {
+            User userToUpdate = await _repository.GetByIdAsync(id);
+
+            if (userToUpdate.Role == entityRole) throw new UselessUpdateException("L'entité mise à jour à les mêmes informations que l'entité à mettre à jour.");
+
+            userToUpdate.Role = entityRole;
+            return await _repository.UpdateRoleAsync(userToUpdate);
         }
     }
 }

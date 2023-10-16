@@ -6,5 +6,6 @@ namespace Timesheet.Domain.Interfaces
     {
         Task<Guid> AddAsync(User entity, RoleType entityRole);
         Task<User> LoginAsync(LoginForm form);
+        Task<Guid> UpdateAsync(Guid id, RoleType entityRole);
     }
 }

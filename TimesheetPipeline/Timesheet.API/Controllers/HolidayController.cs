@@ -35,8 +35,6 @@ namespace Timesheet.API.Controllers
             {
                 return NotFound(ex.Message);
             }
-
-
         }
 
         [Authorize("Auth")]
