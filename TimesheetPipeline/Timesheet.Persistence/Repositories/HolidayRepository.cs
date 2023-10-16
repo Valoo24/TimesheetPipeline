@@ -1,4 +1,5 @@
-﻿using Timesheet.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Timesheet.Domain.Entities;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
 
@@ -13,19 +14,23 @@ namespace Timesheet.Persistence.Repositories
             _context = Context;
         }
 
-        public IEnumerable<Holiday> GetAll()
+        public async Task<IEnumerable<Holiday>> GetAllAsync()
         {
-            return _context.Holidays.ToList();
+            return await _context.Holidays.ToListAsync();
         }
 
-        public Holiday GetById(int id)
+        public async Task<Holiday> GetByIdAsync(int id)
         {
             CheckIdRange(id);
 
-            return _context.Holidays.FirstOrDefault(h => h.Id == id);
+            Holiday? holiday = await _context.Holidays.FirstOrDefaultAsync(h => h.Id == id);
+
+            if (holiday is null || holiday == default) throw new ArgumentNullException();
+
+            return holiday;
         }
 
-        public async Task InitializeDatabase()
+        public async Task InitializeDatabaseAsync()
         {
             await _context.Database.EnsureCreatedAsync();
 
@@ -92,7 +97,7 @@ namespace Timesheet.Persistence.Repositories
 
             foreach (var holiay in HolidayList)
             {
-                _context.Add(holiay);
+                await _context.AddAsync(holiay);
             }
 
             await _context.SaveChangesAsync();

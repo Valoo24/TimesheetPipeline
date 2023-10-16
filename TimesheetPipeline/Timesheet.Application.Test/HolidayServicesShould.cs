@@ -110,7 +110,7 @@ namespace Timesheet.Application.Services
             //Arrange
 
             //Act
-            var Result = _service.GetAll();
+            var Result = _service.GetAllAsync();
 
             //Assert
             Assert.Equal(_holidays, Result);
@@ -120,7 +120,7 @@ namespace Timesheet.Application.Services
         public void GetEasterHoliday()
         {
             //Arrange & Act
-            var Result = _service.GetById(2);
+            var Result = _service.GetByIdAsync(2);
 
             //Assert
             Assert.Equal("Lundi de Pâques", Result.Name);
@@ -131,7 +131,7 @@ namespace Timesheet.Application.Services
         public void GetEasterHolidayFrom2024()
         {
             //Arrange & Act
-            var Result = _service.GetById(2024, 2);
+            var Result = _service.GetByIdAsync(2024, 2);
 
             //Assert
             Assert.Equal("Lundi de Pâques", Result.Name);
@@ -147,7 +147,7 @@ namespace Timesheet.Application.Services
             int Year = rnd.Next(1, 9_999);
 
             //Act
-            var Result = _service.GetById(Year, 2);
+            var Result = _service.GetByIdAsync(Year, 2);
 
             //Assert
             Assert.Equal("Lundi de Pâques", Result.Name);
@@ -172,7 +172,7 @@ namespace Timesheet.Application.Services
         public void ShouldGetAllHolidaysFrom2027()
         {
             //Arrange & Act
-            var Result = _service.GetAll(2027);
+            var Result = _service.GetAllAsync(2027);
 
             //Assert
             Assert.Equal(10, Result.Count());

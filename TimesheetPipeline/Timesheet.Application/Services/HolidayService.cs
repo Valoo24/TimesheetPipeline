@@ -14,14 +14,14 @@ namespace Timesheet.Application.Services
         }
 
         #region Méthodes Read
-        public IEnumerable<Holiday> GetAll()
+        public async Task<IEnumerable<Holiday>> GetAllAsync()
         {
-            return _repository.GetAllAsync();
+            return await _repository.GetAllAsync();
         }
 
-        public IEnumerable<Holiday> GetAll(int year)
+        public async Task<IEnumerable<Holiday>> GetAllAsync(int year)
         {
-            IList<Holiday> HolidayList = _repository.GetAllAsync().ToList();
+            IEnumerable<Holiday> HolidayList = await _repository.GetAllAsync();
 
             foreach (var holiday in HolidayList)
             {
@@ -31,25 +31,25 @@ namespace Timesheet.Application.Services
             return HolidayList;
         }
 
-        public Holiday GetById(int id)
+        public async Task<Holiday> GetByIdAsync(int id)
         {
-            return _repository.GetByIdAsync(id);
+            return await _repository.GetByIdAsync(id);
         }
 
-        public Holiday GetById(int year, int id)
+        public async Task<Holiday> GetByIdAsync(int year, int id)
         {
-            Holiday Holiday = _repository.GetByIdAsync(id);
+            Holiday Holiday = await _repository.GetByIdAsync(id);
 
             ChangeDate(Holiday, year);
 
             return Holiday;
         }
 
-        public IEnumerable<Holiday> GetByMonth(int year, int month)
+        public async Task<IEnumerable<Holiday>> GetByMonthAsync(int year, int month)
         {
             CheckMonth(month);
 
-            IList<Holiday> holidayList = GetAll().ToList();
+            IEnumerable<Holiday> holidayList = await GetAllAsync();
 
             foreach (var holiday in holidayList)
             {
@@ -57,13 +57,6 @@ namespace Timesheet.Application.Services
             }
 
             return holidayList.Where(h => h.Date.Month == month);
-        }
-        #endregion
-
-        #region Méthodes HolidayRepo
-        public void InitializeDatabase()
-        {
-            _repository.InitializeDatabase();
         }
         #endregion
 

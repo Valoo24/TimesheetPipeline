@@ -26,7 +26,7 @@ namespace Timesheet.Application.Services
 
         public Guid Add(TimesheetEntity entity)
         {
-            IList<Holiday> holidayList = _holidayService.GetByMonth(entity.Year, entity.Month).ToList();
+            IList<Holiday> holidayList = _holidayService.GetByMonthAsync(entity.Year, entity.Month).ToList();
 
             foreach (var holiday in holidayList)
             {
@@ -100,7 +100,7 @@ namespace Timesheet.Application.Services
 
         public async Task InitializeDatabaseAsync()
         {
-            await _holidayRepository.InitializeDatabase();
+            await _holidayRepository.InitializeDatabaseAsync();
             await _userRepository.InitializeDatabaseAsync();
         }
 

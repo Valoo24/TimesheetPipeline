@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Timesheet.Domain.Entities;
 using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.API.Controllers
@@ -17,11 +18,11 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpGet("Get/{year}")]
-        public IActionResult GetAll(int year)
+        public async Task<ActionResult<IEnumerable<Holiday>>> GetAll(int year)
         {
             try
             {
-                return Ok(_service.GetAll(year));
+                return Ok(await _service.GetAllAsync(year));
             }
             catch (Exception ex)
             {
@@ -31,11 +32,11 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpGet("GetById/{year}/{id}")]
-        public IActionResult GetById(int year, int id)
+        public async Task<ActionResult<Holiday>> GetById(int year, int id)
         {
             try
             {
-                return Ok(_service.GetById(year, id));
+                return Ok(await _service.GetByIdAsync(year, id));
             }
             catch (Exception ex)
             {
@@ -45,11 +46,11 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpGet("GetByMonth/{year}/{month}")]
-        public IActionResult GetByMonth(int year, int month)
+        public async Task<ActionResult<IEnumerable<Holiday>>> GetByMonth(int year, int month)
         {
             try
             {
-                return Ok(_service.GetByMonth(year, month));
+                return Ok(await _service.GetByMonthAsync(year, month));
             }
             catch (Exception ex)
             {
