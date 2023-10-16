@@ -1,4 +1,5 @@
-﻿using Timesheet.Domain.Interfaces;
+﻿using System.ComponentModel.DataAnnotations;
+using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.Domain.Entities
 {
@@ -10,6 +11,7 @@ namespace Timesheet.Domain.Entities
         /// <summary>
         /// Id d'un congé légal.
         /// </summary>
+        [Key]
         public int Id { get; set; }
 
         /// <summary>
