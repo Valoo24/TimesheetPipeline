@@ -79,6 +79,28 @@ namespace Timesheet.API.Controllers
                 return BadRequest(ModelState);
             }
         }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginForm form)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    User loginUser = await _service.LoginAsync(form);
+                    loginUser.Token = _tokenManager.GenerateToken(loginUser);
+                    return Ok(loginUser.Token);
+                }
+                catch (Exception ex)
+                {
+                    return NotFound(ex.Message);
+                }
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+        }
         #endregion
 
         [Authorize("Auth")]
@@ -141,28 +163,6 @@ namespace Timesheet.API.Controllers
             catch (Exception ex)
             {
                 return NotFound(ex.Message);
-            }
-        }
-
-        [HttpPost("Login")]
-        public async Task<IActionResult> Login(LoginForm form)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    User loginUser = await _service.LoginAsync(form);
-                    loginUser.Token = _tokenManager.GenerateToken(loginUser);
-                    return Ok(loginUser.Token);
-                }
-                catch (Exception ex)
-                {
-                    return NotFound(ex.Message);
-                }
-            }
-            else
-            {
-                return BadRequest(ModelState);
             }
         }
     }

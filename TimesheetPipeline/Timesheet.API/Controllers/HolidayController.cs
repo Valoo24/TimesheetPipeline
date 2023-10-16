@@ -22,12 +22,21 @@ namespace Timesheet.API.Controllers
         {
             try
             {
-                return Ok(await _service.GetAllAsync(year));
+                IEnumerable<Holiday> holidayList = await _service.GetAllAsync();
+
+                foreach (var holiday in holidayList) 
+                {
+                    _service.ChangeDate(holiday, year);
+                }
+
+                return Ok(holidayList);
             }
             catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }
+
+
         }
 
         [Authorize("Auth")]
@@ -36,7 +45,11 @@ namespace Timesheet.API.Controllers
         {
             try
             {
-                return Ok(await _service.GetByIdAsync(year, id));
+                Holiday holiday = await _service.GetByIdAsync(id);
+
+                _service.ChangeDate(holiday, year);
+
+                return Ok(holiday);
             }
             catch (Exception ex)
             {

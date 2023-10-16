@@ -19,30 +19,9 @@ namespace Timesheet.Application.Services
             return await _repository.GetAllAsync();
         }
 
-        public async Task<IEnumerable<Holiday>> GetAllAsync(int year)
-        {
-            IEnumerable<Holiday> HolidayList = await _repository.GetAllAsync();
-
-            foreach (var holiday in HolidayList)
-            {
-                ChangeDate(holiday, year);
-            }
-
-            return HolidayList;
-        }
-
         public async Task<Holiday> GetByIdAsync(int id)
         {
             return await _repository.GetByIdAsync(id);
-        }
-
-        public async Task<Holiday> GetByIdAsync(int year, int id)
-        {
-            Holiday Holiday = await _repository.GetByIdAsync(id);
-
-            ChangeDate(Holiday, year);
-
-            return Holiday;
         }
 
         public async Task<IEnumerable<Holiday>> GetByMonthAsync(int year, int month)
@@ -57,6 +36,25 @@ namespace Timesheet.Application.Services
             }
 
             return holidayList.Where(h => h.Date.Month == month);
+        }
+
+        public void ChangeDate(Holiday holiday, int year)
+        {
+            switch (holiday.Id)
+            {
+                case 2:
+                    holiday.Date = GetEasterDate(year);
+                    break;
+                case 4:
+                    holiday.Date = GetEasterDate(year, false).AddDays(40);
+                    break;
+                case 5:
+                    holiday.Date = GetEasterDate(year).AddDays(50);
+                    break;
+                default:
+                    holiday.Date = new DateTime(year, holiday.Date.Month, holiday.Date.Day);
+                    break;
+            }
         }
         #endregion
 
@@ -81,25 +79,6 @@ namespace Timesheet.Application.Services
 
             if (getMondayDate) return EasterDate.AddDays(2);
             else return EasterDate.AddDays(1);
-        }
-
-        private void ChangeDate(Holiday holiday, int year)
-        {
-            switch (holiday.Id)
-            {
-                case 2:
-                    holiday.Date = GetEasterDate(year);
-                    break;
-                case 4:
-                    holiday.Date = GetEasterDate(year, false).AddDays(40);
-                    break;
-                case 5:
-                    holiday.Date = GetEasterDate(year).AddDays(50);
-                    break;
-                default:
-                    holiday.Date = new DateTime(year, holiday.Date.Month, holiday.Date.Day);
-                    break;
-            }
         }
         #endregion
 
