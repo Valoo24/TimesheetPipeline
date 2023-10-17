@@ -60,7 +60,7 @@ namespace Timesheet.API.Controllers
             }
         }
 
-        [Authorize("Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("AddNewAdministrator")]
         public async Task<IActionResult> AddNewAdmin(UserAddForm form)
         {
@@ -82,6 +82,7 @@ namespace Timesheet.API.Controllers
         }
 
         [HttpPost("Login")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginForm form)
         {
             if (ModelState.IsValid)
@@ -156,8 +157,8 @@ namespace Timesheet.API.Controllers
             }
         }
 
-        [Authorize("Admin")]
-        [Authorize("Regular")]
+        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Regular")]
         [HttpPatch("BecomePremium/{userIdToUpdate}")]
         public async Task<IActionResult> BecomePremium(Guid userIdToUpdate)
         {

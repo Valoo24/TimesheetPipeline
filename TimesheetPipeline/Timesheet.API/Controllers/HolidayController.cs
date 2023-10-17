@@ -7,6 +7,7 @@ namespace Timesheet.API.Controllers
 {
     [ApiController]
     [Route("[Controller]")]
+    //[TypeFilter(typeof(AuthInterceptor))]
     public class HolidayController : Controller
     {
         private IHolidayService _service { get; set; }
