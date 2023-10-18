@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Timesheet.Domain.Entities;
+using Timesheet.Domain.Exceptions;
 using Timesheet.Domain.Interfaces;
 using Timesheet.Infrastrucutre.DataAccess;
 
@@ -25,7 +26,7 @@ namespace Timesheet.Persistence.Repositories
 
             Holiday? holiday = await _context.Holidays.FirstOrDefaultAsync(h => h.Id == id);
 
-            if (holiday is null || holiday == default) throw new ArgumentNullException();
+            if (holiday is null || holiday == default) throw new NoContentException();
 
             return holiday;
         }
