@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using Timesheet.Domain.Exceptions;
+using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.API.Middelwares
 {
@@ -36,23 +37,9 @@ namespace Timesheet.API.Middelwares
             //Toutes les exceptions gérées sont à mette dans un nouveau case ici :
             switch (exception)
             {
-                case BadRequestException ex:
-                    httpStatusCode = HttpStatusCode.BadRequest;
-                    responseBody = new()
-                    {
-                        Status = (int)httpStatusCode,
-                        Title = "Bad Request",
-                        Detail = ex.Message
-                    };
-                    break;
-                case NonExistingMonthException ex:
-                    httpStatusCode = HttpStatusCode.BadRequest;
-                    responseBody = new()
-                    {
-                        Status = (int)httpStatusCode,
-                        Title = "Bad Request",
-                        Detail = ex.Message
-                    };
+                case ICustomException ex:
+                    httpStatusCode = ex.ErrorDetail.HttpStatus;
+                    responseBody = ExceptionDetailMapper(ex.ErrorDetail);
                     break;
                 case ArgumentOutOfRangeException ex:
                     httpStatusCode = HttpStatusCode.BadRequest;
@@ -60,15 +47,6 @@ namespace Timesheet.API.Middelwares
                     {
                         Status = (int)httpStatusCode,
                         Title = "Bad Request",
-                        Detail = ex.Message
-                    };
-                    break;
-                case NoContentException ex:
-                    httpStatusCode = HttpStatusCode.NoContent;
-                    responseBody = new()
-                    {
-                        Status = (int)httpStatusCode,
-                        Title = "No Content",
                         Detail = ex.Message
                     };
                     break;
@@ -91,6 +69,16 @@ namespace Timesheet.API.Middelwares
             }
 
             return context.Response.WriteAsJsonAsync(responseBody);
+        }
+
+        private ProblemDetails ExceptionDetailMapper(ExceptionDetail detail)
+        {
+            return new ProblemDetails()
+            {
+                Status = detail.ErrorCode,
+                Title = detail.Title,
+                Detail = detail.Detail
+            };
         }
     }
 }

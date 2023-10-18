@@ -6,7 +6,7 @@ namespace Timesheet.Domain.Exceptions
     {
         public string Title { get; set; } = string.Empty;
         public string Detail { get; set; } = string.Empty;
-        HttpStatusCode HttpStatus { get; set; } = HttpStatusCode.InternalServerError;
+        public HttpStatusCode HttpStatus { get; set; } = HttpStatusCode.InternalServerError;
         public int ErrorCode { get { return (int)HttpStatus; } }
     }
 }
