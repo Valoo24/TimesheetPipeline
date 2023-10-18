@@ -21,25 +21,41 @@ namespace Timesheet.Application.Services
 
         public async Task<Holiday> GetByIdAsync(int id)
         {
-            CheckIdRange(id);
+            if (id <= 0 || id > 10) throw new ArgumentOutOfRangeException($"{id}");
 
             return await _repository.GetByIdAsync(id);
         }
 
+        /// <summary>
+        /// Méthode asynchrone permettant de renvoyer un IEnumerable de tous les entity Holiday présents dans la base de donnée pour un mois en particulier.
+        /// </summary>
+        /// <param name="year">L'Année à attribuer aux entity Holiday.</param>
+        /// <param name="month">Le mois des entity Holiday à récupérer.</param>
+        /// <exception cref="NonExistingMonthException"></exception>
+        /// <exception cref="NoContentException"></exception>
         public async Task<IEnumerable<Holiday>> GetByMonthAsync(int year, int month)
         {
-            CheckMonth(month);
+            if (month <= 0 || month > 12) throw new NonExistingMonthException(month);
 
-            IEnumerable<Holiday> holidayList = await GetAllAsync();
+            IEnumerable<Holiday> holidayList = await _repository.GetAllAsync();
+
+            holidayList = holidayList.Where(h => h.Date.Month == month);
+
+            if(!holidayList.Any()) throw new NoContentException(holidayList);
 
             foreach (var holiday in holidayList)
             {
                 ChangeDate(holiday, year);
             }
 
-            return holidayList.Where(h => h.Date.Month == month);
+            return holidayList;
         }
 
+        /// <summary>
+        /// Transforme la date de l'entity Holiday selon l'année donnée.
+        /// </summary>
+        /// <param name="holiday">Entity Holiday à transformer.</param>
+        /// <param name="year">Année de l'entity Holiday.</param>
         public void ChangeDate(Holiday holiday, int year)
         {
             switch (holiday.Id)
@@ -61,6 +77,11 @@ namespace Timesheet.Application.Services
         #endregion
 
         #region Méthodes Custom
+        /// <summary>
+        /// Renvoie la date du dimanche de Pâques.
+        /// </summary>
+        /// <param name="year">Année du dimanche de Pâques.</param>
+        /// <param name="getMondayDate">Si true, renvoie le lundi de Pâques (paramètre par défaut), sinon, renvoie le dimanche de Pâques</param>
         private DateTime GetEasterDate(int year, bool getMondayDate = true)
         {
             int a = year % 19;
@@ -81,18 +102,6 @@ namespace Timesheet.Application.Services
 
             if (getMondayDate) return EasterDate.AddDays(2);
             else return EasterDate.AddDays(1);
-        }
-        #endregion
-
-        #region Check Methods
-        private void CheckMonth(int month)
-        {
-            if (month <= 0 || month > 12) throw new NonExistingMonthException(month);
-        }
-
-        private void CheckIdRange(int id)
-        {
-            if (id <= 0 || id > 10) throw new ArgumentOutOfRangeException($"id");
         }
         #endregion
     }

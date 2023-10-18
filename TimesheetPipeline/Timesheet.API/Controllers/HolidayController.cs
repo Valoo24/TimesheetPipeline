@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using Timesheet.Domain.Entities;
+using Timesheet.Domain.Exceptions;
 using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.API.Controllers
@@ -18,6 +20,10 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpGet("Get/{year}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult<IEnumerable<Holiday>>> GetAll(int year)
         {
             IEnumerable<Holiday> holidayList = await _service.GetAllAsync();

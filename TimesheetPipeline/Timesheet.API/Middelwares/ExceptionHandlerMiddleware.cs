@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using Timesheet.Domain.Exceptions;
 
 namespace Timesheet.API.Middelwares
@@ -30,32 +31,61 @@ namespace Timesheet.API.Middelwares
 
             context.Response.ContentType = "application/json";
 
-            var responseBody = string.Empty;
+            ProblemDetails? responseBody = null;
 
             //Toutes les exceptions gérées sont à mette dans un nouveau case ici :
             switch (exception)
             {
                 case BadRequestException ex:
                     httpStatusCode = HttpStatusCode.BadRequest;
-                    responseBody = ex.Message;
+                    responseBody = new()
+                    {
+                        Status = (int)httpStatusCode,
+                        Title = "Bad Request",
+                        Detail = ex.Message
+                    };
                     break;
                 case NonExistingMonthException ex:
                     httpStatusCode = HttpStatusCode.BadRequest;
-                    responseBody = ex.Message;
+                    responseBody = new()
+                    {
+                        Status = (int)httpStatusCode,
+                        Title = "Bad Request",
+                        Detail = ex.Message
+                    };
+                    break;
+                case ArgumentOutOfRangeException ex:
+                    httpStatusCode = HttpStatusCode.BadRequest;
+                    responseBody = new()
+                    {
+                        Status = (int)httpStatusCode,
+                        Title = "Bad Request",
+                        Detail = ex.Message
+                    };
                     break;
                 case NoContentException ex:
                     httpStatusCode = HttpStatusCode.NoContent;
-                    responseBody = ex.Message;
+                    responseBody = new()
+                    {
+                        Status = (int)httpStatusCode,
+                        Title = "No Content",
+                        Detail = ex.Message
+                    };
                     break;
                 case Exception ex:
                     httpStatusCode = HttpStatusCode.InternalServerError;
-                    responseBody = ex.Message;
+                    responseBody = new()
+                    {
+                        Status = (int)httpStatusCode,
+                        Title = "Internal Server Error",
+                        Detail = ex.Message
+                    };
                     break;
             }
 
             context.Response.StatusCode = (int)httpStatusCode;
 
-            if (responseBody == string.Empty)
+            if (responseBody is null)
             {
                 return context.Response.WriteAsJsonAsync(new { error = exception.Message });
             }

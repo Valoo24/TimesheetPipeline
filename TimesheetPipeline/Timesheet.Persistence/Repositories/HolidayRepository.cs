@@ -15,11 +15,24 @@ namespace Timesheet.Persistence.Repositories
             _context = Context;
         }
 
+        /// <summary>
+        /// Méthode asynchrone qui renvoie tout les entity Holiday présent dans la base de donnée.
+        /// </summary>
+        /// <exception cref="NoContentException"></exception>
         public async Task<IEnumerable<Holiday>> GetAllAsync()
         {
-            return await _context.Holidays.ToListAsync();
+            var result = await _context.Holidays.ToListAsync();
+
+            if(!result.Any()) throw new NoContentException(result);
+
+            return result;
         }
 
+        /// <summary>
+        /// Méthode asynchrone qui renvoie un entity Holiday de la base de donnée selon son id.
+        /// </summary>
+        /// <param name="id">Identitfiant de l'etity Holiday.</param>
+        /// <exception cref="BadRequestException"></exception>
         public async Task<Holiday> GetByIdAsync(int id)
         {
             Holiday? holiday = await _context.Holidays.FirstOrDefaultAsync(h => h.Id == id);
