@@ -20,53 +20,32 @@ namespace Timesheet.API.Controllers
         [HttpGet("Get/{year}")]
         public async Task<ActionResult<IEnumerable<Holiday>>> GetAll(int year)
         {
-            try
-            {
-                IEnumerable<Holiday> holidayList = await _service.GetAllAsync();
+            IEnumerable<Holiday> holidayList = await _service.GetAllAsync();
 
-                foreach (var holiday in holidayList) 
-                {
-                    _service.ChangeDate(holiday, year);
-                }
-
-                return Ok(holidayList);
-            }
-            catch (Exception ex)
+            foreach (var holiday in holidayList)
             {
-                return NotFound(ex.Message);
+                _service.ChangeDate(holiday, year);
             }
+
+            return Ok(holidayList);
         }
 
         [Authorize("Auth")]
         [HttpGet("GetById/{year}/{id}")]
         public async Task<ActionResult<Holiday>> GetById(int year, int id)
         {
-            try
-            {
-                Holiday holiday = await _service.GetByIdAsync(id);
+            Holiday holiday = await _service.GetByIdAsync(id);
 
-                _service.ChangeDate(holiday, year);
+            _service.ChangeDate(holiday, year);
 
-                return Ok(holiday);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            return Ok(holiday);
         }
 
         [Authorize("Auth")]
         [HttpGet("GetByMonth/{year}/{month}")]
         public async Task<ActionResult<IEnumerable<Holiday>>> GetByMonth(int year, int month)
         {
-            try
-            {
-                return Ok(await _service.GetByMonthAsync(year, month));
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            return Ok(await _service.GetByMonthAsync(year, month));
         }
     }
 }

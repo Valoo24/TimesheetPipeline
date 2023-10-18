@@ -13,6 +13,7 @@ using Timesheet.Persistence.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddLogging();
 
 builder.Services.AddDbContext<TimesheetContext>(
     option => option.UseSqlServer(builder.Configuration.GetConnectionString("TimesheetConnection"))
@@ -29,6 +30,8 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<ITimesheetRepository, TimesheetRepository>();
 builder.Services.AddScoped<ITimesheetService, TimesheetService>();
+
+builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -86,17 +89,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
-builder.Services.AddLogging();
-
-builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
-
 var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseAuthorization();
-app.UseAuthentication();
+//app.UseAuthentication();
 
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 

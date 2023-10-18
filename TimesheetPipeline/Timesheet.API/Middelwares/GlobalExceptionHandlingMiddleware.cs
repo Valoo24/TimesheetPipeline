@@ -8,10 +8,9 @@ namespace Timesheet.API.Middelwares
     {
         private readonly ILogger _logger;
 
-        public GlobalExceptionHandlingMiddleware(ILogger logger)
+        public GlobalExceptionHandlingMiddleware(ILogger<GlobalExceptionHandlingMiddleware> logger)
         {
             _logger = logger;
-
         }
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -31,14 +30,14 @@ namespace Timesheet.API.Middelwares
                     Status = (int)HttpStatusCode.InternalServerError,
                     Type = "Server error",
                     Title = "Server error",
-                    Detail = "An internal server hs occured"
+                    Detail = "An internal server hs occured " + ex.Message
                 };
 
                 string json = JsonSerializer.Serialize(problem);
 
                 await context.Response.WriteAsync(json);
 
-                context.Response.ContentType = "application/json+problem";
+                context.Response.ContentType = "application/json";
             }
         }
     }
