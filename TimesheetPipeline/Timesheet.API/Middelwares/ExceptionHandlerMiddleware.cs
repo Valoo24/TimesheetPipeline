@@ -91,7 +91,6 @@ namespace Timesheet.API.Middelwares
             }
 
             return context.Response.WriteAsJsonAsync(responseBody);
-
         }
     }
 }
