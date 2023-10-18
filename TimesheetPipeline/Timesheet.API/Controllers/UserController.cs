@@ -25,14 +25,7 @@ namespace Timesheet.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    return Ok($"{await _service.AddAsync(form.ToEntity())}");
-                }
-                catch (Exception ex)
-                {
-                    return NotFound(ex.Message);
-                }
+                return Ok($"{await _service.AddAsync(form.ToEntity())}");
             }
             else
             {
@@ -45,14 +38,7 @@ namespace Timesheet.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    return Ok($"{await _service.AddAsync(form.ToEntity(), RoleType.Premium)}");
-                }
-                catch (Exception ex)
-                {
-                    return NotFound(ex.Message);
-                }
+                return Ok($"{await _service.AddAsync(form.ToEntity(), RoleType.Premium)}");
             }
             else
             {
@@ -66,14 +52,7 @@ namespace Timesheet.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    return Ok($"{await _service.AddAsync(form.ToEntity(), RoleType.Admin)}");
-                }
-                catch (Exception ex)
-                {
-                    return NotFound(ex.Message);
-                }
+                return Ok($"{await _service.AddAsync(form.ToEntity(), RoleType.Admin)}");
             }
             else
             {
@@ -86,16 +65,9 @@ namespace Timesheet.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    User loginUser = await _service.LoginAsync(form);
-                    loginUser.Token = _tokenManager.GenerateToken(loginUser);
-                    return Ok(loginUser.Token);
-                }
-                catch (Exception ex)
-                {
-                    return NotFound(ex.Message);
-                }
+                User loginUser = await _service.LoginAsync(form);
+                loginUser.Token = _tokenManager.GenerateToken(loginUser);
+                return Ok(loginUser.Token);
             }
             else
             {
@@ -109,28 +81,14 @@ namespace Timesheet.API.Controllers
         [HttpGet("Get")]
         public async Task<ActionResult<IEnumerable<User>>> GetAll()
         {
-            try
-            {
-                return Ok(await _service.GetAllAsync());
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            return Ok(await _service.GetAllAsync());
         }
 
         [Authorize("Auth")]
         [HttpGet("Get/{id}")]
         public async Task<ActionResult<User>> GetById(Guid id)
         {
-            try
-            {
-                return Ok(await _service.GetByIdAsync(id));
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            return Ok(await _service.GetByIdAsync(id));
         }
         #endregion
 
@@ -141,14 +99,7 @@ namespace Timesheet.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    return Ok($"{await _service.UpdateAsync(form.ToEntity(userIdToUpdate))}");
-                }
-                catch (Exception ex)
-                {
-                    return NotFound(ex.Message);
-                }
+                return Ok($"{await _service.UpdateAsync(form.ToEntity(userIdToUpdate))}");
             }
             else
             {
@@ -161,18 +112,7 @@ namespace Timesheet.API.Controllers
         [HttpPatch("BecomePremium/{userIdToUpdate}")]
         public async Task<IActionResult> BecomePremium(Guid userIdToUpdate)
         {
-            try
-            {
-                return Ok($"{await _service.UpdateAsync(userIdToUpdate, RoleType.Premium)}");
-            }
-            catch(UselessUpdateException ex)
-            {
-                return BadRequest(ex);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            return Ok($"{await _service.UpdateAsync(userIdToUpdate, RoleType.Premium)}");
         }
         #endregion
 
@@ -181,14 +121,7 @@ namespace Timesheet.API.Controllers
         [HttpDelete("Delete/{userIdToDelete}")]
         public async Task<IActionResult> Delete(Guid userIdToDelete)
         {
-            try
-            {
-                return Ok($"{await _service.DeleteAsync(userIdToDelete)}");
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.Message);
-            }
+            return Ok($"{await _service.DeleteAsync(userIdToDelete)}");
         }
         #endregion
     }

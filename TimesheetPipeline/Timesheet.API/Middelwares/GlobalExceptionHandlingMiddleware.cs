@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using System.Text.Json;
 
 namespace Timesheet.API.Middelwares
 {
@@ -19,6 +18,24 @@ namespace Timesheet.API.Middelwares
             {
                 await next(context);
             }
+            catch(ArgumentNullException ex)
+            {
+                _logger.LogError(ex, ex.Message);
+
+                context.Response.StatusCode = (int)HttpStatusCode.NoContent;
+
+                ProblemDetails problem = new()
+                {
+                    Status = (int)HttpStatusCode.NoContent,
+                    Type = "Server error",
+                    Title = "Server error",
+                    Detail = "An internal server hs occured " + ex.Message
+                };
+
+                await context.Response.WriteAsJsonAsync(problem);
+
+                context.Response.ContentType = "application/json";
+            }
             catch (Exception ex) 
             {
                 _logger.LogError(ex, ex.Message);
@@ -33,9 +50,7 @@ namespace Timesheet.API.Middelwares
                     Detail = "An internal server hs occured " + ex.Message
                 };
 
-                string json = JsonSerializer.Serialize(problem);
-
-                await context.Response.WriteAsync(json);
+                await context.Response.WriteAsJsonAsync(problem);
 
                 context.Response.ContentType = "application/json";
             }
