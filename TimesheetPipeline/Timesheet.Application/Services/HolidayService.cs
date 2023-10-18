@@ -21,6 +21,8 @@ namespace Timesheet.Application.Services
 
         public async Task<Holiday> GetByIdAsync(int id)
         {
+            CheckIdRange(id);
+
             return await _repository.GetByIdAsync(id);
         }
 
@@ -85,9 +87,12 @@ namespace Timesheet.Application.Services
         #region Check Methods
         private void CheckMonth(int month)
         {
-            if (month <= 0) throw new NonExistingMonthException("A month can't be 0 or lower.");
+            if (month <= 0 || month > 12) throw new NonExistingMonthException(month);
+        }
 
-            if (month > 12) throw new NonExistingMonthException("A month can't be more than 12.");
+        private void CheckIdRange(int id)
+        {
+            if (id <= 0 || id > 10) throw new ArgumentOutOfRangeException($"id");
         }
         #endregion
     }

@@ -22,11 +22,9 @@ namespace Timesheet.Persistence.Repositories
 
         public async Task<Holiday> GetByIdAsync(int id)
         {
-            CheckIdRange(id);
-
             Holiday? holiday = await _context.Holidays.FirstOrDefaultAsync(h => h.Id == id);
 
-            if (holiday is null || holiday == default) throw new NoContentException();
+            if (holiday is null || holiday == default) throw new BadRequestException(id);
 
             return holiday;
         }
@@ -102,13 +100,6 @@ namespace Timesheet.Persistence.Repositories
             }
 
             await _context.SaveChangesAsync();
-        }
-
-        private void CheckIdRange(int id)
-        {
-            if (id <= 0) throw new ArgumentOutOfRangeException("id");
-
-            if (id > 10) throw new ArgumentOutOfRangeException("id");
         }
     }
 }
