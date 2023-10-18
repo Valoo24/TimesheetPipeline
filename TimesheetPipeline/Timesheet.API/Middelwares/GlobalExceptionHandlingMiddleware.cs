@@ -1,15 +1,15 @@
-﻿using System.Net;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Text.Json;
 
 namespace Timesheet.API.Middelwares
 {
     public class GlobalExceptionHandlingMiddleware : IMiddleware
     {
-        private readonly RequestDelegate _next;
         private readonly ILogger _logger;
 
-        public GlobalExceptionHandlingMiddleware(RequestDelegate next, ILogger logger)
+        public GlobalExceptionHandlingMiddleware(ILogger logger)
         {
-            _next = next;
             _logger = logger;
 
         }
@@ -18,13 +18,27 @@ namespace Timesheet.API.Middelwares
         {
             try
             {
-                await _next(context);
+                await next(context);
             }
             catch (Exception ex) 
             {
                 _logger.LogError(ex, ex.Message);
 
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+                ProblemDetails problem = new()
+                {
+                    Status = (int)HttpStatusCode.InternalServerError,
+                    Type = "Server error",
+                    Title = "Server error",
+                    Detail = "An internal server hs occured"
+                };
+
+                string json = JsonSerializer.Serialize(problem);
+
+                await context.Response.WriteAsync(json);
+
+                context.Response.ContentType = "application/json+problem";
             }
         }
     }
