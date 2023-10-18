@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Timesheet.Application.Mappers;
 using Timesheet.Domain.Entities.Users;
-using Timesheet.Domain.Exceptions;
 using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.API.Controllers
@@ -121,6 +120,7 @@ namespace Timesheet.API.Controllers
         [HttpDelete("Delete/{userIdToDelete}")]
         public async Task<IActionResult> Delete(Guid userIdToDelete)
         {
+            throw new ArgumentNullException();
             return Ok($"{await _service.DeleteAsync(userIdToDelete)}");
         }
         #endregion
