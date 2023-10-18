@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using Timesheet.API.Mapper;
 using Timesheet.Domain.Exceptions;
 using Timesheet.Domain.Interfaces;
 
@@ -34,12 +35,11 @@ namespace Timesheet.API.Middelwares
 
             ProblemDetails? responseBody = null;
 
-            //Toutes les exceptions gérées sont à mette dans un nouveau case ici :
             switch (exception)
             {
                 case ICustomException ex:
                     httpStatusCode = ex.ErrorDetail.HttpStatus;
-                    responseBody = ExceptionDetailMapper(ex.ErrorDetail);
+                    responseBody = ex.ErrorDetail.ToProblemDetails();
                     break;
                 case ArgumentOutOfRangeException ex:
                     httpStatusCode = HttpStatusCode.BadRequest;
@@ -69,16 +69,6 @@ namespace Timesheet.API.Middelwares
             }
 
             return context.Response.WriteAsJsonAsync(responseBody);
-        }
-
-        private ProblemDetails ExceptionDetailMapper(ExceptionDetail detail)
-        {
-            return new ProblemDetails()
-            {
-                Status = detail.ErrorCode,
-                Title = detail.Title,
-                Detail = detail.Detail
-            };
         }
     }
 }
