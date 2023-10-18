@@ -1,4 +1,8 @@
-﻿using System.Net;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using Timesheet.API.Mapper;
+using Timesheet.Domain.Exceptions;
+using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.API.Middelwares
 {
@@ -17,38 +21,54 @@ namespace Timesheet.API.Middelwares
             {
                 await _next(context);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 await ConvertException(context, ex);
             }
         }
 
-        private Task ConvertException(HttpContext context, Exception exception) 
+        private Task ConvertException(HttpContext context, Exception exception)
         {
             HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError;
 
             context.Response.ContentType = "application/json";
 
-            var responseBody = string.Empty;
+            ProblemDetails? responseBody = null;
 
-            //Toutes les exceptions gérées sont à mette dans un nouveau case ici :
-            switch(exception) 
+            switch (exception)
             {
+                case ICustomException ex:
+                    httpStatusCode = ex.ErrorDetail.HttpStatus;
+                    responseBody = ex.ErrorDetail.ToProblemDetails();
+                    break;
+                case ArgumentOutOfRangeException ex:
+                    httpStatusCode = HttpStatusCode.BadRequest;
+                    responseBody = new()
+                    {
+                        Status = (int)httpStatusCode,
+                        Title = "Bad Request",
+                        Detail = ex.Message
+                    };
+                    break;
                 case Exception ex:
                     httpStatusCode = HttpStatusCode.InternalServerError;
-                    responseBody = ex.Message;
+                    responseBody = new()
+                    {
+                        Status = (int)httpStatusCode,
+                        Title = "Internal Server Error",
+                        Detail = ex.Message
+                    };
                     break;
             }
 
             context.Response.StatusCode = (int)httpStatusCode;
 
-            if(responseBody == string.Empty)
+            if (responseBody is null)
             {
-                return context.Response.WriteAsJsonAsync(new {error = exception.Message});
+                return context.Response.WriteAsJsonAsync(new { error = exception.Message });
             }
 
             return context.Response.WriteAsJsonAsync(responseBody);
-
         }
     }
 }

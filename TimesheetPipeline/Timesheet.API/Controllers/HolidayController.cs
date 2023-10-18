@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using Timesheet.Domain.Entities;
+using Timesheet.Domain.Exceptions;
 using Timesheet.Domain.Interfaces;
 
 namespace Timesheet.API.Controllers
@@ -18,6 +20,10 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpGet("Get/{year}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult<IEnumerable<Holiday>>> GetAll(int year)
         {
             IEnumerable<Holiday> holidayList = await _service.GetAllAsync();
@@ -32,6 +38,10 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpGet("GetById/{year}/{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult<Holiday>> GetById(int year, int id)
         {
             Holiday holiday = await _service.GetByIdAsync(id);
@@ -43,6 +53,10 @@ namespace Timesheet.API.Controllers
 
         [Authorize("Auth")]
         [HttpGet("GetByMonth/{year}/{month}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult<IEnumerable<Holiday>>> GetByMonth(int year, int month)
         {
             return Ok(await _service.GetByMonthAsync(year, month));
